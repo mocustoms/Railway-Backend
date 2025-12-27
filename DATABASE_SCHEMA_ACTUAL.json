@@ -1,0 +1,4060 @@
+{
+  "general_ledger": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "financial_year_code",
+        "data_type": "character varying",
+        "character_maximum_length": 20,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "system_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "reference_number",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "transaction_type",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "transaction_type_name",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "created_by_code",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "created_by_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "description",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "account_type_code",
+        "data_type": "character varying",
+        "character_maximum_length": 20,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "account_type_name",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "account_type_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "account_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "account_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "account_code",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "account_nature",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "enum_general_ledger_account_nature"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 6,
+        "is_nullable": "NO",
+        "column_default": "1",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "username",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "general_ledger_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "transaction_type_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "financial_year_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "system_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "user_debit_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_credit_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_debit_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_credit_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "fk_transaction_type_id",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "transaction_type_id",
+        "foreign_table_name": "transaction_types",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "general_ledger_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "general_ledger_system_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "general_ledger_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "general_ledger",
+        "foreign_column_name": "id"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "general_ledger_account_date_idx",
+        "indexdef": "CREATE INDEX general_ledger_account_date_idx ON public.general_ledger USING btree (account_id, transaction_date)"
+      },
+      {
+        "indexname": "general_ledger_account_id_idx",
+        "indexdef": "CREATE INDEX general_ledger_account_id_idx ON public.general_ledger USING btree (account_id)"
+      },
+      {
+        "indexname": "general_ledger_account_type_id_idx",
+        "indexdef": "CREATE INDEX general_ledger_account_type_id_idx ON public.general_ledger USING btree (account_type_id)"
+      },
+      {
+        "indexname": "general_ledger_created_by_code_idx",
+        "indexdef": "CREATE INDEX general_ledger_created_by_code_idx ON public.general_ledger USING btree (created_by_code)"
+      },
+      {
+        "indexname": "general_ledger_financial_year_code_idx",
+        "indexdef": "CREATE INDEX general_ledger_financial_year_code_idx ON public.general_ledger USING btree (financial_year_code)"
+      },
+      {
+        "indexname": "general_ledger_financial_year_id_idx",
+        "indexdef": "CREATE INDEX general_ledger_financial_year_id_idx ON public.general_ledger USING btree (financial_year_id)"
+      },
+      {
+        "indexname": "general_ledger_fy_date_idx",
+        "indexdef": "CREATE INDEX general_ledger_fy_date_idx ON public.general_ledger USING btree (financial_year_code, transaction_date)"
+      },
+      {
+        "indexname": "general_ledger_parent_id_idx",
+        "indexdef": "CREATE INDEX general_ledger_parent_id_idx ON public.general_ledger USING btree (general_ledger_id)"
+      },
+      {
+        "indexname": "general_ledger_pkey",
+        "indexdef": "CREATE UNIQUE INDEX general_ledger_pkey ON public.general_ledger USING btree (id)"
+      },
+      {
+        "indexname": "general_ledger_reference_number_idx",
+        "indexdef": "CREATE INDEX general_ledger_reference_number_idx ON public.general_ledger USING btree (reference_number)"
+      },
+      {
+        "indexname": "general_ledger_transaction_date_idx",
+        "indexdef": "CREATE INDEX general_ledger_transaction_date_idx ON public.general_ledger USING btree (transaction_date)"
+      },
+      {
+        "indexname": "general_ledger_transaction_type_idx",
+        "indexdef": "CREATE INDEX general_ledger_transaction_type_idx ON public.general_ledger USING btree (transaction_type)"
+      },
+      {
+        "indexname": "general_ledger_type_date_idx",
+        "indexdef": "CREATE INDEX general_ledger_type_date_idx ON public.general_ledger USING btree (transaction_type, transaction_date)"
+      },
+      {
+        "indexname": "idx_general_ledger_financial_year_id",
+        "indexdef": "CREATE INDEX idx_general_ledger_financial_year_id ON public.general_ledger USING btree (financial_year_id)"
+      }
+    ]
+  },
+  "customers": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "customer_id",
+        "data_type": "character varying",
+        "character_maximum_length": 30,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "customer_group_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "full_name",
+        "data_type": "character varying",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "address",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "default_receivable_account_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "fax",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "loyalty_card_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "loyalty_card_config_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "birthday",
+        "data_type": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "date"
+      },
+      {
+        "column_name": "phone_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "email",
+        "data_type": "character varying",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "website",
+        "data_type": "character varying",
+        "character_maximum_length": 200,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "is_active",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "true",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "created_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "account_balance",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "debt_balance",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "deposit_balance",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "loyalty_points",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "customers_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_created_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "created_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_customer_group_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "customer_group_id",
+        "foreign_table_name": "customer_groups",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_default_receivable_account_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "default_receivable_account_id",
+        "foreign_table_name": "accounts",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_loyalty_card_config_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "loyalty_card_config_id",
+        "foreign_table_name": "loyalty_card_configs",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_updated_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "updated_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "customers_customer_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "customer_id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "customer_id"
+      },
+      {
+        "constraint_name": "customers_customer_id_key1",
+        "constraint_type": "UNIQUE",
+        "column_name": "customer_id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "customer_id"
+      },
+      {
+        "constraint_name": "customers_customer_id_key2",
+        "constraint_type": "UNIQUE",
+        "column_name": "customer_id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "customer_id"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "customers_company_id",
+        "indexdef": "CREATE INDEX customers_company_id ON public.customers USING btree (\"companyId\")"
+      },
+      {
+        "indexname": "customers_customer_group_id",
+        "indexdef": "CREATE INDEX customers_customer_group_id ON public.customers USING btree (customer_group_id)"
+      },
+      {
+        "indexname": "customers_customer_id",
+        "indexdef": "CREATE UNIQUE INDEX customers_customer_id ON public.customers USING btree (customer_id)"
+      },
+      {
+        "indexname": "customers_customer_id_companyId_unique",
+        "indexdef": "CREATE UNIQUE INDEX \"customers_customer_id_companyId_unique\" ON public.customers USING btree (customer_id, \"companyId\")"
+      },
+      {
+        "indexname": "customers_customer_id_key",
+        "indexdef": "CREATE UNIQUE INDEX customers_customer_id_key ON public.customers USING btree (customer_id)"
+      },
+      {
+        "indexname": "customers_customer_id_key1",
+        "indexdef": "CREATE UNIQUE INDEX customers_customer_id_key1 ON public.customers USING btree (customer_id)"
+      },
+      {
+        "indexname": "customers_customer_id_key2",
+        "indexdef": "CREATE UNIQUE INDEX customers_customer_id_key2 ON public.customers USING btree (customer_id)"
+      },
+      {
+        "indexname": "customers_default_receivable_account_id",
+        "indexdef": "CREATE INDEX customers_default_receivable_account_id ON public.customers USING btree (default_receivable_account_id)"
+      },
+      {
+        "indexname": "customers_is_active",
+        "indexdef": "CREATE INDEX customers_is_active ON public.customers USING btree (is_active)"
+      },
+      {
+        "indexname": "customers_loyalty_card_config_id",
+        "indexdef": "CREATE INDEX customers_loyalty_card_config_id ON public.customers USING btree (loyalty_card_config_id)"
+      },
+      {
+        "indexname": "customers_pkey",
+        "indexdef": "CREATE UNIQUE INDEX customers_pkey ON public.customers USING btree (id)"
+      }
+    ]
+  },
+  "loyalty_transactions": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "loyalty_card_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_type",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "enum_loyalty_transactions_transaction_type"
+      },
+      {
+        "column_name": "points_amount",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "transaction_reference",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "description",
+        "data_type": "character varying",
+        "character_maximum_length": 500,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "order_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "points_balance_before",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "points_balance_after",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "tier_before",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "enum_loyalty_transactions_tier_before"
+      },
+      {
+        "column_name": "tier_after",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "enum_loyalty_transactions_tier_after"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "expiry_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "is_expired",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "false",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "created_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sales_invoice_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sales_order_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sales_transaction_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "customer_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "store_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "loyalty_config_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "financial_year_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_ref_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "redemption_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 18,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": "1",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "status",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": "'completed'::enum_loyalty_transactions_status",
+        "udt_name": "enum_loyalty_transactions_status"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "updated_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "loyalty_transactions_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_created_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "created_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_customer_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "customer_id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_financial_year_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "financial_year_id",
+        "foreign_table_name": "financial_years",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_loyalty_config_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "loyalty_config_id",
+        "foreign_table_name": "loyalty_card_configs",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_sales_invoice_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "sales_invoice_id",
+        "foreign_table_name": "sales_invoices",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_sales_order_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "sales_order_id",
+        "foreign_table_name": "sales_orders",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_sales_transaction_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "sales_transaction_id",
+        "foreign_table_name": "sales_transactions",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_store_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "store_id",
+        "foreign_table_name": "stores",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_updated_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "updated_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "loyalty_transactions_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "loyalty_transactions",
+        "foreign_column_name": "id"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "loyalty_transactions_companyId_idx",
+        "indexdef": "CREATE INDEX \"loyalty_transactions_companyId_idx\" ON public.loyalty_transactions USING btree (\"companyId\")"
+      },
+      {
+        "indexname": "loyalty_transactions_customer_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_customer_id_idx ON public.loyalty_transactions USING btree (customer_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_financial_year_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_financial_year_id_idx ON public.loyalty_transactions USING btree (financial_year_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_is_expired_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_is_expired_idx ON public.loyalty_transactions USING btree (is_expired)"
+      },
+      {
+        "indexname": "loyalty_transactions_loyalty_card_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_loyalty_card_id_idx ON public.loyalty_transactions USING btree (loyalty_card_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_order_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_order_id_idx ON public.loyalty_transactions USING btree (order_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_pkey",
+        "indexdef": "CREATE UNIQUE INDEX loyalty_transactions_pkey ON public.loyalty_transactions USING btree (id)"
+      },
+      {
+        "indexname": "loyalty_transactions_sales_invoice_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_sales_invoice_id_idx ON public.loyalty_transactions USING btree (sales_invoice_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_sales_order_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_sales_order_id_idx ON public.loyalty_transactions USING btree (sales_order_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_sales_transaction_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_sales_transaction_id_idx ON public.loyalty_transactions USING btree (sales_transaction_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_status_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_status_idx ON public.loyalty_transactions USING btree (status)"
+      },
+      {
+        "indexname": "loyalty_transactions_store_id_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_store_id_idx ON public.loyalty_transactions USING btree (store_id)"
+      },
+      {
+        "indexname": "loyalty_transactions_transaction_date_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_transaction_date_idx ON public.loyalty_transactions USING btree (transaction_date)"
+      },
+      {
+        "indexname": "loyalty_transactions_transaction_ref_number_companyId_unique",
+        "indexdef": "CREATE UNIQUE INDEX \"loyalty_transactions_transaction_ref_number_companyId_unique\" ON public.loyalty_transactions USING btree (transaction_ref_number, \"companyId\")"
+      },
+      {
+        "indexname": "loyalty_transactions_transaction_ref_number_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_transaction_ref_number_idx ON public.loyalty_transactions USING btree (transaction_ref_number)"
+      },
+      {
+        "indexname": "loyalty_transactions_transaction_type_idx",
+        "indexdef": "CREATE INDEX loyalty_transactions_transaction_type_idx ON public.loyalty_transactions USING btree (transaction_type)"
+      }
+    ]
+  },
+  "price_history": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "entity_type",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "entity_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "entity_code",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "entity_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "module_name",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "transaction_type_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_type_name",
+        "data_type": "character varying",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "old_selling_price",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "new_selling_price",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "costing_method_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "price_change_reason_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "quantity",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 3,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "unit",
+        "data_type": "character varying",
+        "character_maximum_length": 20,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": "1",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "reference_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "change_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "created_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "conversion_notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "system_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_average_cost_old",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "product_average_cost_new",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_unit_cost_old",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_unit_cost_new",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_amount_old",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_amount_new",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "price_history_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_costing_method_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "costing_method_id",
+        "foreign_table_name": "costing_methods",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_price_change_reason_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "price_change_reason_id",
+        "foreign_table_name": "price_change_reasons",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_system_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_transaction_type_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "transaction_type_id",
+        "foreign_table_name": "transaction_types",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "price_history_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "price_history",
+        "foreign_column_name": "id"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "price_history_date_idx",
+        "indexdef": "CREATE INDEX price_history_date_idx ON public.price_history USING btree (change_date)"
+      },
+      {
+        "indexname": "price_history_entity_date_idx",
+        "indexdef": "CREATE INDEX price_history_entity_date_idx ON public.price_history USING btree (entity_type, entity_id, change_date)"
+      },
+      {
+        "indexname": "price_history_entity_idx",
+        "indexdef": "CREATE INDEX price_history_entity_idx ON public.price_history USING btree (entity_type, entity_id)"
+      },
+      {
+        "indexname": "price_history_module_idx",
+        "indexdef": "CREATE INDEX price_history_module_idx ON public.price_history USING btree (module_name)"
+      },
+      {
+        "indexname": "price_history_pkey",
+        "indexdef": "CREATE UNIQUE INDEX price_history_pkey ON public.price_history USING btree (id)"
+      },
+      {
+        "indexname": "price_history_transaction_date_idx",
+        "indexdef": "CREATE INDEX price_history_transaction_date_idx ON public.price_history USING btree (transaction_date)"
+      }
+    ]
+  },
+  "product_expiry_dates": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": "nextval('product_expiry_dates_id_seq'::regclass)",
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "uuid",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "gen_random_uuid()",
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "batch_number",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "expiry_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "store_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "current_quantity",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_received",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_sold",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_adjusted",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "selling_price",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "supplier_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "purchase_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "purchase_reference",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "manufacturing_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "status",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": "'active'::character varying",
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "days_until_expiry",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "is_expired",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": "false",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "created_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "is_active",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "true",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "system_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_average_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_unit_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "unit_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "unit_cost_equivalent",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "fk_product_expiry_dates_currency",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_expiry_dates_product",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "product_id",
+        "foreign_table_name": "products",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_system_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "batch_number",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "batch_number"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "batch_number",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "expiry_date"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "batch_number",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "batch_number",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "expiry_date",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "batch_number"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "expiry_date",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "expiry_date"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "expiry_date"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "expiry_date",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "batch_number"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "expiry_date"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "batch_number"
+      },
+      {
+        "constraint_name": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "expiry_date",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_expiry_dates_uuid_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "uuid",
+        "foreign_table_name": "product_expiry_dates",
+        "foreign_column_name": "uuid"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "idx_product_expiry_dates_batch_number",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_batch_number ON public.product_expiry_dates USING btree (batch_number)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_days_until_expiry",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_days_until_expiry ON public.product_expiry_dates USING btree (days_until_expiry)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_expired_status",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_expired_status ON public.product_expiry_dates USING btree (is_expired, status)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_expiry_date",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_expiry_date ON public.product_expiry_dates USING btree (expiry_date)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_is_expired",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_is_expired ON public.product_expiry_dates USING btree (is_expired)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_product_expiry",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_product_expiry ON public.product_expiry_dates USING btree (product_id, expiry_date)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_product_id",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_product_id ON public.product_expiry_dates USING btree (product_id)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_status",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_status ON public.product_expiry_dates USING btree (status)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_store_id",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_store_id ON public.product_expiry_dates USING btree (store_id)"
+      },
+      {
+        "indexname": "idx_product_expiry_dates_store_status",
+        "indexdef": "CREATE INDEX idx_product_expiry_dates_store_status ON public.product_expiry_dates USING btree (store_id, status)"
+      },
+      {
+        "indexname": "product_expiry_dates_pkey",
+        "indexdef": "CREATE UNIQUE INDEX product_expiry_dates_pkey ON public.product_expiry_dates USING btree (id)"
+      },
+      {
+        "indexname": "product_expiry_dates_product_id_batch_number_expiry_date_st_key",
+        "indexdef": "CREATE UNIQUE INDEX product_expiry_dates_product_id_batch_number_expiry_date_st_key ON public.product_expiry_dates USING btree (product_id, batch_number, expiry_date, store_id)"
+      },
+      {
+        "indexname": "product_expiry_dates_uuid_key",
+        "indexdef": "CREATE UNIQUE INDEX product_expiry_dates_uuid_key ON public.product_expiry_dates USING btree (uuid)"
+      }
+    ]
+  },
+  "product_serial_numbers": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": "nextval('product_serial_numbers_id_seq'::regclass)",
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "uuid",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "gen_random_uuid()",
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "serial_number",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "store_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "current_quantity",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_received",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_sold",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_quantity_adjusted",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "selling_price",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "supplier_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "purchase_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "purchase_reference",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "warranty_expiry_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "status",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": "'active'::character varying",
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "created_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "is_active",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "true",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "system_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_average_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_unit_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "unit_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "unit_cost_equivalent",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "NULL::numeric",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "fk_product_serial_numbers_currency",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_serial_numbers_product",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "product_id",
+        "foreign_table_name": "products",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_system_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "serial_number",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "serial_number",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "serial_number"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "serial_number",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "serial_number"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "store_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "store_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "serial_number"
+      },
+      {
+        "constraint_name": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "product_id",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "product_id"
+      },
+      {
+        "constraint_name": "product_serial_numbers_uuid_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "uuid",
+        "foreign_table_name": "product_serial_numbers",
+        "foreign_column_name": "uuid"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "idx_product_serial_numbers_product_id",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_product_id ON public.product_serial_numbers USING btree (product_id)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_product_serial",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_product_serial ON public.product_serial_numbers USING btree (product_id, serial_number)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_purchase_date",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_purchase_date ON public.product_serial_numbers USING btree (purchase_date)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_serial_number",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_serial_number ON public.product_serial_numbers USING btree (serial_number)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_status",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_status ON public.product_serial_numbers USING btree (status)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_store_id",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_store_id ON public.product_serial_numbers USING btree (store_id)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_store_status",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_store_status ON public.product_serial_numbers USING btree (store_id, status)"
+      },
+      {
+        "indexname": "idx_product_serial_numbers_warranty_expiry",
+        "indexdef": "CREATE INDEX idx_product_serial_numbers_warranty_expiry ON public.product_serial_numbers USING btree (warranty_expiry_date)"
+      },
+      {
+        "indexname": "product_serial_numbers_pkey",
+        "indexdef": "CREATE UNIQUE INDEX product_serial_numbers_pkey ON public.product_serial_numbers USING btree (id)"
+      },
+      {
+        "indexname": "product_serial_numbers_product_id_serial_number_store_id_key",
+        "indexdef": "CREATE UNIQUE INDEX product_serial_numbers_product_id_serial_number_store_id_key ON public.product_serial_numbers USING btree (product_id, serial_number, store_id)"
+      },
+      {
+        "indexname": "product_serial_numbers_uuid_key",
+        "indexdef": "CREATE UNIQUE INDEX product_serial_numbers_uuid_key ON public.product_serial_numbers USING btree (uuid)"
+      }
+    ]
+  },
+  "product_transactions": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "integer",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": "NO",
+        "column_default": "nextval('product_transactions_id_seq'::regclass)",
+        "udt_name": "int4"
+      },
+      {
+        "column_name": "uuid",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "gen_random_uuid()",
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "system_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "financial_year_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "financial_year_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "transaction_type_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_type_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "store_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "manufacturer_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "model_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "brand_name_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "packaging_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "packaging_issue_quantity",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "supplier_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "customer_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "customer_name",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "created_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_by_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "expiry_date",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "serial_number",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "quantity_in",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "quantity_out",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "reference_number",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "reference_type",
+        "data_type": "character varying",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "is_active",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "true",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp without time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamp"
+      },
+      {
+        "column_name": "conversion_notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "equivalent_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "system_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_average_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "user_unit_cost",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "YES",
+        "column_default": "0.00",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "fk_product_transactions_brand",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "brand_name_id",
+        "foreign_table_name": "product_brand_names",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_transactions_manufacturer",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "manufacturer_id",
+        "foreign_table_name": "product_manufacturers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_transactions_model",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "model_id",
+        "foreign_table_name": "product_models",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_transactions_packaging",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "packaging_id",
+        "foreign_table_name": "packaging",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_transactions_product",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "product_id",
+        "foreign_table_name": "products",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "fk_product_transactions_transaction_type",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "transaction_type_id",
+        "foreign_table_name": "transaction_types",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_transactions_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_transactions_system_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_transactions_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "product_transactions",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "product_transactions_uuid_key",
+        "constraint_type": "UNIQUE",
+        "column_name": "uuid",
+        "foreign_table_name": "product_transactions",
+        "foreign_column_name": "uuid"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "product_transactions_created_by_id",
+        "indexdef": "CREATE INDEX product_transactions_created_by_id ON public.product_transactions USING btree (created_by_id)"
+      },
+      {
+        "indexname": "product_transactions_expiry_date",
+        "indexdef": "CREATE INDEX product_transactions_expiry_date ON public.product_transactions USING btree (expiry_date)"
+      },
+      {
+        "indexname": "product_transactions_financial_year_id",
+        "indexdef": "CREATE INDEX product_transactions_financial_year_id ON public.product_transactions USING btree (financial_year_id)"
+      },
+      {
+        "indexname": "product_transactions_pkey",
+        "indexdef": "CREATE UNIQUE INDEX product_transactions_pkey ON public.product_transactions USING btree (id)"
+      },
+      {
+        "indexname": "product_transactions_product_id",
+        "indexdef": "CREATE INDEX product_transactions_product_id ON public.product_transactions USING btree (product_id)"
+      },
+      {
+        "indexname": "product_transactions_product_id_transaction_date",
+        "indexdef": "CREATE INDEX product_transactions_product_id_transaction_date ON public.product_transactions USING btree (product_id, transaction_date)"
+      },
+      {
+        "indexname": "product_transactions_reference_number",
+        "indexdef": "CREATE INDEX product_transactions_reference_number ON public.product_transactions USING btree (reference_number)"
+      },
+      {
+        "indexname": "product_transactions_serial_number",
+        "indexdef": "CREATE INDEX product_transactions_serial_number ON public.product_transactions USING btree (serial_number)"
+      },
+      {
+        "indexname": "product_transactions_store_id",
+        "indexdef": "CREATE INDEX product_transactions_store_id ON public.product_transactions USING btree (store_id)"
+      },
+      {
+        "indexname": "product_transactions_store_id_transaction_date",
+        "indexdef": "CREATE INDEX product_transactions_store_id_transaction_date ON public.product_transactions USING btree (store_id, transaction_date)"
+      },
+      {
+        "indexname": "product_transactions_transaction_date",
+        "indexdef": "CREATE INDEX product_transactions_transaction_date ON public.product_transactions USING btree (transaction_date)"
+      },
+      {
+        "indexname": "product_transactions_transaction_type_id",
+        "indexdef": "CREATE INDEX product_transactions_transaction_type_id ON public.product_transactions USING btree (transaction_type_id)"
+      },
+      {
+        "indexname": "product_transactions_transaction_type_id_transaction_date",
+        "indexdef": "CREATE INDEX product_transactions_transaction_type_id_transaction_date ON public.product_transactions USING btree (transaction_type_id, transaction_date)"
+      },
+      {
+        "indexname": "product_transactions_uuid_key",
+        "indexdef": "CREATE UNIQUE INDEX product_transactions_uuid_key ON public.product_transactions USING btree (uuid)"
+      }
+    ]
+  },
+  "sales_transactions": {
+    "exists": true,
+    "columns": [
+      {
+        "column_name": "id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_ref_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "transaction_type",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "enum_sales_transactions_transaction_type"
+      },
+      {
+        "column_name": "companyId",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "source_invoice_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "source_order_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "source_transaction_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "parent_transaction_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "date"
+      },
+      {
+        "column_name": "due_date",
+        "data_type": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "date"
+      },
+      {
+        "column_name": "valid_until",
+        "data_type": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "date"
+      },
+      {
+        "column_name": "delivery_date",
+        "data_type": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "date"
+      },
+      {
+        "column_name": "store_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "customer_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sales_agent_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "financial_year_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "subtotal",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "discount_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "tax_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_wht_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "amount_after_discount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "amount_after_wht",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "total_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "paid_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "balance_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "equivalent_amount",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 15,
+        "numeric_scale": 2,
+        "is_nullable": "NO",
+        "column_default": "0",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "exchange_rate",
+        "data_type": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 10,
+        "numeric_scale": 6,
+        "is_nullable": "YES",
+        "column_default": "1",
+        "udt_name": "numeric"
+      },
+      {
+        "column_name": "exchange_rate_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "system_default_currency_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "status",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "'draft'::enum_sales_transactions_status",
+        "udt_name": "enum_sales_transactions_status"
+      },
+      {
+        "column_name": "is_active",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "true",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "is_cancelled",
+        "data_type": "boolean",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "false",
+        "udt_name": "bool"
+      },
+      {
+        "column_name": "notes",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "terms_conditions",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "shipping_address",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "rejection_reason",
+        "data_type": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "text"
+      },
+      {
+        "column_name": "created_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "updated_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sent_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "sent_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "approved_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "approved_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "cancelled_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "cancelled_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "rejected_by",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "rejected_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP",
+        "udt_name": "timestamptz"
+      },
+      {
+        "column_name": "receipt_invoice_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "receipt_number",
+        "data_type": "character varying",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "varchar"
+      },
+      {
+        "column_name": "product_category_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "brand_name_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "manufacturer_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "model_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "color_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "packaging_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "price_category_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "store_location_id",
+        "data_type": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "uuid"
+      },
+      {
+        "column_name": "product_type",
+        "data_type": "USER-DEFINED",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": "YES",
+        "column_default": null,
+        "udt_name": "enum_sales_transactions_product_type"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_name": "sales_transactions_approved_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "approved_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_brand_name_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "brand_name_id",
+        "foreign_table_name": "product_brand_names",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_cancelled_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "cancelled_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_color_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "color_id",
+        "foreign_table_name": "product_colors",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_companyId_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "companyId",
+        "foreign_table_name": "Company",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_created_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "created_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_customer_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "customer_id",
+        "foreign_table_name": "customers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_exchange_rate_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "exchange_rate_id",
+        "foreign_table_name": "exchange_rates",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_financial_year_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "financial_year_id",
+        "foreign_table_name": "financial_years",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_financial_year_id_fkey1",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "financial_year_id",
+        "foreign_table_name": "financial_years",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_manufacturer_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "manufacturer_id",
+        "foreign_table_name": "product_manufacturers",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_model_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "model_id",
+        "foreign_table_name": "product_models",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_packaging_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "packaging_id",
+        "foreign_table_name": "packaging",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_parent_transaction_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "parent_transaction_id",
+        "foreign_table_name": "sales_transactions",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_price_category_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "price_category_id",
+        "foreign_table_name": "price_categories",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_product_category_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "product_category_id",
+        "foreign_table_name": "product_categories",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_rejected_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "rejected_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_sales_agent_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "sales_agent_id",
+        "foreign_table_name": "sales_agents",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_sent_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "sent_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_source_invoice_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "source_invoice_id",
+        "foreign_table_name": "sales_invoices",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_source_order_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "source_order_id",
+        "foreign_table_name": "sales_orders",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_source_transaction_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "source_transaction_id",
+        "foreign_table_name": "sales_transactions",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_store_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "store_id",
+        "foreign_table_name": "stores",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_store_location_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "store_location_id",
+        "foreign_table_name": "product_store_locations",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_system_default_currency_id_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "system_default_currency_id",
+        "foreign_table_name": "currencies",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_updated_by_fkey",
+        "constraint_type": "FOREIGN KEY",
+        "column_name": "updated_by",
+        "foreign_table_name": "users",
+        "foreign_column_name": "id"
+      },
+      {
+        "constraint_name": "sales_transactions_pkey",
+        "constraint_type": "PRIMARY KEY",
+        "column_name": "id",
+        "foreign_table_name": "sales_transactions",
+        "foreign_column_name": "id"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "idx_sales_transactions_companyId",
+        "indexdef": "CREATE INDEX \"idx_sales_transactions_companyId\" ON public.sales_transactions USING btree (\"companyId\")"
+      },
+      {
+        "indexname": "idx_sales_transactions_company_date",
+        "indexdef": "CREATE INDEX idx_sales_transactions_company_date ON public.sales_transactions USING btree (\"companyId\", transaction_date)"
+      },
+      {
+        "indexname": "idx_sales_transactions_company_status",
+        "indexdef": "CREATE INDEX idx_sales_transactions_company_status ON public.sales_transactions USING btree (\"companyId\", status)"
+      },
+      {
+        "indexname": "idx_sales_transactions_company_store_date",
+        "indexdef": "CREATE INDEX idx_sales_transactions_company_store_date ON public.sales_transactions USING btree (\"companyId\", store_id, transaction_date)"
+      },
+      {
+        "indexname": "idx_sales_transactions_customer_id",
+        "indexdef": "CREATE INDEX idx_sales_transactions_customer_id ON public.sales_transactions USING btree (customer_id)"
+      },
+      {
+        "indexname": "idx_sales_transactions_receipt_invoice_number",
+        "indexdef": "CREATE INDEX idx_sales_transactions_receipt_invoice_number ON public.sales_transactions USING btree (receipt_invoice_number)"
+      },
+      {
+        "indexname": "idx_sales_transactions_receipt_number",
+        "indexdef": "CREATE INDEX idx_sales_transactions_receipt_number ON public.sales_transactions USING btree (receipt_number)"
+      },
+      {
+        "indexname": "idx_sales_transactions_source_invoice_id",
+        "indexdef": "CREATE INDEX idx_sales_transactions_source_invoice_id ON public.sales_transactions USING btree (source_invoice_id)"
+      },
+      {
+        "indexname": "idx_sales_transactions_source_order_id",
+        "indexdef": "CREATE INDEX idx_sales_transactions_source_order_id ON public.sales_transactions USING btree (source_order_id)"
+      },
+      {
+        "indexname": "idx_sales_transactions_status",
+        "indexdef": "CREATE INDEX idx_sales_transactions_status ON public.sales_transactions USING btree (status)"
+      },
+      {
+        "indexname": "idx_sales_transactions_store_id",
+        "indexdef": "CREATE INDEX idx_sales_transactions_store_id ON public.sales_transactions USING btree (store_id)"
+      },
+      {
+        "indexname": "idx_sales_transactions_transaction_date",
+        "indexdef": "CREATE INDEX idx_sales_transactions_transaction_date ON public.sales_transactions USING btree (transaction_date)"
+      },
+      {
+        "indexname": "idx_sales_transactions_transaction_type",
+        "indexdef": "CREATE INDEX idx_sales_transactions_transaction_type ON public.sales_transactions USING btree (transaction_type)"
+      },
+      {
+        "indexname": "sales_transactions_brand_name_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_brand_name_id_idx ON public.sales_transactions USING btree (brand_name_id)"
+      },
+      {
+        "indexname": "sales_transactions_color_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_color_id_idx ON public.sales_transactions USING btree (color_id)"
+      },
+      {
+        "indexname": "sales_transactions_manufacturer_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_manufacturer_id_idx ON public.sales_transactions USING btree (manufacturer_id)"
+      },
+      {
+        "indexname": "sales_transactions_model_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_model_id_idx ON public.sales_transactions USING btree (model_id)"
+      },
+      {
+        "indexname": "sales_transactions_packaging_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_packaging_id_idx ON public.sales_transactions USING btree (packaging_id)"
+      },
+      {
+        "indexname": "sales_transactions_pkey",
+        "indexdef": "CREATE UNIQUE INDEX sales_transactions_pkey ON public.sales_transactions USING btree (id)"
+      },
+      {
+        "indexname": "sales_transactions_price_category_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_price_category_id_idx ON public.sales_transactions USING btree (price_category_id)"
+      },
+      {
+        "indexname": "sales_transactions_product_category_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_product_category_id_idx ON public.sales_transactions USING btree (product_category_id)"
+      },
+      {
+        "indexname": "sales_transactions_product_type_idx",
+        "indexdef": "CREATE INDEX sales_transactions_product_type_idx ON public.sales_transactions USING btree (product_type)"
+      },
+      {
+        "indexname": "sales_transactions_receipt_number_companyId_key",
+        "indexdef": "CREATE UNIQUE INDEX \"sales_transactions_receipt_number_companyId_key\" ON public.sales_transactions USING btree (receipt_number, \"companyId\")"
+      },
+      {
+        "indexname": "sales_transactions_store_location_id_idx",
+        "indexdef": "CREATE INDEX sales_transactions_store_location_id_idx ON public.sales_transactions USING btree (store_location_id)"
+      },
+      {
+        "indexname": "sales_transactions_transaction_ref_number_companyId_key",
+        "indexdef": "CREATE UNIQUE INDEX \"sales_transactions_transaction_ref_number_companyId_key\" ON public.sales_transactions USING btree (transaction_ref_number, \"companyId\")"
+      }
+    ]
+  }
+}

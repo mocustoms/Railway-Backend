@@ -1,0 +1,67 @@
+{
+  "account_types": [
+    {
+      "name": "REVENUE",
+      "code": "HAM-AT-0001",
+      "description": null,
+      "category": "REVENUE",
+      "nature": "CREDIT",
+      "is_active": true,
+      "_originalId": "4fdfc052-a973-4de9-bf28-f0c7bf510080"
+    },
+    {
+      "name": "ASSET",
+      "code": "HAM-AT-0002",
+      "description": null,
+      "category": "ASSET",
+      "nature": "DEBIT",
+      "is_active": true,
+      "_originalId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2"
+    },
+    {
+      "name": "EQUITY",
+      "code": "HAM-AT-0003",
+      "description": null,
+      "category": "EQUITY",
+      "nature": "CREDIT",
+      "is_active": true,
+      "_originalId": "c8a9c2c4-f37b-4deb-a441-d15b44f9ae08"
+    },
+    {
+      "name": "EXPENSES",
+      "code": "HAM-AT-0004",
+      "description": null,
+      "category": "EXPENSE",
+      "nature": "DEBIT",
+      "is_active": true,
+      "_originalId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe"
+    },
+    {
+      "name": "LIABILITIES",
+      "code": "HAM-AT-0005",
+      "description": null,
+      "category": "LIABILITY",
+      "nature": "DEBIT",
+      "is_active": true,
+      "_originalId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a"
+    }
+  ],
+  "exchange_rates": [
+    {
+      "from_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+      "to_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+      "rate": "1.000000",
+      "effective_date": "2025-11-06",
+      "is_active": true,
+      "_originalId": "19643122-da44-43a9-b908-1331cdad7693"
+    },
+    {
+      "from_currency_id": "02c7fb9e-f4cf-47c8-a64c-88d27e2ec792",
+      "to_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+      "rate": "3100.000000",
+      "effective_date": "2025-11-04",
+      "is_active": true,
+      "_originalId": "d15abead-ff90-43d0-b34e-ae669bc750c5"
+    }
+  ]
+}

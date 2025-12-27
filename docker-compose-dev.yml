@@ -1,0 +1,40 @@
+services:
+  mauzo-db:
+    image: postgis/postgis:17-master
+    container_name: mauzo-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: easymauzo_pos
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d easymauzo_pos"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  
+  mauzo-api:
+    image: node:16
+    container_name: mauzo-api
+    working_dir: /app
+    environment:
+       HOME: /app
+       PUPPETEER_CONFIG_DIR: /app/.config/puppeteer=value
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm run dev"
+    depends_on:
+      mauzo-db:
+        condition: service_healthy
+
+
+volumes:
+  db-data:
+    driver: local
+
+

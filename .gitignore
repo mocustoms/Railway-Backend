@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Uploads (keep directory structure but ignore contents in git)
+uploads/*
+!uploads/.gitkeep
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Database backups (contain sensitive data)
+backups/
+*.sql
+!migrations/**/*.sql
+
+# Security-sensitive files
+*.pem
+*.key
+*.crt
+*.cert
+*secret*
+*password*
+*credential*
+*.credentials
+
+# Railway-specific sensitive files
+*railway*.md
+!RAILWAY_VOLUME_SETUP.md
+!RAILWAY_IMAGE_UPLOAD_FIX.md
+
+# Environment and config files
+.env*
+!.env.example
+config.local.js
+secrets.json
+
+# Logs that might contain sensitive data
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files that might contain sensitive data
+tmp/
+temp/
+*.tmp
+*.cache
+

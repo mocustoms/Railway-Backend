@@ -1,0 +1,51 @@
+﻿≡ƒº¬ Testing Initialization Only
+
+≡ƒô¥ Step 1: Registering User...
+Γ£à User registered
+
+≡ƒÅó Step 2: Registering Company...
+Γ£à Company registered
+   Company ID: 695a2e1b-449b-4ce0-bd6b-26b14d381e5f
+
+≡ƒÜÇ Step 3: Initializing Company Data...
+
+≡ƒôè Initialization Results:
+   Success: true
+   Message: Company initialization completed
+   Total: 90
+   Successful: 19
+   Failed: 7
+
+≡ƒôï Details by table:
+   Γ£à stores: 2/2 created
+   ΓÜá∩╕Å accounts: 0/43 created
+   ΓÜá∩╕Å financial_years: 0/1 created
+   Γ£à customer_groups: 3/3 created
+   Γ£à linked_accounts: 12/12 created
+   ΓÜá∩╕Å product_categories: 0/7 created
+   ΓÜá∩╕Å packaging: 0/2 created
+   ΓÜá∩╕Å tax_codes: 0/5 created
+   ΓÜá∩╕Å adjustment_reasons: 0/2 created
+      ΓÜá∩╕Å  2 errors
+         1. notNull Violation: AdjustmentReason.tracking_account_id cannot be null (tracking_account_id: AdjustmentReason.tracking_account_id cannot be null)
+         2. notNull Violation: AdjustmentReason.tracking_account_id cannot be null (tracking_account_id: AdjustmentReason.tracking_account_id cannot be null)
+   ΓÜá∩╕Å return_reasons: 0/3 created
+      ΓÜá∩╕Å  3 errors
+         1. null value in column "refund_account_id" of relation "return_reasons" violates not-null constraint
+         2. null value in column "refund_account_id" of relation "return_reasons" violates not-null constraint
+   ΓÜá∩╕Å price_categories: 0/4 created
+   Γ£à currencies: 2/2 created
+   ΓÜá∩╕Å payment_methods: 0/2 created
+   ΓÜá∩╕Å payment_types: 0/2 created
+      ΓÜá∩╕Å  2 errors
+         1. notNull Violation: PaymentType.payment_method_id cannot be null (payment_method_id: PaymentType.payment_method_id cannot be null)
+         2. notNull Violation: PaymentType.payment_method_id cannot be null (payment_method_id: PaymentType.payment_method_id cannot be null)
+
+Γ¥î Errors:
+   1. adjustment_reasons: notNull Violation: AdjustmentReason.tracking_account_id cannot be null (tracking_account_id: AdjustmentReason.tracking_account_id cannot be null)
+   2. adjustment_reasons: notNull Violation: AdjustmentReason.tracking_account_id cannot be null (tracking_account_id: AdjustmentReason.tracking_account_id cannot be null)
+   3. return_reasons: null value in column "refund_account_id" of relation "return_reasons" violates not-null constraint
+   4. return_reasons: null value in column "refund_account_id" of relation "return_reasons" violates not-null constraint
+   5. return_reasons: null value in column "refund_account_id" of relation "return_reasons" violates not-null constraint
+
+Γ£à Test completed

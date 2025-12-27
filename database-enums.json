@@ -1,0 +1,213 @@
+{
+  "enum_account_type_audits_action": [
+    "create",
+    "update",
+    "delete"
+  ],
+  "enum_account_types_category": [
+    "ASSET",
+    "LIABILITY",
+    "EQUITY",
+    "REVENUE",
+    "EXPENSE"
+  ],
+  "enum_account_types_nature": [
+    "DEBIT",
+    "CREDIT"
+  ],
+  "enum_accounts_nature": [
+    "DEBIT",
+    "CREDIT"
+  ],
+  "enum_accounts_status": [
+    "active",
+    "inactive"
+  ],
+  "enum_adjustment_reasons_adjustment_type": [
+    "add",
+    "deduct"
+  ],
+  "enum_general_ledger_account_nature": [
+    "debit",
+    "credit"
+  ],
+  "enum_openingBalances_nature": [
+    "DEBIT",
+    "CREDIT"
+  ],
+  "enum_openingBalances_type": [
+    "debit",
+    "credit"
+  ],
+  "enum_packaging_status": [
+    "active",
+    "inactive"
+  ],
+  "enum_physical_inventories_inventory_type": [
+    "stock_in",
+    "stock_out",
+    "transfer",
+    "count"
+  ],
+  "enum_physical_inventories_status": [
+    "pending",
+    "posted",
+    "approved",
+    "rejected",
+    "reversed",
+    "draft",
+    "returned_for_correction"
+  ],
+  "enum_physical_inventory_items_adjustment_type": [
+    "stock_in",
+    "stock_out",
+    "no_change"
+  ],
+  "enum_price_categories_price_change_type": [
+    "increase",
+    "decrease"
+  ],
+  "enum_price_categories_recurring_day_of_week": [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+  ],
+  "enum_price_categories_recurring_month": [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december"
+  ],
+  "enum_price_categories_recurring_period": [
+    "daily",
+    "weekly",
+    "monthly",
+    "yearly"
+  ],
+  "enum_price_categories_scheduled_type": [
+    "not_scheduled",
+    "one_time",
+    "recurring"
+  ],
+  "enum_price_change_reasons_category": [
+    "cost",
+    "selling",
+    "both"
+  ],
+  "enum_products_product_type": [
+    "resale",
+    "raw_materials",
+    "manufactured",
+    "services",
+    "pharmaceuticals"
+  ],
+  "enum_proforma_invoices_status": [
+    "draft",
+    "sent",
+    "accepted",
+    "rejected",
+    "expired"
+  ],
+  "enum_return_reasons_return_type": [
+    "full_refund",
+    "partial_refund",
+    "exchange",
+    "store_credit"
+  ],
+  "enum_sales_agents_status": [
+    "active",
+    "inactive"
+  ],
+  "enum_store_request_item_transactions_transaction_type": [
+    "requested",
+    "approved",
+    "issued",
+    "received",
+    "fulfilled",
+    "rejected"
+  ],
+  "enum_store_request_items_status": [
+    "pending",
+    "approved",
+    "rejected",
+    "partially_fulfilled",
+    "issued",
+    "received",
+    "fulfilled",
+    "partial_issued",
+    "partially_received",
+    "fully_received",
+    "closed_partially_received"
+  ],
+  "enum_store_requests_direction": [
+    "inbound",
+    "outbound"
+  ],
+  "enum_store_requests_priority": [
+    "low",
+    "medium",
+    "high",
+    "urgent"
+  ],
+  "enum_store_requests_request_type": [
+    "transfer",
+    "loan",
+    "emergency",
+    "regular",
+    "request",
+    "issue"
+  ],
+  "enum_store_requests_status": [
+    "draft",
+    "submitted",
+    "approved",
+    "rejected",
+    "fulfilled",
+    "cancelled",
+    "partial_issued",
+    "partially_received",
+    "fully_received",
+    "partial_issued_cancelled",
+    "partially_received_cancelled"
+  ],
+  "enum_stores_store_type": [
+    "pharmacy",
+    "retail_shop",
+    "restaurant",
+    "barber_shop",
+    "supermarket",
+    "clothing_store",
+    "electronics_store",
+    "hardware_store",
+    "jewelry_store",
+    "bookstore",
+    "other"
+  ],
+  "enum_user_stores_role": [
+    "manager",
+    "cashier",
+    "viewer"
+  ],
+  "enum_users_approval_status": [
+    "pending",
+    "approved",
+    "rejected"
+  ],
+  "enum_users_role": [
+    "admin",
+    "manager",
+    "cashier"
+  ]
+}

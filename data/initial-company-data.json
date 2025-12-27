@@ -1,0 +1,1052 @@
+{
+  "version": "1.0.0",
+  "exportedAt": "2025-11-09T09:08:09.490Z",
+  "sourceCompanyId": "4e42f29c-4b11-48a3-a74a-ba4f26c138e3",
+  "tables": {
+    "stores": [
+      {
+        "name": "Main Store",
+        "store_type": "retail_shop",
+        "location": "Dar es salaam",
+        "phone": "0744883286",
+        "email": "mocustomstech@gmail.com",
+        "address": "Ilala Boma",
+        "description": "",
+        "is_active": true,
+        "default_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+        "latitude": null,
+        "longitude": null,
+        "is_manufacturing": false,
+        "can_receive_po": true,
+        "can_issue_to_store": true,
+        "can_receive_from_store": true,
+        "is_storage_facility": false,
+        "has_temperature_control": false,
+        "temperature_min": null,
+        "temperature_max": null,
+        "settings": {},
+        "default_price_category_id": "7459884d-d379-44ba-aa5c-2720746763f9",
+        "_originalId": "bdc3f59e-191b-4a8e-86cb-5ba12c173a5c"
+      },
+      {
+        "name": "Shop",
+        "store_type": "retail_shop",
+        "location": "Kinondoni",
+        "phone": "0744883284",
+        "email": "mocustomstech@gmail.com",
+        "address": "Dar es sallam",
+        "description": "",
+        "is_active": true,
+        "default_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+        "latitude": null,
+        "longitude": null,
+        "is_manufacturing": false,
+        "can_receive_po": false,
+        "can_issue_to_store": false,
+        "can_receive_from_store": true,
+        "is_storage_facility": false,
+        "has_temperature_control": false,
+        "temperature_min": null,
+        "temperature_max": null,
+        "settings": {},
+        "default_price_category_id": "7459884d-d379-44ba-aa5c-2720746763f9",
+        "_originalId": "24592306-3849-42f7-b9ed-87ffa3438e23"
+      }
+    ],
+    "accounts": [
+      {
+        "name": "CURRENT ASSETS",
+        "code": "HAM-ACC-0001",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "93bf49b6-a823-417b-bcf6-5ff1bd7dbd5b"
+      },
+      {
+        "name": "FIXED ASSETS",
+        "code": "HAM-ACC-0002",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "798819dc-596b-4e54-ab23-7d43495e6027"
+      },
+      {
+        "name": "CURRENT LIABILITIES",
+        "code": "HAM-ACC-0003",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "d2d7af4a-e589-48e6-bac6-2f3f5c0a177a"
+      },
+      {
+        "name": "Undeposited Funds Account",
+        "code": "HAM-ACC-0004",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "93bf49b6-a823-417b-bcf6-5ff1bd7dbd5b",
+        "description": "",
+        "status": "active",
+        "_originalId": "f09d38b3-2abc-4334-abd2-ab4c6356cb7f"
+      },
+      {
+        "name": "Cash Sales",
+        "code": "HAM-ACC-0005",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "f09d38b3-2abc-4334-abd2-ab4c6356cb7f",
+        "description": "",
+        "status": "active",
+        "_originalId": "55fa2737-bf5a-44b2-ae44-9d33a695546b"
+      },
+      {
+        "name": "Deposited Funds",
+        "code": "HAM-ACC-0006",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "93bf49b6-a823-417b-bcf6-5ff1bd7dbd5b",
+        "description": "",
+        "status": "active",
+        "_originalId": "13b72988-f279-4fba-b975-1964685902fb"
+      },
+      {
+        "name": "Bank Payments",
+        "code": "HAM-ACC-0007",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "13b72988-f279-4fba-b975-1964685902fb",
+        "description": "",
+        "status": "active",
+        "_originalId": "3c728ae1-12e7-4a09-bbd7-0cb91b2158fc"
+      },
+      {
+        "name": "Bank Accounts",
+        "code": "HAM-ACC-0008",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "6c3675c6-c354-4da6-9bd1-d255b8ad31d3"
+      },
+      {
+        "name": "DTB",
+        "code": "HAM-ACC-0009",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6c3675c6-c354-4da6-9bd1-d255b8ad31d3",
+        "description": "",
+        "status": "active",
+        "_originalId": "af4a2e27-9e3a-4a57-bef3-8a6eaee495ed"
+      },
+      {
+        "name": "CRDB",
+        "code": "HAM-ACC-0010",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6c3675c6-c354-4da6-9bd1-d255b8ad31d3",
+        "description": "",
+        "status": "active",
+        "_originalId": "6d3026d8-7b81-49b3-acec-2ee57bc16f43"
+      },
+      {
+        "name": "NMB",
+        "code": "HAM-ACC-0011",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6c3675c6-c354-4da6-9bd1-d255b8ad31d3",
+        "description": "",
+        "status": "active",
+        "_originalId": "3a86be28-7e22-4f3c-9cf1-35a6f6ee18ac"
+      },
+      {
+        "name": "MIXX BY YAS",
+        "code": "HAM-ACC-0012",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "13b72988-f279-4fba-b975-1964685902fb",
+        "description": "",
+        "status": "active",
+        "_originalId": "5503c82b-af33-4df2-9976-2bd9786403d7"
+      },
+      {
+        "name": "M-PESA",
+        "code": "HAM-ACC-0013",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "13b72988-f279-4fba-b975-1964685902fb",
+        "description": "",
+        "status": "active",
+        "_originalId": "b8be7c18-c9ad-4c42-a9fa-2e2c26232c15"
+      },
+      {
+        "name": "AIRTEL MONEY",
+        "code": "HAM-ACC-0014",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "13b72988-f279-4fba-b975-1964685902fb",
+        "description": "",
+        "status": "active",
+        "_originalId": "e40a6b46-33d6-42c2-a398-89f71eb2952d"
+      },
+      {
+        "name": "WHT Payable",
+        "code": "HAM-ACC-0015",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "d2d7af4a-e589-48e6-bac6-2f3f5c0a177a",
+        "description": "",
+        "status": "active",
+        "_originalId": "2ef12887-deea-47ed-9923-bef3c83dc3aa"
+      },
+      {
+        "name": "Account Payable",
+        "code": "HAM-ACC-0016",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "d2d7af4a-e589-48e6-bac6-2f3f5c0a177a",
+        "description": "",
+        "status": "active",
+        "_originalId": "226fa430-8cdc-408c-a719-5766ebc44e86"
+      },
+      {
+        "name": "Sales Tax Payable",
+        "code": "HAM-ACC-0017",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "d2d7af4a-e589-48e6-bac6-2f3f5c0a177a",
+        "description": "",
+        "status": "active",
+        "_originalId": "77f46d09-1132-430b-b12a-1b5dfb089e62"
+      },
+      {
+        "name": "WHT Recievables",
+        "code": "HAM-ACC-0018",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "93bf49b6-a823-417b-bcf6-5ff1bd7dbd5b",
+        "description": "",
+        "status": "active",
+        "_originalId": "5f6eb29f-515e-4790-9d7f-502851823f7c"
+      },
+      {
+        "name": "WHT Recievables 5",
+        "code": "HAM-ACC-0019",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "5f6eb29f-515e-4790-9d7f-502851823f7c",
+        "description": "",
+        "status": "active",
+        "_originalId": "5f44beeb-b9fe-463b-b549-cc0f2b791e78"
+      },
+      {
+        "name": "WHT Recievables 10",
+        "code": "HAM-ACC-0020",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "5f6eb29f-515e-4790-9d7f-502851823f7c",
+        "description": "",
+        "status": "active",
+        "_originalId": "ead2ca0f-3d20-4945-bc62-2404b655f4f2"
+      },
+      {
+        "name": "WHT Recievables 15",
+        "code": "HAM-ACC-0021",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "5f6eb29f-515e-4790-9d7f-502851823f7c",
+        "description": "",
+        "status": "active",
+        "_originalId": "f7b670ed-cb9f-4c35-82b5-71c4d7f3cb25"
+      },
+      {
+        "name": "WHT Payable 5",
+        "code": "HAM-ACC-0022",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "2ef12887-deea-47ed-9923-bef3c83dc3aa",
+        "description": "",
+        "status": "active",
+        "_originalId": "8750d0a8-1d40-4a91-a94a-75f853b92791"
+      },
+      {
+        "name": "WHT Payable 10",
+        "code": "HAM-ACC-0023",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "2ef12887-deea-47ed-9923-bef3c83dc3aa",
+        "description": "",
+        "status": "active",
+        "_originalId": "246b318f-f51b-4a54-b588-86cb79d1f7d8"
+      },
+      {
+        "name": "WHT Payable 15",
+        "code": "HAM-ACC-0024",
+        "type": "LIABILITY",
+        "nature": "DEBIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "2ef12887-deea-47ed-9923-bef3c83dc3aa",
+        "description": "",
+        "status": "active",
+        "_originalId": "52c18bb6-0759-404d-81c9-e39a98a619a5"
+      },
+      {
+        "name": "Cost of Goods Sold",
+        "code": "HAM-ACC-0025",
+        "type": "EXPENSE",
+        "nature": "DEBIT",
+        "accountTypeId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "82a6b17d-3863-4d44-9049-d2cec89958be"
+      },
+      {
+        "name": "Product Sales",
+        "code": "HAM-ACC-0026",
+        "type": "REVENUE",
+        "nature": "CREDIT",
+        "accountTypeId": "4fdfc052-a973-4de9-bf28-f0c7bf510080",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "74e655b5-5e54-444b-91e6-f3a1b9e679b8"
+      },
+      {
+        "name": "Inventory Account",
+        "code": "HAM-ACC-0027",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "6e3001cd-efa0-479b-abcf-5813b035fc33"
+      },
+      {
+        "name": "Inventory Sales",
+        "code": "HAM-ACC-0028",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6e3001cd-efa0-479b-abcf-5813b035fc33",
+        "description": "",
+        "status": "active",
+        "_originalId": "35d3c8dc-fdef-4549-a71f-284c50cf0942"
+      },
+      {
+        "name": "Inventory Returns",
+        "code": "HAM-ACC-0029",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6e3001cd-efa0-479b-abcf-5813b035fc33",
+        "description": "",
+        "status": "active",
+        "_originalId": "efbc5df7-5f3c-4177-a605-7d725b982289"
+      },
+      {
+        "name": "Stock increases",
+        "code": "HAM-ACC-0030",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6e3001cd-efa0-479b-abcf-5813b035fc33",
+        "description": "",
+        "status": "active",
+        "_originalId": "21a3c707-5d49-49dc-9982-f414afdb10d2"
+      },
+      {
+        "name": "Stock Decrease - Corresponding",
+        "code": "HAM-ACC-0031",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "6e3001cd-efa0-479b-abcf-5813b035fc33",
+        "description": "",
+        "status": "active",
+        "_originalId": "2c0f3d5e-2895-4e92-8081-e240d173b056"
+      },
+      {
+        "name": "Stock increases - corresponding",
+        "code": "HAM-ACC-0032",
+        "type": "REVENUE",
+        "nature": "CREDIT",
+        "accountTypeId": "4fdfc052-a973-4de9-bf28-f0c7bf510080",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "1a379d39-b8fc-433a-b2dd-54a424cf7cc7"
+      },
+      {
+        "name": "Stock Decrease",
+        "code": "HAM-ACC-0033",
+        "type": "EXPENSE",
+        "nature": "DEBIT",
+        "accountTypeId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "74b797cf-b65a-4d87-8b99-1b30e5ee7acb"
+      },
+      {
+        "name": "Cash on hand",
+        "code": "HAM-ACC-0034",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "f09d38b3-2abc-4334-abd2-ab4c6356cb7f",
+        "description": "",
+        "status": "active",
+        "_originalId": "2654be6b-3629-4201-912b-ecba0affa1f3"
+      },
+      {
+        "name": "Customer Receivable Account",
+        "code": "HAM-ACC-0035",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "1a1df16a-f36e-4e8b-8c79-21fda66aa122"
+      },
+      {
+        "name": "Customer Deposits",
+        "code": "HAM-ACC-0036",
+        "type": "LIABILITY",
+        "nature": "CREDIT",
+        "accountTypeId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a",
+        "parentId": "d2d7af4a-e589-48e6-bac6-2f3f5c0a177a",
+        "description": "",
+        "status": "active",
+        "_originalId": "d812342c-2ebe-49be-bd7e-2ceab3603cea"
+      },
+      {
+        "name": "Debtors Account",
+        "code": "HAM-ACC-0037",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "e252b2eb-fa24-4a1c-987c-62ab14eb84ee"
+      },
+      {
+        "name": "Trade Debtors",
+        "code": "HAM-ACC-0038",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": "e252b2eb-fa24-4a1c-987c-62ab14eb84ee",
+        "description": "",
+        "status": "active",
+        "_originalId": "4ad99b79-4523-45f2-a66b-dd9d1451df56"
+      },
+      {
+        "name": "Direct Costs",
+        "code": "HAM-ACC-0039",
+        "type": "EXPENSE",
+        "nature": "DEBIT",
+        "accountTypeId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "a3a19d12-7c44-47e7-b339-be4584e46c75"
+      },
+      {
+        "name": "Service Revenue Consulting Income and Labor Revenue",
+        "code": "HAM-ACC-0040",
+        "type": "REVENUE",
+        "nature": "CREDIT",
+        "accountTypeId": "4fdfc052-a973-4de9-bf28-f0c7bf510080",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "ab756d24-34c7-4837-90e0-db17b7f49b7b"
+      },
+      {
+        "name": "Non Inventory Accounts",
+        "code": "HAM-ACC-0041",
+        "type": "ASSET",
+        "nature": "DEBIT",
+        "accountTypeId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "253e0a32-61e8-4897-abee-93e72be23b6d"
+      },
+      {
+        "name": "Discount Allowed",
+        "code": "HAM-ACC-0042",
+        "type": "EXPENSE",
+        "nature": "DEBIT",
+        "accountTypeId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "8dc8fd78-8999-4232-aa2e-4b36418773b8"
+      },
+      {
+        "name": "Discount Received",
+        "code": "HAM-ACC-0043",
+        "type": "REVENUE",
+        "nature": "CREDIT",
+        "accountTypeId": "4fdfc052-a973-4de9-bf28-f0c7bf510080",
+        "parentId": null,
+        "description": "",
+        "status": "active",
+        "_originalId": "0c8c2005-a18f-4563-9455-000ed654f0fa"
+      }
+    ],
+    "financial_years": [
+      {
+        "name": "2025",
+        "startDate": "2025-01-01",
+        "endDate": "2025-12-31",
+        "description": "",
+        "isCurrent": true,
+        "isActive": true,
+        "isClosed": false,
+        "closedAt": null,
+        "closingNotes": null
+      }
+    ],
+    "customer_groups": [
+      {
+        "group_name": "Depositing Customers",
+        "group_code": "CG-0001",
+        "is_default": false,
+        "description": null,
+        "is_active": true,
+        "account_receivable_id": "4ad99b79-4523-45f2-a66b-dd9d1451df56",
+        "default_liability_account_id": "d812342c-2ebe-49be-bd7e-2ceab3603cea"
+      },
+      {
+        "group_name": "Credit Customers",
+        "group_code": "CG-0002",
+        "is_default": false,
+        "description": null,
+        "is_active": true,
+        "account_receivable_id": "4ad99b79-4523-45f2-a66b-dd9d1451df56",
+        "default_liability_account_id": "d812342c-2ebe-49be-bd7e-2ceab3603cea"
+      },
+      {
+        "group_name": "General Customers",
+        "group_code": "CG-0003",
+        "is_default": true,
+        "description": null,
+        "is_active": true,
+        "account_receivable_id": "4ad99b79-4523-45f2-a66b-dd9d1451df56",
+        "default_liability_account_id": "d812342c-2ebe-49be-bd7e-2ceab3603cea"
+      }
+    ],
+    "linked_accounts": [
+      {
+        "account_type": "customer_deposits",
+        "account_id": null
+      },
+      {
+        "account_type": "payables",
+        "account_id": null
+      },
+      {
+        "account_type": "receivables",
+        "account_id": "4ad99b79-4523-45f2-a66b-dd9d1451df56"
+      },
+      {
+        "account_type": "cost_of_goods_sold",
+        "account_id": null
+      },
+      {
+        "account_type": "inventory",
+        "account_id": null
+      },
+      {
+        "account_type": "sales_revenue",
+        "account_id": null
+      },
+      {
+        "account_type": "discounts_allowed",
+        "account_id": "8dc8fd78-8999-4232-aa2e-4b36418773b8"
+      },
+      {
+        "account_type": "discounts_received",
+        "account_id": null
+      },
+      {
+        "account_type": "opening_balance_equity",
+        "account_id": null
+      },
+      {
+        "account_type": "current_earnings",
+        "account_id": null
+      },
+      {
+        "account_type": "retained_earnings",
+        "account_id": null
+      },
+      {
+        "account_type": "sales_returns_liability",
+        "account_id": null
+      }
+    ],
+    "product_categories": [
+      {
+        "code": "CAT-0001",
+        "name": "Mobile Devices",
+        "tax_code_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "purchases_tax_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#2196f3",
+        "description": null
+      },
+      {
+        "code": "CAT-0002",
+        "name": "Manufacturing Products",
+        "tax_code_id": "5c004b38-d078-4f50-9699-bb0a250aef9b",
+        "purchases_tax_id": "5c004b38-d078-4f50-9699-bb0a250aef9b",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#9c27b0",
+        "description": null
+      },
+      {
+        "code": "CAT-0003",
+        "name": "Support & Services",
+        "tax_code_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "purchases_tax_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "cogs_account_id": "a3a19d12-7c44-47e7-b339-be4584e46c75",
+        "income_account_id": "ab756d24-34c7-4837-90e0-db17b7f49b7b",
+        "asset_account_id": "253e0a32-61e8-4897-abee-93e72be23b6d",
+        "is_active": true,
+        "color": "#8bc34a",
+        "description": null
+      },
+      {
+        "code": "CAT-0004",
+        "name": "Sofwares",
+        "tax_code_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "purchases_tax_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#795548",
+        "description": null
+      },
+      {
+        "code": "CAT-0005",
+        "name": "FootWare",
+        "tax_code_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "purchases_tax_id": "5c004b38-d078-4f50-9699-bb0a250aef9b",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#9c27b0",
+        "description": null
+      },
+      {
+        "code": "CAT-0006",
+        "name": "Raw Materials",
+        "tax_code_id": "5c004b38-d078-4f50-9699-bb0a250aef9b",
+        "purchases_tax_id": "5c004b38-d078-4f50-9699-bb0a250aef9b",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#607d8b",
+        "description": null
+      },
+      {
+        "code": "CAT-0007",
+        "name": "Medicine",
+        "tax_code_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "purchases_tax_id": "0599f740-68d3-4546-aee1-d9cddcdd8c11",
+        "cogs_account_id": "82a6b17d-3863-4d44-9049-d2cec89958be",
+        "income_account_id": "74e655b5-5e54-444b-91e6-f3a1b9e679b8",
+        "asset_account_id": "35d3c8dc-fdef-4549-a71f-284c50cf0942",
+        "is_active": true,
+        "color": "#ff9800",
+        "description": null
+      }
+    ],
+    "packaging": [
+      {
+        "code": "PKG-0001",
+        "name": "PCS",
+        "pieces": 1,
+        "status": "active",
+        "unit": null
+      },
+      {
+        "code": "PKG-0002",
+        "name": "Dozen",
+        "pieces": 12,
+        "status": "active",
+        "unit": null
+      }
+    ],
+    "tax_codes": [
+      {
+        "code": "TAX-0001",
+        "name": "VAT",
+        "rate": "18.00",
+        "indicator": "B",
+        "efd_department_code": "A",
+        "sales_tax_account_id": "77f46d09-1132-430b-b12a-1b5dfb089e62",
+        "purchases_tax_account_id": "226fa430-8cdc-408c-a719-5766ebc44e86",
+        "is_active": true,
+        "is_wht": false,
+        "_originalId": "0599f740-68d3-4546-aee1-d9cddcdd8c11"
+      },
+      {
+        "code": "TAX-0002",
+        "name": "No VAT",
+        "rate": "0.00",
+        "indicator": "A",
+        "efd_department_code": "V",
+        "sales_tax_account_id": "77f46d09-1132-430b-b12a-1b5dfb089e62",
+        "purchases_tax_account_id": "226fa430-8cdc-408c-a719-5766ebc44e86",
+        "is_active": true,
+        "is_wht": false,
+        "_originalId": "5c004b38-d078-4f50-9699-bb0a250aef9b"
+      },
+      {
+        "code": "TAX-0003",
+        "name": "WHT (5%)",
+        "rate": "5.00",
+        "indicator": "",
+        "efd_department_code": "",
+        "sales_tax_account_id": "5f44beeb-b9fe-463b-b549-cc0f2b791e78",
+        "purchases_tax_account_id": "8750d0a8-1d40-4a91-a94a-75f853b92791",
+        "is_active": true,
+        "is_wht": true,
+        "_originalId": "ebb5b2e5-2bb2-4b41-8c14-e99b231f694b"
+      },
+      {
+        "code": "TAX-0004",
+        "name": "WHT (10%)",
+        "rate": "10.00",
+        "indicator": "",
+        "efd_department_code": "",
+        "sales_tax_account_id": "ead2ca0f-3d20-4945-bc62-2404b655f4f2",
+        "purchases_tax_account_id": "246b318f-f51b-4a54-b588-86cb79d1f7d8",
+        "is_active": true,
+        "is_wht": true,
+        "_originalId": "096308ee-d334-48f7-aebf-a21aa566842c"
+      },
+      {
+        "code": "TAX-0005",
+        "name": "WHT (15%)",
+        "rate": "15.00",
+        "indicator": "",
+        "efd_department_code": "",
+        "sales_tax_account_id": "f7b670ed-cb9f-4c35-82b5-71c4d7f3cb25",
+        "purchases_tax_account_id": "52c18bb6-0759-404d-81c9-e39a98a619a5",
+        "is_active": true,
+        "is_wht": true,
+        "_originalId": "e1a80073-31ba-4f50-ba3c-a6074f49d323"
+      }
+    ],
+    "adjustment_reasons": [
+      {
+        "code": "ADJ-0001",
+        "name": "Adjustment IN",
+        "description": "Correction of inventory count errors",
+        "adjustment_type": "add",
+        "tracking_account_id": "21a3c707-5d49-49dc-9982-f414afdb10d2",
+        "is_active": true,
+        "corresponding_account_id": "1a379d39-b8fc-433a-b2dd-54a424cf7cc7"
+      },
+      {
+        "code": "ADJ-0002",
+        "name": "Adjustment OUT",
+        "description": "Inventory Correction OUT",
+        "adjustment_type": "deduct",
+        "tracking_account_id": "74b797cf-b65a-4d87-8b99-1b30e5ee7acb",
+        "is_active": true,
+        "corresponding_account_id": "2c0f3d5e-2895-4e92-8081-e240d173b056"
+      }
+    ],
+    "return_reasons": [
+      {
+        "code": "RET-0001",
+        "name": "Broken",
+        "description": "",
+        "return_type": "store_credit",
+        "requires_approval": true,
+        "max_return_days": 10,
+        "refund_account_id": "2654be6b-3629-4201-912b-ecba0affa1f3",
+        "inventory_account_id": "efbc5df7-5f3c-4177-a605-7d725b982289",
+        "is_active": true
+      },
+      {
+        "code": "RET-0002",
+        "name": "Customer Return on Credit",
+        "description": "",
+        "return_type": "full_refund",
+        "requires_approval": false,
+        "max_return_days": 10,
+        "refund_account_id": "1a1df16a-f36e-4e8b-8c79-21fda66aa122",
+        "inventory_account_id": "efbc5df7-5f3c-4177-a605-7d725b982289",
+        "is_active": true
+      },
+      {
+        "code": "RET-0003",
+        "name": "Customer Return on Sale",
+        "description": "",
+        "return_type": "full_refund",
+        "requires_approval": true,
+        "max_return_days": 10,
+        "refund_account_id": "2654be6b-3629-4201-912b-ecba0affa1f3",
+        "inventory_account_id": "efbc5df7-5f3c-4177-a605-7d725b982289",
+        "is_active": true
+      }
+    ],
+    "price_categories": [
+      {
+        "code": "HAM-PRC-0001",
+        "name": "Retail Price",
+        "description": "",
+        "is_active": true,
+        "price_change_type": "increase",
+        "percentage_change": "0.00",
+        "scheduled_type": "not_scheduled",
+        "recurring_period": null,
+        "scheduled_date": null,
+        "recurring_day_of_week": null,
+        "recurring_date": null,
+        "recurring_month": null,
+        "start_time": null,
+        "end_time": null,
+        "_originalId": "7459884d-d379-44ba-aa5c-2720746763f9"
+      },
+      {
+        "code": "HAM-PRC-0002",
+        "name": "Wholesale",
+        "description": "",
+        "is_active": true,
+        "price_change_type": "decrease",
+        "percentage_change": "10.00",
+        "scheduled_type": "not_scheduled",
+        "recurring_period": null,
+        "scheduled_date": null,
+        "recurring_day_of_week": null,
+        "recurring_date": null,
+        "recurring_month": null,
+        "start_time": null,
+        "end_time": null,
+        "_originalId": "ea8e2b9f-8baa-4891-9cb5-2914bed442d7"
+      },
+      {
+        "code": "HAM-PRC-0003",
+        "name": "Happy Hour",
+        "description": "",
+        "is_active": true,
+        "price_change_type": "decrease",
+        "percentage_change": "15.00",
+        "scheduled_type": "not_scheduled",
+        "recurring_period": null,
+        "scheduled_date": null,
+        "recurring_day_of_week": null,
+        "recurring_date": null,
+        "recurring_month": null,
+        "start_time": null,
+        "end_time": null,
+        "_originalId": "e0d67f6f-2054-4595-ab0f-3a5077122603"
+      },
+      {
+        "code": "HAM-PRC-0004",
+        "name": "Service Charge",
+        "description": "",
+        "is_active": true,
+        "price_change_type": "increase",
+        "percentage_change": "0.00",
+        "scheduled_type": "not_scheduled",
+        "recurring_period": null,
+        "scheduled_date": null,
+        "recurring_day_of_week": null,
+        "recurring_date": null,
+        "recurring_month": null,
+        "start_time": null,
+        "end_time": null,
+        "_originalId": "7960d2fd-3a90-42d9-a5b0-11b2c66c008c"
+      }
+    ],
+    "currencies": [
+      {
+        "code": "HAM-CUR-0001",
+        "name": "Tanzania TZS",
+        "symbol": "TSh",
+        "country": "Tanzania",
+        "flag": "🇹🇿",
+        "is_default": true,
+        "is_active": true,
+        "_originalId": "a37abbc4-fe10-44d4-9478-841d34c7c09d"
+      },
+      {
+        "code": "HAM-CUR-0002",
+        "name": "United States USD",
+        "symbol": "$",
+        "country": "United States",
+        "flag": "🇺🇸",
+        "is_default": false,
+        "is_active": true,
+        "_originalId": "02c7fb9e-f4cf-47c8-a64c-88d27e2ec792"
+      }
+    ],
+    "payment_methods": [
+      {
+        "code": "PMT-0001",
+        "name": "CASH",
+        "deducts_from_customer_account": true,
+        "requires_bank_details": false,
+        "upload_document": false,
+        "is_active": true,
+        "_originalId": "990a0a1e-5a27-4141-b197-7a7246588481"
+      },
+      {
+        "code": "PMT-0002",
+        "name": "BANK",
+        "deducts_from_customer_account": true,
+        "requires_bank_details": true,
+        "upload_document": true,
+        "is_active": true,
+        "_originalId": "3e6a08b2-61af-45ff-98d6-58e2d7e8dab7"
+      }
+    ],
+    "payment_types": [
+      {
+        "code": "PTY-0001",
+        "name": "Cash Sales",
+        "payment_method_id": "990a0a1e-5a27-4141-b197-7a7246588481",
+        "order_of_display": 1,
+        "default_account_id": "55fa2737-bf5a-44b2-ae44-9d33a695546b",
+        "used_in_sales": true,
+        "used_in_debtor_payments": true,
+        "used_in_credit_payments": true,
+        "used_in_customer_deposits": true,
+        "used_in_refunds": true,
+        "display_in_cashier_report": true,
+        "used_in_banking": false,
+        "is_active": true
+      },
+      {
+        "code": "PTY-0002",
+        "name": "Bank Sales",
+        "payment_method_id": "3e6a08b2-61af-45ff-98d6-58e2d7e8dab7",
+        "order_of_display": 2,
+        "default_account_id": "3c728ae1-12e7-4a09-bbd7-0cb91b2158fc",
+        "used_in_sales": true,
+        "used_in_debtor_payments": true,
+        "used_in_credit_payments": true,
+        "used_in_customer_deposits": true,
+        "used_in_refunds": true,
+        "display_in_cashier_report": true,
+        "used_in_banking": true,
+        "is_active": true
+      }
+    ],
+    "account_types": [
+      {
+        "name": "REVENUE",
+        "code": "HAM-AT-0001",
+        "description": null,
+        "category": "REVENUE",
+        "nature": "CREDIT",
+        "is_active": true,
+        "_originalId": "4fdfc052-a973-4de9-bf28-f0c7bf510080"
+      },
+      {
+        "name": "ASSET",
+        "code": "HAM-AT-0002",
+        "description": null,
+        "category": "ASSET",
+        "nature": "DEBIT",
+        "is_active": true,
+        "_originalId": "aac2e0a9-46a4-4af6-9dd4-8f36007f57b2"
+      },
+      {
+        "name": "EQUITY",
+        "code": "HAM-AT-0003",
+        "description": null,
+        "category": "EQUITY",
+        "nature": "CREDIT",
+        "is_active": true,
+        "_originalId": "c8a9c2c4-f37b-4deb-a441-d15b44f9ae08"
+      },
+      {
+        "name": "EXPENSES",
+        "code": "HAM-AT-0004",
+        "description": null,
+        "category": "EXPENSE",
+        "nature": "DEBIT",
+        "is_active": true,
+        "_originalId": "8fbbeb7b-e20c-434e-a9b0-aebd64f811fe"
+      },
+      {
+        "name": "LIABILITIES",
+        "code": "HAM-AT-0005",
+        "description": null,
+        "category": "LIABILITY",
+        "nature": "DEBIT",
+        "is_active": true,
+        "_originalId": "37b0bf8b-c13e-4d0d-b5c5-6cbb4b60355a"
+      }
+    ],
+    "exchange_rates": [
+      {
+        "from_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+        "to_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+        "rate": "1.000000",
+        "effective_date": "2025-11-06",
+        "is_active": true,
+        "_originalId": "19643122-da44-43a9-b908-1331cdad7693"
+      },
+      {
+        "from_currency_id": "02c7fb9e-f4cf-47c8-a64c-88d27e2ec792",
+        "to_currency_id": "a37abbc4-fe10-44d4-9478-841d34c7c09d",
+        "rate": "3100.000000",
+        "effective_date": "2025-11-04",
+        "is_active": true,
+        "_originalId": "d15abead-ff90-43d0-b34e-ae669bc750c5"
+      }
+    ]
+  }
+}
