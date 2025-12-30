@@ -11,13 +11,13 @@ function setupAssociations(models) {
     // Account associations
     Account.belongsTo(User, { as: 'creator', foreignKey: 'createdBy' });
     Account.belongsTo(User, { as: 'updater', foreignKey: 'updatedBy' });
-    Account.belongsTo(AccountType, { as: 'accountType', foreignKey: 'account_type_id' });
+    Account.belongsTo(AccountType, { as: 'accountType', foreignKey: 'accountTypeId' });
     Account.hasMany(OpeningBalance, { as: 'openingBalances', foreignKey: 'accountId' });
 
     // AccountType associations
     AccountType.belongsTo(User, { as: 'creator', foreignKey: 'created_by' });
     AccountType.belongsTo(User, { as: 'updater', foreignKey: 'updated_by' });
-    AccountType.hasMany(Account, { as: 'accounts', foreignKey: 'account_type_id' });
+    AccountType.hasMany(Account, { as: 'accounts', foreignKey: 'accountTypeId' });
     AccountType.hasMany(OpeningBalance, { as: 'openingBalances', foreignKey: 'accountTypeId' });
     User.hasMany(AccountType, { as: 'createdAccountTypes', foreignKey: 'created_by' });
     User.hasMany(AccountType, { as: 'updatedAccountTypes', foreignKey: 'updated_by' });

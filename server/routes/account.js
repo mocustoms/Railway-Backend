@@ -150,11 +150,11 @@ router.get('/', async (req, res) => {
             // not all account types with the same category
             // Use get() to access the model attribute, or access directly if it's a plain object
             const typeAccounts = accounts.filter(acc => {
-                const accountTypeId = acc.get ? acc.get('account_type_id') : acc.account_type_id;
+                const accountTypeId = acc.get ? acc.get('accountTypeId') : acc.accountTypeId;
                 return accountTypeId === accountType.id;
             });
-            
-            // Build tree for accounts of this type
+                
+                // Build tree for accounts of this type
             const accountTree = buildAccountTree(typeAccounts);
             
             return {
@@ -176,6 +176,7 @@ router.get('/', async (req, res) => {
 
         res.json(tree);
     } catch (err) {
+        // console.error('Error fetching accounts:', err);
         if (err && err.stack) {
             }
         res.status(500).json({ error: 'Failed to fetch accounts', details: err.message });

@@ -655,8 +655,6 @@ const startServer = async (port) => {
          `,
         { type: sequelize.QueryTypes.SELECT }
       );
-      console.log(`ℹ️ Found ${tables.length} tables in the database`);
-      console.log(`ℹ️ Tables: ${tables.map((t) => t.tablename).join(", ")}`);
       if (tables.length < 2) {
         await sequelize.sync({ alter: false, force: false }); // Ensure models are synced
         console.log("✅ Database synchronized");

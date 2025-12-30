@@ -10,12 +10,23 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./pgadmin-data:/pgadmin-data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d easymauzo_pos"]
       interval: 5s
       timeout: 5s
       retries: 10
-  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mauzo-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pgadmin-data:/pgadmin-data
   mauzo-api:
     image: node:16
     container_name: mauzo-api
@@ -23,6 +34,11 @@ services:
     environment:
        HOME: /app
        PUPPETEER_CONFIG_DIR: /app/.config/puppeteer=value
+       DB_NAME: easymauzo_pos
+       DB_USER: postgres
+       DB_PASSWORD: postgres
+       DB_HOST: mauzo-db
+       DB_PORT: 5432
     volumes:
       - .:/app
     ports:
