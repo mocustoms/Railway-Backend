@@ -72,6 +72,8 @@ const ReceiptTransaction = require('./receiptTransaction')(sequelize);
 const JournalEntry = require('./journalEntry');
 const JournalEntryLine = require('./journalEntryLine');
 const Supplier = require('./supplier');
+const Vendor = require('./vendor');
+const VendorGroup = require('./vendorGroup');
 
 // Set up associations
 const models = {
@@ -145,7 +147,9 @@ const models = {
     ReceiptTransaction,
     JournalEntry,
     JournalEntryLine,
-    Supplier
+    Supplier,
+    Vendor,
+    VendorGroup
 };
 
 // Call individual model associate methods

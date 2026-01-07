@@ -1,6 +1,8 @@
 // Model Associations
 // This file handles all associations between models to avoid circular dependencies
 
+const { Vendor } = require(".");
+
 function setupAssociations(models) {
     const { User, Account, OpeningBalance, Store, FinancialYear, AccountType, UserStore, Currency, ExchangeRate, PaymentMethod, PaymentType, TaxCode, AdjustmentReason, ReturnReason, ProductCategory, ProductModel, Product, ProductStoreLocation, ProductColor, Packaging, ProductManufacturer, ProductBrandName, PriceCategory, ProductPriceCategory, ProductStore, ProductPharmaceuticalInfo, TransactionType, CostingMethod, PriceChangeReason, PriceHistory, StockAdjustment, StockAdjustmentItem, StoreRequest, StoreRequestItem, StoreRequestItemTransaction, SalesAgent, BankDetail, CustomerDeposit, Customer, CustomerGroup, ProformaInvoice, ProformaInvoiceItem, SalesOrder, SalesOrderItem, SalesInvoice, SalesInvoiceItem, SalesTransaction, LinkedAccount, LoyaltyCardConfig, LoyaltyCard, LoyaltyTransaction, Receipt, ReceiptItem, ReceiptTransaction, Company, JournalEntry, JournalEntryLine } = models;
 
@@ -539,13 +541,42 @@ function setupAssociations(models) {
     // CustomerGroup associations (reverse relationships only)
     CustomerGroup.hasMany(Customer, { as: 'customers', foreignKey: 'customer_group_id' });
 
+    // Vendor and VendorGroup associations
+    // Vendor belongs to a VendorGroup and a Company, and may reference a default payable Account
+    models.Vendor.belongsTo(models.VendorGroup, { as: 'vendorGroup', foreignKey: 'vendor_group_id' });
+    models.Vendor.belongsTo(models.Company, { as: 'company', foreignKey: 'companyId' });
+    
+    models.Vendor.belongsTo(models.Account, { as: 'defaultPayableAccount', foreignKey: 'default_payable_account_id' });
+
+    // Reverse associations for Vendor
+    models.VendorGroup.hasMany(models.Vendor, { as: 'vendors', foreignKey: 'vendor_group_id' });
+    models.Company.hasMany(models.Vendor, { as: 'vendors', foreignKey: 'companyId' });
+    models.Account.hasMany(models.Vendor, { as: 'defaultPayableVendors', foreignKey: 'default_payable_account_id' });
+
+    // VendorGroup belongs to Company and references liability/payable Accounts
+    models.VendorGroup.belongsTo(models.Company, { as: 'company', foreignKey: 'companyId' });
+    models.VendorGroup.belongsTo(models.Account, { as: 'liabilityAccount', foreignKey: 'liablity_account_id' });
+    models.VendorGroup.belongsTo(models.Account, { as: 'payableAccount', foreignKey: 'payable_account_id' });
+
+    // VendorGroup -> User associations for created_by / updated_by
+    models.VendorGroup.belongsTo(models.User, { as: 'creator', foreignKey: 'created_by' });
+    models.VendorGroup.belongsTo(models.User, { as: 'updater', foreignKey: 'updated_by' });
+
+    // Reverse associations for VendorGroup -> Account
+    models.Account.hasMany(models.VendorGroup, { as: 'liabilityVendorGroups', foreignKey: 'liablity_account_id' });
+    models.Account.hasMany(models.VendorGroup, { as: 'payableVendorGroups', foreignKey: 'payable_account_id' });
+    models.Company.hasMany(models.VendorGroup, { as: 'vendorGroups', foreignKey: 'companyId' });
+
     // LoyaltyCardConfig associations (reverse relationships only)
     LoyaltyCardConfig.hasMany(Customer, { as: 'customers', foreignKey: 'loyalty_card_config_id' });
 
     // User-Customer associations (reverse relationships only)
     User.hasMany(Customer, { as: 'createdCustomers', foreignKey: 'created_by' });
     User.hasMany(Customer, { as: 'updatedCustomers', foreignKey: 'updated_by' });
-
+    User.hasMany(models.Vendor, { as: 'createdVendors', foreignKey: 'created_by' });
+    User.hasMany(models.Vendor, { as: 'updatedVendors', foreignKey: 'updated_by' });
+    User.hasMany(models.VendorGroup, { as: 'createdVendorGroups', foreignKey: 'created_by' });
+    User.hasMany(models.VendorGroup, { as: 'updatedVendorGroups', foreignKey: 'updated_by' });
     // ReturnReason associations
     ReturnReason.belongsTo(User, { as: 'createdByUserReturnReason', foreignKey: 'created_by' });
     ReturnReason.belongsTo(User, { as: 'updatedByUserReturnReason', foreignKey: 'updated_by' });

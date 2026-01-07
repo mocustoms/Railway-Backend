@@ -57,6 +57,7 @@ const customerListReportRouter = require("./server/routes/customerListReport");
 const customerBirthdaysReportRouter = require("./server/routes/customerBirthdaysReport");
 const administrationRouter = require("./server/routes/administration");
 const currencyRouter = require("./server/routes/currency");
+const vendorGroupRouter = require("./server/routes/vendorGroup");
 const runMigrations = require("./scripts/run-migrations").runMigrations;
 const auth = require("./server/middleware/auth");
 
@@ -398,6 +399,10 @@ app.use("/api/schedulers", require("./server/routes/scheduler"));
 
 // App version route (public, no auth required)
 app.use("/api/app-version", require("./server/routes/appVersion"));
+
+app.use("/api/vendor-groups", vendorGroupRouter);
+
+app.use("/api/vendors", require("./server/routes/vendor"));
 
 // Enhanced health check endpoint
 app.get("/api/health", async (req, res) => {

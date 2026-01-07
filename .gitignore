@@ -10,6 +10,8 @@ pgadmin-data/
 .env.test.local
 .env.production.local
 
+*.sh
+
 # Logs
 logs/
 *.log
