@@ -561,6 +561,8 @@ function setupAssociations(models) {
     // VendorGroup -> User associations for created_by / updated_by
     models.VendorGroup.belongsTo(models.User, { as: 'creator', foreignKey: 'created_by' });
     models.VendorGroup.belongsTo(models.User, { as: 'updater', foreignKey: 'updated_by' });
+    models.Vendor.belongsTo(models.User, { as: 'creator', foreignKey: 'created_by' });
+    models.Vendor.belongsTo(models.User, { as: 'updater', foreignKey: 'updated_by' });
 
     // Reverse associations for VendorGroup -> Account
     models.Account.hasMany(models.VendorGroup, { as: 'liabilityVendorGroups', foreignKey: 'liablity_account_id' });

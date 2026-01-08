@@ -73,7 +73,7 @@ router.get('/', async (req, res) => {
     };
 
     let orderClause = [];
-    if (sort_by === 'group_name') {
+    if (sort_by === 'vendor_group_name') {
       orderClause = [[{ model: VendorGroup, as: 'vendorGroup' }, 'vendor_group_name', sort_order.toUpperCase()]];
     } else if (sort_by === 'default_payable_account_name') {
       orderClause = [[{ model: Account, as: 'defaultPayableAccount' }, 'name', sort_order.toUpperCase()]];
@@ -90,7 +90,7 @@ router.get('/', async (req, res) => {
     const { count, rows } = await Vendor.findAndCountAll({
       where: finalWhere,
       include: [
-        // { model: VendorGroup, as: 'vendorGroup', attributes: ['id', 'vendor_group_name', 'vendor_group_code'], where: buildCompanyWhere(req), required: false },
+        { model: VendorGroup, as: 'vendorGroup', attributes: ['id', 'vendor_group_name', 'vendor_group_code'], where: buildCompanyWhere(req), required: false },
         { model: Account, as: 'defaultPayableAccount', attributes: ['id', 'code', 'name'], required: false },
         { model: User, as: 'creator', attributes: ['id', 'first_name', 'last_name'] },
         { model: User, as: 'updater', attributes: ['id', 'first_name', 'last_name'] }
@@ -123,6 +123,7 @@ router.get('/', async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Error fetching vendors:', error);
     return res.status(500).json({ success: false, error: 'Failed to fetch vendors' });
   }
 });
@@ -165,7 +166,7 @@ router.post('/', [
   body('vendor_group_id').isUUID().withMessage('Vendor group id is required'),
   body('full_name').trim().notEmpty().withMessage('Full name is required').isLength({ max: 150 }).withMessage('Full name too long'),
   body('default_payable_account_id').optional().isUUID().withMessage('Default payable account must be a UUID'),
-  body('email').optional().isEmail().withMessage('Invalid email')
+  body('email').optional({ checkFalsy: true }).isEmail().withMessage('Invalid email')
 ], csrfProtection, async (req, res) => {
   const transaction = await sequelize.transaction();
   try {
@@ -239,6 +240,7 @@ router.post('/', [
 
     return res.status(201).json({ success: true, data: createdWithIncludes });
   } catch (error) {
+    console.error('Error creating vendor:', error);
     if (transaction && !transaction.finished) await transaction.rollback();
     if (error.name === 'SequelizeUniqueConstraintError') {
       return res.status(400).json({ success: false, error: 'Duplicate entry', message: error.message, fields: error.fields });

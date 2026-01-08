@@ -77,14 +77,12 @@ const Vendor = sequelize.define(
     indexes: [
       {
         unique: true,
-        fields: ["vendor_id", "companyId"],
+        fields: ["vendor_id"],
       },
       {
-        unique: true,
         fields: ["vendor_group_id"],
       },
       {
-        unique: true,
         fields: ["companyId"],
       },
     ],

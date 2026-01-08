@@ -102,7 +102,7 @@ router.get("/", async (req, res) => {
     const transformed = rows.map((r) => ({
       ...r.toJSON(),
       default_liability_account_id: r.liablity_account_id,
-      payable_account_id: r.account_payable_id,
+      account_payable_id: r.payableAccount ? r.payableAccount.id : null,
       default_liability_account_name: r.liabilityAccount
         ? `${r.liabilityAccount.code} - ${r.liabilityAccount.name}`
         : null,
