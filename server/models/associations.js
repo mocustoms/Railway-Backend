@@ -419,7 +419,7 @@ function setupAssociations(models) {
     // PriceHistory associations
     PriceHistory.belongsTo(CostingMethod, { as: 'costingMethod', foreignKey: 'costing_method_id' });
     PriceHistory.belongsTo(PriceChangeReason, { as: 'priceChangeReason', foreignKey: 'price_change_reason_id' });
-    PriceHistory.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transactionTypeId' });
+    PriceHistory.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transaction_type_id' });
     PriceHistory.belongsTo(Currency, { as: 'currency', foreignKey: 'currency_id' });
     PriceHistory.belongsTo(User, { as: 'creator', foreignKey: 'created_by' });
     

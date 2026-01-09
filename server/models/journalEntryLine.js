@@ -12,7 +12,8 @@ JournalEntryLine.init({
     journalEntryId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'journalEntryId',
+        // DB column uses snake_case naming
+        field: 'journal_entry_id',
         references: {
             model: 'journal_entries',
             key: 'id'
@@ -24,7 +25,7 @@ JournalEntryLine.init({
     accountId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'accountId',
+        field: 'account_id',
         references: {
             model: 'accounts',
             key: 'id'
@@ -36,7 +37,7 @@ JournalEntryLine.init({
     accountTypeId: {
         type: DataTypes.UUID,
         allowNull: true,
-        field: 'accountTypeId',
+        field: 'account_type_id',
         references: {
             model: 'account_types',
             key: 'id'
@@ -62,7 +63,7 @@ JournalEntryLine.init({
     originalAmount: {
         type: DataTypes.DECIMAL(15, 2),
         allowNull: true,
-        field: 'originalAmount',
+        field: 'original_amount',
 
     },
     equivalentAmount: {
@@ -75,7 +76,7 @@ JournalEntryLine.init({
     currencyId: {
         type: DataTypes.UUID,
         allowNull: true,
-        field: 'currencyId',
+        field: 'currency_id',
         references: {
             model: 'currencies',
             key: 'id'
@@ -87,7 +88,7 @@ JournalEntryLine.init({
     exchangeRateId: {
         type: DataTypes.UUID,
         allowNull: true,
-        field: 'exchangeRateId',
+        field: 'exchange_rate_id',
         references: {
             model: 'exchange_rates',
             key: 'id'
@@ -100,7 +101,7 @@ JournalEntryLine.init({
         type: DataTypes.DECIMAL(15, 6),
         allowNull: true,
         defaultValue: 1.000000,
-        field: 'exchangeRate',
+        field: 'exchange_rate',
 
     },
     description: {
@@ -112,7 +113,7 @@ JournalEntryLine.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1,
-        field: 'lineNumber',
+        field: 'line_number',
 
     },
     companyId: {
@@ -137,19 +138,20 @@ JournalEntryLine.init({
             fields: ['companyId']
         },
         {
-            fields: ['journalEntryId']
+            // index on DB column name
+            fields: ['journal_entry_id']
         },
         {
-            fields: ['accountId']
+            fields: ['account_id']
         },
         {
-            fields: ['accountTypeId']
+            fields: ['account_type_id']
         },
         {
-            fields: ['currencyId']
+            fields: ['currency_id']
         },
         {
-            fields: ['journalEntryId', 'lineNumber']
+            fields: ['journal_entry_id', 'line_number']
         }
     ]
 });
