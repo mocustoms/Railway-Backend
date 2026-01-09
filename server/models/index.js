@@ -74,6 +74,7 @@ const JournalEntryLine = require('./journalEntryLine');
 const Supplier = require('./supplier');
 const Vendor = require('./vendor');
 const VendorGroup = require('./vendorGroup');
+const VendorProduct = require('./vendorProduct')(sequelize, DataTypes);
 
 // Set up associations
 const models = {
@@ -149,6 +150,7 @@ const models = {
     JournalEntryLine,
     Supplier,
     Vendor,
+    VendorProduct,
     VendorGroup
 };
 

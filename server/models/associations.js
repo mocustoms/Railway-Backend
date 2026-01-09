@@ -548,6 +548,15 @@ function setupAssociations(models) {
     
     models.Vendor.belongsTo(models.Account, { as: 'defaultPayableAccount', foreignKey: 'default_payable_account_id' });
 
+        // Vendor <-> Product many-to-many via VendorProduct
+        if (models.VendorProduct) {
+            models.Vendor.belongsToMany(models.Product, { through: models.VendorProduct, as: 'products', foreignKey: 'vendor_id', otherKey: 'product_id' });
+            models.Product.belongsToMany(models.Vendor, { through: models.VendorProduct, as: 'vendors', foreignKey: 'product_id', otherKey: 'vendor_id' });
+            // Expose direct access to join entries
+            models.Vendor.hasMany(models.VendorProduct, { as: 'vendorProducts', foreignKey: 'vendor_id' });
+            models.Product.hasMany(models.VendorProduct, { as: 'productVendors', foreignKey: 'product_id' });
+        }
+
     // Reverse associations for Vendor
     models.VendorGroup.hasMany(models.Vendor, { as: 'vendors', foreignKey: 'vendor_group_id' });
     models.Company.hasMany(models.Vendor, { as: 'vendors', foreignKey: 'companyId' });

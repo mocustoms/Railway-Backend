@@ -9,7 +9,7 @@ const { csrfProtection } = require('../middleware/csrfProtection');
 const autoCodeService = require('../utils/autoCodeService');
 const ExcelJS = require('exceljs');
 const PDFDocument = require('pdfkit');
-const { Vendor, VendorGroup, Account, Company, User, sequelize } = require('../models');
+const { Vendor, VendorGroup, Account, Company, User, sequelize, Product, VendorProduct } = require('../models');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
@@ -254,7 +254,7 @@ router.put('/:id', [
   body('vendor_group_id').optional().isUUID().withMessage('Vendor group id must be a UUID'),
   body('full_name').optional().trim().notEmpty().withMessage('Full name cannot be empty').isLength({ max: 150 }).withMessage('Full name too long'),
   body('default_payable_account_id').optional().isUUID().withMessage('Default payable account must be a UUID'),
-  body('email').optional().isEmail().withMessage('Invalid email')
+  body('email').optional({checkFalsy: true}).isEmail().withMessage('Invalid email')
 ], csrfProtection, async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -327,6 +327,175 @@ router.get('/:id/usage', async (req, res) => {
     return res.json({ isUsed: false, usageCount: 0, canDelete: true });
   } catch (error) {
     res.status(500).json({ success: false, error: 'Failed to check vendor usage' });
+  }
+});
+
+// Get products assigned to a vendor
+router.get('/:vendorId/products', async (req, res) => {
+  try {
+    const { vendorId } = req.params;
+    const vendor = await Vendor.findOne({ where: buildCompanyWhere(req, { id: vendorId }) });
+    if (!vendor) return res.status(404).json({ success: false, error: 'Vendor not found' });
+
+    // Find assigned products via the join table and include product details
+    const assignments = await VendorProduct.findAll({
+      where: { vendor_id: vendor.id },
+      include: [
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'code', 'name', 'product_type', 'barcode'],
+          where: buildCompanyWhere(req),
+          required: true
+        }
+      ],
+      order: [['created_at', 'DESC']]
+    });
+
+    const result = assignments.map(a => {
+      const p = a.product;
+      return {
+        id: p.id,
+        code: p.code,
+        name: p.name,
+        product_type: p.product_type,
+        barcode: p.barcode || undefined,
+        assigned_at: a.created_at ? new Date(a.created_at).toISOString() : null
+      };
+    });
+
+    return res.json({ success: true, data: result });
+  } catch (error) {
+    console.error('Error fetching vendor products:', error);
+    return res.status(500).json({ success: false, error: 'Failed to fetch vendor products' });
+  }
+});
+
+// Assign products to vendor
+router.post('/:vendorId/products', [
+  body('product_ids').isArray({ min: 1 }).withMessage('product_ids must be a non-empty array'),
+  body('product_ids.*').isUUID().withMessage('Each product id must be a valid UUID')
+], csrfProtection, async (req, res) => {
+  const transaction = await sequelize.transaction();
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      await transaction.rollback();
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const { vendorId } = req.params;
+    const { product_ids } = req.body;
+
+    const vendor = await Vendor.findOne({ where: buildCompanyWhere(req, { id: vendorId }), transaction });
+    if (!vendor) {
+      await transaction.rollback();
+      return res.status(404).json({ success: false, error: 'Vendor not found' });
+    }
+
+    // Ensure all products exist and belong to the company (if company scoping is used)
+    const products = await Product.findAll({ where: buildCompanyWhere(req, { id: product_ids }), transaction });
+    if (products.length !== product_ids.length) {
+      await transaction.rollback();
+      return res.status(400).json({ success: false, error: 'One or more products not found or do not belong to your company' });
+    }
+
+    // Create join rows if they do not exist
+    for (const pid of product_ids) {
+      await VendorProduct.findOrCreate({
+        where: { vendor_id: vendor.id, product_id: pid },
+        defaults: { companyId: req.user.companyId || null },
+        transaction
+      });
+    }
+
+    await transaction.commit();
+
+    const updated = await Vendor.findOne({ where: buildCompanyWhere(req, { id: vendor.id }), include: [ { model: Product, as: 'products' } ] });
+    return res.json({ success: true, data: updated });
+  } catch (error) {
+    if (transaction && !transaction.finished) await transaction.rollback();
+    console.error('Error assigning products to vendor:', error);
+    return res.status(500).json({ success: false, error: 'Failed to assign products to vendor' });
+  }
+});
+
+// Unassign a product from a vendor
+router.delete('/:vendorId/products/:productId', csrfProtection, async (req, res) => {
+  const transaction = await sequelize.transaction();
+  try {
+    const { vendorId, productId } = req.params;
+
+    const vendor = await Vendor.findOne({ where: buildCompanyWhere(req, { id: vendorId }), transaction });
+    if (!vendor) {
+      await transaction.rollback();
+      return res.status(404).json({ success: false, error: 'Vendor not found' });
+    }
+
+    const product = await Product.findOne({ where: buildCompanyWhere(req, { id: productId }), transaction });
+    if (!product) {
+      await transaction.rollback();
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+
+    const where = { vendor_id: vendor.id, product_id: product.id };
+    if (req.user && req.user.companyId) where.companyId = req.user.companyId;
+
+    const destroyed = await VendorProduct.destroy({ where, transaction });
+    if (!destroyed) {
+      await transaction.rollback();
+      return res.status(404).json({ success: false, error: 'Assignment not found' });
+    }
+
+    await transaction.commit();
+    return res.json({ success: true });
+  } catch (error) {
+    if (transaction && !transaction.finished) await transaction.rollback();
+    console.error('Error unassigning product from vendor:', error);
+    return res.status(500).json({ success: false, error: 'Failed to unassign product from vendor' });
+  }
+});
+
+// Bulk remove products from a vendor
+router.post('/:vendorId/products/bulk-remove', [
+  body('product_ids').isArray({ min: 1 }).withMessage('product_ids must be a non-empty array'),
+  body('product_ids.*').isUUID().withMessage('Each product id must be a valid UUID')
+], csrfProtection, async (req, res) => {
+  const transaction = await sequelize.transaction();
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      await transaction.rollback();
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const { vendorId } = req.params;
+    const { product_ids } = req.body;
+
+    const vendor = await Vendor.findOne({ where: buildCompanyWhere(req, { id: vendorId }), transaction });
+    if (!vendor) {
+      await transaction.rollback();
+      return res.status(404).json({ success: false, error: 'Vendor not found' });
+    }
+
+    // Ensure all products exist and belong to the company
+    const products = await Product.findAll({ where: buildCompanyWhere(req, { id: product_ids }), transaction });
+    if (products.length !== product_ids.length) {
+      await transaction.rollback();
+      return res.status(400).json({ success: false, error: 'One or more products not found or do not belong to your company' });
+    }
+
+    const where = { vendor_id: vendor.id, product_id: product_ids };
+    if (req.user && req.user.companyId) where.companyId = req.user.companyId;
+
+    const destroyed = await VendorProduct.destroy({ where, transaction });
+
+    await transaction.commit();
+    return res.json({ success: true, removed: destroyed });
+  } catch (error) {
+    if (transaction && !transaction.finished) await transaction.rollback();
+    console.error('Error bulk removing products from vendor:', error);
+    return res.status(500).json({ success: false, error: 'Failed to bulk remove products from vendor' });
   }
 });
 
