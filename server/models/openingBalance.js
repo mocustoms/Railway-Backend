@@ -125,10 +125,11 @@ OpeningBalance.init({
         defaultValue: 0,
 
     },
-    transactionTypeId: {
+    transaction_type_id: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'transactionTypeId',
+        // DB column uses snake_case naming for foreign keys
+        field: 'transaction_type_id',
         references: {
             model: 'transaction_types',
             key: 'id'
@@ -185,7 +186,7 @@ OpeningBalance.init({
             fields: ['accountTypeId']
         },
         {
-            fields: ['transactionTypeId']
+            fields: ['transaction_type_id']
         },
         {
             unique: true,

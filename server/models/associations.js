@@ -32,7 +32,7 @@ function setupAssociations(models) {
     OpeningBalance.belongsTo(Currency, { as: 'currency', foreignKey: 'currencyId' });
     OpeningBalance.belongsTo(ExchangeRate, { as: 'exchangeRateRecord', foreignKey: 'exchangeRateId' });
     OpeningBalance.belongsTo(FinancialYear, { as: 'financialYear', foreignKey: 'financialYearId' });
-    OpeningBalance.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transactionTypeId' });
+    OpeningBalance.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transaction_type_id' });
 
     // JournalEntry associations
     JournalEntry.belongsTo(FinancialYear, { as: 'financialYear', foreignKey: 'financialYearId' });
@@ -396,7 +396,7 @@ function setupAssociations(models) {
     User.hasMany(models.ProductRawMaterial, { as: 'updatedRawMaterials', foreignKey: 'updated_by' });
 
     // TransactionType associations
-    TransactionType.hasMany(OpeningBalance, { as: 'openingBalances', foreignKey: 'transactionTypeId' });
+    TransactionType.hasMany(OpeningBalance, { as: 'openingBalances', foreignKey: 'transaction_type_id' });
 
     // Price History System Associations
     
@@ -419,7 +419,7 @@ function setupAssociations(models) {
     // PriceHistory associations
     PriceHistory.belongsTo(CostingMethod, { as: 'costingMethod', foreignKey: 'costing_method_id' });
     PriceHistory.belongsTo(PriceChangeReason, { as: 'priceChangeReason', foreignKey: 'price_change_reason_id' });
-    PriceHistory.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transaction_type_id' });
+    PriceHistory.belongsTo(TransactionType, { as: 'transactionType', foreignKey: 'transactionTypeId' });
     PriceHistory.belongsTo(Currency, { as: 'currency', foreignKey: 'currency_id' });
     PriceHistory.belongsTo(User, { as: 'creator', foreignKey: 'created_by' });
     

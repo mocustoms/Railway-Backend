@@ -676,7 +676,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
             exchangeRateId,
             exchangeRate: exchangeRate ? parseFloat(exchangeRate) : null,
             financialYearId,
-            transactionTypeId: transactionType.id,
+            transaction_type_id: transactionType.id,
             createdBy: req.user.id,
             equivalentAmount: equivalentAmount,
             referenceNumber: finalReferenceNumber
@@ -737,11 +737,13 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
         try {
             await createGeneralLedgerEntry(createdBalance, req.user);
             } catch (glError) {
+                console.error('Failed to create general ledger entry for opening balance:', glError);
             // Don't fail the opening balance creation if general ledger fails
         }
 
         res.status(201).json(createdBalance);
     } catch (error) {
+        console.error('Error creating opening balance:', error);
         res.status(500).json({ error: 'Failed to create opening balance' });
     }
 });
@@ -1218,7 +1220,7 @@ router.post('/import', csrfProtection, csrfProtection, async (req, res) => {
                     createdBy: req.user.id,
                     updatedBy: req.user.id,
                     equivalentAmount: equivalentAmount,
-                    transactionTypeId: transactionType.id,
+                    transaction_type_id: transactionType.id,
                     referenceNumber: referenceNumber
                 };
                 
