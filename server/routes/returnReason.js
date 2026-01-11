@@ -137,7 +137,7 @@ router.get('/all', async (req, res) => {
 });
 
 // Get return reason statistics
-router.get('/stats/overview', async (req, res) => {
+router.get('/stats', async (req, res) => {
     try {
         const total = await ReturnReason.count({
             where: buildCompanyWhere(req)

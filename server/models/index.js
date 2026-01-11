@@ -75,6 +75,8 @@ const Supplier = require('./supplier');
 const Vendor = require('./vendor');
 const VendorGroup = require('./vendorGroup');
 const VendorProduct = require('./vendorProduct')(sequelize, DataTypes);
+const ReturnOut = require('./ReturnOut');
+const ReturnOutItem = require('./ReturnOutItem');
 
 // Set up associations
 const models = {
@@ -152,6 +154,9 @@ const models = {
     Vendor,
     VendorProduct,
     VendorGroup
+    ,
+    ReturnOut,
+    ReturnOutItem,
 };
 
 // Call individual model associate methods

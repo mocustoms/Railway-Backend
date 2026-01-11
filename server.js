@@ -52,6 +52,7 @@ const salesTransactionRoutes = require("./server/routes/salesTransaction");
 const physicalInventoryRoutes = require("./server/routes/physicalInventory");
 const stockBalanceRouter = require("./server/routes/stockBalance");
 const stockAdjustmentRoutes = require("./server/routes/stockAdjustment");
+const returnOutRoutes = require("./server/routes/returnOut");
 const storeRequestRoutes = require("./server/routes/storeRequest");
 const customerListReportRouter = require("./server/routes/customerListReport");
 const customerBirthdaysReportRouter = require("./server/routes/customerBirthdaysReport");
@@ -340,6 +341,9 @@ app.use("/api/sales-transactions", salesTransactionRoutes);
 // Stock adjustment routes
 app.use("/api/stock-adjustments", stockAdjustmentRoutes);
 
+// Returns Out routes
+app.use('/api/returns-out', returnOutRoutes);
+
 // Store request routes
 app.use("/api/store-requests", storeRequestRoutes);
 
@@ -403,6 +407,9 @@ app.use("/api/app-version", require("./server/routes/appVersion"));
 app.use("/api/vendor-groups", vendorGroupRouter);
 
 app.use("/api/vendors", require("./server/routes/vendor"));
+
+app.use("/api/returns-out-reasons", require("./server/routes/returnReason"));
+app.use('api/returns-out',require("./server/routes/returnOut"));
 
 // Enhanced health check endpoint
 app.get("/api/health", async (req, res) => {
