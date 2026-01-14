@@ -62,6 +62,11 @@ function setupAssociations(models) {
     Company,
     ReturnOut,
     ReturnOutItem,
+  PurchaseOrder,
+  PurchaseOrderItem,
+  PurchaseInvoice,
+  PurchaseInvoiceItem,
+  PurchaseInvoicePayment,
     JournalEntry,
     JournalEntryLine,
   } = models;
@@ -1100,6 +1105,35 @@ function setupAssociations(models) {
 
     ReturnOutItem.belongsTo(ReturnOut, { as: 'returnOut', foreignKey: 'return_out_id' });
     ReturnOutItem.belongsTo(Product, { as: 'product', foreignKey: 'product_id' });
+  }
+
+  // Purchase Order associations
+  if (typeof PurchaseOrder !== 'undefined' && typeof PurchaseOrderItem !== 'undefined') {
+    PurchaseOrder.hasMany(PurchaseOrderItem, { as: 'items', foreignKey: 'purchase_order_id' });
+    PurchaseOrder.belongsTo(models.Vendor, { as: 'vendor', foreignKey: 'vendor_id' });
+    PurchaseOrder.belongsTo(Store, { as: 'store', foreignKey: 'store_id' });
+    PurchaseOrder.belongsTo(Currency, { as: 'currency', foreignKey: 'currency_id' });
+
+    PurchaseOrderItem.belongsTo(PurchaseOrder, { as: 'purchaseOrder', foreignKey: 'purchase_order_id' });
+    PurchaseOrderItem.belongsTo(Product, { as: 'product', foreignKey: 'product_id' });
+  }
+
+  // Purchase Invoice associations
+  if (typeof PurchaseInvoice !== 'undefined' && typeof PurchaseInvoiceItem !== 'undefined') {
+    PurchaseInvoice.hasMany(PurchaseInvoiceItem, { as: 'items', foreignKey: 'purchase_invoice_id' });
+    PurchaseInvoice.belongsTo(models.Vendor, { as: 'vendor', foreignKey: 'vendor_id' });
+    PurchaseInvoice.belongsTo(Store, { as: 'store', foreignKey: 'store_id' });
+    PurchaseInvoice.belongsTo(models.PurchaseOrder, { as: 'purchaseOrder', foreignKey: 'purchase_order_id' });
+    PurchaseInvoice.belongsTo(Currency, { as: 'currency', foreignKey: 'currency_id' });
+
+    PurchaseInvoiceItem.belongsTo(PurchaseInvoice, { as: 'purchaseInvoice', foreignKey: 'purchase_invoice_id' });
+    PurchaseInvoiceItem.belongsTo(Product, { as: 'product', foreignKey: 'product_id' });
+
+    if (typeof PurchaseInvoicePayment !== 'undefined') {
+      PurchaseInvoice.hasMany(PurchaseInvoicePayment, { as: 'payments', foreignKey: 'purchase_invoice_id' });
+      PurchaseInvoicePayment.belongsTo(PurchaseInvoice, { as: 'purchaseInvoice', foreignKey: 'purchase_invoice_id' });
+      PurchaseInvoicePayment.belongsTo(User, { as: 'createdByUser', foreignKey: 'created_by' });
+    }
   }
 
   // Reverse associations

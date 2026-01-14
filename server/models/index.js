@@ -77,6 +77,11 @@ const VendorGroup = require('./vendorGroup');
 const VendorProduct = require('./vendorProduct')(sequelize, DataTypes);
 const ReturnOut = require('./ReturnOut');
 const ReturnOutItem = require('./ReturnOutItem');
+const PurchaseOrder = require('./PurchaseOrder');
+const PurchaseOrderItem = require('./PurchaseOrderItem');
+const PurchaseInvoice = require('./PurchaseInvoice');
+const PurchaseInvoiceItem = require('./PurchaseInvoiceItem');
+const PurchaseInvoicePayment = require('./PurchaseInvoicePayment');
 
 // Set up associations
 const models = {
@@ -157,6 +162,11 @@ const models = {
     ,
     ReturnOut,
     ReturnOutItem,
+    PurchaseOrder,
+    PurchaseOrderItem,
+    PurchaseInvoice,
+    PurchaseInvoiceItem,
+    PurchaseInvoicePayment,
 };
 
 // Call individual model associate methods
