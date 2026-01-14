@@ -65,7 +65,6 @@ backups/
 *.crt
 *.cert
 *secret*
-*password*
 *credential*
 *.credentials
 
