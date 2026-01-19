@@ -2,7 +2,16 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('return_outs', {
+    // Create table only if it doesn't already exist
+    let tableExists = true;
+    try {
+      await queryInterface.describeTable('return_outs');
+    } catch (err) {
+      tableExists = false;
+    }
+
+    if (!tableExists) {
+      await queryInterface.createTable('return_outs', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
@@ -22,17 +31,40 @@ module.exports = {
       created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('NOW()') },
       updated_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('NOW()') },
       deleted_at: { type: Sequelize.DATE, allowNull: true },
-      companyId: { type: Sequelize.UUID, allowNull: false }
+      company_id: { type: Sequelize.UUID, allowNull: false }
     });
 
-    await queryInterface.addIndex('return_outs', ['store_id']);
-    await queryInterface.addIndex('return_outs', ['vendor_id']);
-    await queryInterface.addIndex('return_outs', ['return_reason_id']);
-    await queryInterface.addIndex('return_outs', ['currency_id']);
-    await queryInterface.addIndex('return_outs', ['companyId']);
+      // Add indexes if they do not exist
+      const existingIndexes = await queryInterface.showIndex('return_outs');
+  const hasIndexOn = (col) => existingIndexes.some(ix => ix.fields && ix.fields.some(f => f.attribute === col || f.name === col));
+
+  if (!hasIndexOn('store_id')) await queryInterface.addIndex('return_outs', ['store_id']);
+  if (!hasIndexOn('vendor_id')) await queryInterface.addIndex('return_outs', ['vendor_id']);
+  if (!hasIndexOn('return_reason_id')) await queryInterface.addIndex('return_outs', ['return_reason_id']);
+  if (!hasIndexOn('currency_id')) await queryInterface.addIndex('return_outs', ['currency_id']);
+  if (!hasIndexOn('company_id')) await queryInterface.addIndex('return_outs', ['company_id']);
+    } else {
+      // Table exists - ensure requested indexes exist
+      const existingIndexes = await queryInterface.showIndex('return_outs');
+  const hasIndexOn = (col) => existingIndexes.some(ix => ix.fields && ix.fields.some(f => f.attribute === col || f.name === col));
+  if (!hasIndexOn('store_id')) await queryInterface.addIndex('return_outs', ['store_id']);
+  if (!hasIndexOn('vendor_id')) await queryInterface.addIndex('return_outs', ['vendor_id']);
+  if (!hasIndexOn('return_reason_id')) await queryInterface.addIndex('return_outs', ['return_reason_id']);
+  if (!hasIndexOn('currency_id')) await queryInterface.addIndex('return_outs', ['currency_id']);
+  if (!hasIndexOn('company_id')) await queryInterface.addIndex('return_outs', ['company_id']);
+    }
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('return_outs');
+    // Drop table only if it exists
+    let tableExists = true;
+    try {
+      await queryInterface.describeTable('return_outs');
+    } catch (err) {
+      tableExists = false;
+    }
+    if (tableExists) {
+      await queryInterface.dropTable('return_outs');
+    }
   }
 };

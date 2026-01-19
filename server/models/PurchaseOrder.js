@@ -10,7 +10,7 @@ PurchaseOrder.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    poNumber: { type: DataTypes.STRING, allowNull: true, field: "po_number" },
+    poNumber: { type: DataTypes.STRING, allowNull: false, field: "po_number" },
     orderDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
@@ -63,10 +63,12 @@ PurchaseOrder.init(
     status: {
       type: DataTypes.ENUM(
         "draft",
-        "ordered",
-        "partially_received",
+        "sent",
+        "accepted",
+        "rejected",
+        "expired",
         "received",
-        "cancelled"
+        "converted",
       ),
       allowNull: false,
       defaultValue: "draft",
@@ -85,7 +87,7 @@ PurchaseOrder.init(
     updatedAt: "updatedAt",
     paranoid: true,
     deletedAt: "deleted_at",
-  }
+  },
 );
 
 module.exports = PurchaseOrder;

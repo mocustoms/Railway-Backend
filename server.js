@@ -236,8 +236,13 @@ const listRoutes = (app) => {
 
 // Register API routes
 // Auth routes
-app.use("/api/auth", authRouter);
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.use("/api/auth", authRouter);
 // Company routes
 app.use("/api/company", companyRouter);
 
