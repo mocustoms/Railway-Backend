@@ -39,10 +39,13 @@ PurchaseInvoice.init(
     status: {
       type: DataTypes.ENUM(
         "draft",
-        "posted",
-        "partially_paid",
+        "sent",
+        "approved",
         "paid",
-        "cancelled"
+        "partial_paid",
+        "overdue",
+        "cancelled",
+        "rejected",
       ),
       allowNull: false,
       defaultValue: "draft",
@@ -97,7 +100,7 @@ PurchaseInvoice.init(
     updatedAt: "updatedAt",
     paranoid: true,
     deletedAt: "deleted_at",
-  }
+  },
 );
 
 module.exports = PurchaseInvoice;

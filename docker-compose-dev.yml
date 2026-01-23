@@ -26,7 +26,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./pgadmin-data:/pgadmin-data
+      - pgadmin-data:/pgadmin-data
   mauzo-api:
     image: node:16
     container_name: mauzo-api
@@ -52,5 +52,5 @@ services:
 volumes:
   db-data:
     driver: local
-
-
+  pgadmin-data:
+    driver: local

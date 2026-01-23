@@ -31,7 +31,7 @@ class PurchaseInvoiceService {
           product_id: it.productId || it.product_id || null,
           description: it.description || it.desc || null,
           quantity: qty,
-          unit_price: unitPrice,
+          unitPrice: unitPrice,
           discount_percentage: discountPercentage || null,
           discount_amount: computedDiscount || null,
           tax_percentage: taxPercentage || null,
@@ -46,9 +46,9 @@ class PurchaseInvoiceService {
 
       const invoice = await PurchaseInvoice.create({
         invoice_number: payload.invoiceNumber || payload.invoice_number || null,
-        invoice_date: payload.invoiceDate || payload.invoice_date,
+        invoiceDate: payload.invoiceDate || payload.invoice_date,
         due_date: payload.dueDate || payload.due_date || null,
-        vendor_id: payload.vendorId || payload.vendor_id,
+        vendorId: payload.vendorId || payload.vendor_id,
         store_id: payload.storeId || payload.store_id || null,
         purchase_order_id: payload.purchaseOrderId || payload.purchase_order_id || null,
         currency_id: payload.currencyId || payload.currency_id || null,
@@ -62,12 +62,12 @@ class PurchaseInvoiceService {
         total_amount: total,
         balance_due: total,
         notes: payload.notes || null,
-        created_by: user.id,
+        createdBy: user.id,
         companyId: payload.companyId
       }, { transaction });
 
       for (const rec of itemRecords) {
-        await PurchaseInvoiceItem.create({ purchase_invoice_id: invoice.id, ...rec }, { transaction });
+        await PurchaseInvoiceItem.create({ purchaseInvoiceId: invoice.id, ...rec }, { transaction });
       }
 
       return await PurchaseInvoice.findByPk(invoice.id, { include: [{ model: PurchaseInvoiceItem, as: 'items' }], transaction });

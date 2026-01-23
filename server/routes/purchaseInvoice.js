@@ -6,7 +6,7 @@ const stripCompanyId = require('../middleware/stripCompanyId');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const { csrfProtection } = require('../middleware/csrfProtection');
 const { Op } = require('sequelize');
-const { PurchaseInvoice, PurchaseInvoiceItem, PurchaseInvoicePayment, Product, Vendor, Store, Currency } = require('../models');
+const { PurchaseInvoice, PurchaseInvoiceItem, PurchaseInvoicePayment, Product, Vendor, Store, Currency, sequelize } = require('../models');
 const PurchaseInvoiceService = require('../services/purchaseInvoiceService');
 
 const validate = (validations) => async (req, res, next) => {
@@ -27,8 +27,8 @@ router.get('/stats', async (req, res) => {
   try {
     const total = await PurchaseInvoice.count({ where: buildCompanyWhere(req) });
     const draft = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'draft' }) });
-    const posted = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'posted' }) });
-    const partiallyPaid = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'partially_paid' }) });
+    const sent = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'sent' }) });
+    const partiallyPaid = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'partial_paid' }) });
     const paid = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'paid' }) });
     const cancelled = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { status: 'cancelled' }) });
 
@@ -39,7 +39,7 @@ router.get('/stats', async (req, res) => {
     // Overdue (due_date < today and balance_due > 0)
     const overdue = await PurchaseInvoice.count({ where: buildCompanyWhere(req, { due_date: { [Op.lt]: new Date() }, balance_due: { [Op.gt]: 0 } }) });
 
-    res.json({ stats: { total, draft, posted, partiallyPaid, paid, cancelled, totalAmount: totalAmountSum, balanceDue: balanceDueSum, overdue } });
+    res.json({ total, draft, sent, partiallyPaid, paid, cancelled, totalAmount: totalAmountSum, balanceDue: balanceDueSum, overdue });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error', details: error.message });
   }
@@ -87,11 +87,11 @@ router.get('/', async (req, res) => {
 
 // Create invoice (inline handler delegating to service)
 router.post('/', csrfProtection, validate([
-  body('invoiceDate').notEmpty().withMessage('invoiceDate is required'),
-  body('vendorId').notEmpty().withMessage('vendorId is required'),
+  body('invoice_date').notEmpty().withMessage('invoice_date is required'),
+  body('vendor_id').notEmpty().withMessage('vendor_id is required'),
   body('items').isArray({ min: 1 }).withMessage('items array required'),
   body('items.*.quantity').notEmpty().withMessage('item.quantity required'),
-  body('items.*.unitPrice').notEmpty().withMessage('item.unitPrice required')
+  body('items.*.unit_price').notEmpty().withMessage('item.unit_price required')
 ]), async (req, res) => {
   try {
     if (!req.user.companyId) return res.status(400).json({ error: 'Company ID required' });
@@ -99,6 +99,7 @@ router.post('/', csrfProtection, validate([
     const created = await PurchaseInvoiceService.createInvoice(payload, req.user);
     res.status(201).json(created);
   } catch (error) {
+    console.log('Error creating purchase invoice:', error);
     if (error.status) return res.status(error.status).json({ error: error.message });
     res.status(500).json({ error: 'Internal server error', details: error.message });
   }
@@ -132,6 +133,94 @@ router.put('/:id', csrfProtection, validate([ param('id').isUUID() ]), async (re
 router.post('/:id/post', csrfProtection, validate([ param('id').isUUID() ]), async (req, res) => {
   try {
     const result = await PurchaseInvoiceService.post(req.params.id, req.user);
+    res.json(result);
+  } catch (error) {
+    if (error.status) return res.status(error.status).json({ error: error.message });
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// PUT /api/purchase-invoices/:id/send - Send purchase invoice
+router.put('/:id/send', csrfProtection, validate([ param('id').isUUID() ]), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const invoice = await PurchaseInvoice.findOne({ where: buildCompanyWhere(req, { id }) });
+    if (!invoice) return res.status(404).json({ error: 'Invoice not found' });
+    if (invoice.status !== 'draft') return res.status(400).json({ error: 'Only draft invoices can be sent' });
+    await invoice.update({ status: 'sent', sent_by: req.user.id, sent_at: new Date(), updated_by: req.user.id });
+    res.json({ message: 'Invoice sent' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// PUT /api/purchase-invoices/:id/approve - Approve purchase invoice
+router.put('/:id/approve', csrfProtection, validate([ param('id').isUUID() ]), async (req, res) => {
+  const dbTransaction = await sequelize.transaction();
+  try {
+    const { id } = req.params;
+    const invoice = await PurchaseInvoice.findOne({ where: buildCompanyWhere(req, { id }), transaction: dbTransaction, lock: dbTransaction.LOCK.UPDATE });
+    if (!invoice) { await dbTransaction.rollback(); return res.status(404).json({ error: 'Invoice not found' }); }
+    if (['approved','paid','cancelled'].includes(invoice.status)) { await dbTransaction.rollback(); return res.status(400).json({ error: 'Cannot approve this invoice' }); }
+    if (!['sent','overdue','draft'].includes(invoice.status)) { await dbTransaction.rollback(); return res.status(400).json({ error: 'Only sent, overdue or draft invoices can be approved' }); }
+
+    // Perform any domain-specific processing here if needed (GL posting, inventory, etc.)
+    await invoice.update({ status: 'approved', approved_by: req.user.id, approved_at: new Date(), updated_by: req.user.id }, { transaction: dbTransaction });
+    await dbTransaction.commit();
+    res.json({ message: 'Invoice approved' });
+  } catch (error) {
+    try { await dbTransaction.rollback(); } catch (e) {}
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// PUT /api/purchase-invoices/:id/reject - Reject purchase invoice
+router.put('/:id/reject', csrfProtection, validate([ param('id').isUUID(), body('rejectionReason').notEmpty() ]), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rejectionReason } = req.body;
+    const invoice = await PurchaseInvoice.findOne({ where: buildCompanyWhere(req, { id }) });
+    if (!invoice) return res.status(404).json({ error: 'Invoice not found' });
+    if (['paid','cancelled','rejected'].includes(invoice.status)) return res.status(400).json({ error: 'Cannot reject this invoice' });
+    await invoice.update({ status: 'rejected', rejected_by: req.user.id, rejected_at: new Date(), rejection_reason: rejectionReason.trim(), updated_by: req.user.id });
+    res.json({ message: 'Invoice rejected' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// PUT /api/purchase-invoices/:id/cancel - Cancel purchase invoice (accepts cancellationReason)
+router.put('/:id/cancel', csrfProtection, validate([ param('id').isUUID(), body('cancellationReason').notEmpty() ]), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { cancellationReason } = req.body;
+    const invoice = await PurchaseInvoice.findOne({ where: buildCompanyWhere(req, { id }) });
+    if (!invoice) return res.status(404).json({ error: 'Invoice not found' });
+    if (invoice.status === 'paid') return res.status(400).json({ error: 'Paid invoices cannot be cancelled' });
+    if (['cancelled','rejected'].includes(invoice.status)) return res.status(400).json({ error: 'Invoice already cancelled or rejected' });
+    await invoice.update({ status: 'cancelled', cancelled_by: req.user.id, cancelled_at: new Date(), cancellation_reason: cancellationReason.trim(), updated_by: req.user.id });
+    res.json({ message: 'Invoice cancelled' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
+// GET /api/purchase-invoices/export/excel - Export purchase invoices to Excel (not implemented)
+router.get('/export/excel', async (req, res) => {
+  return res.status(501).json({ message: 'Excel export for purchase invoices not yet implemented' });
+});
+
+// GET /api/purchase-invoices/export/pdf - Export purchase invoices to PDF (not implemented)
+router.get('/export/pdf', async (req, res) => {
+  return res.status(501).json({ message: 'PDF export for purchase invoices not yet implemented' });
+});
+
+// PUT /api/purchase-invoices/:id/record-payment - Record a payment directly against the invoice
+router.put('/:id/record-payment', csrfProtection, validate([ param('id').isUUID(), body('amount').notEmpty() ]), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const payload = { amount: req.body.amount, method: req.body.method, reference: req.body.reference };
+    const result = await PurchaseInvoiceService.pay(id, payload, req.user);
     res.json(result);
   } catch (error) {
     if (error.status) return res.status(error.status).json({ error: error.message });

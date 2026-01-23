@@ -42,7 +42,7 @@ module.exports = {
   if (!hasIndexOn('vendor_id')) await queryInterface.addIndex('return_outs', ['vendor_id']);
   if (!hasIndexOn('return_reason_id')) await queryInterface.addIndex('return_outs', ['return_reason_id']);
   if (!hasIndexOn('currency_id')) await queryInterface.addIndex('return_outs', ['currency_id']);
-  if (!hasIndexOn('company_id')) await queryInterface.addIndex('return_outs', ['company_id']);
+  // if (!hasIndexOn('companyId')) await queryInterface.addIndex('return_outs', ['companyId']);
     } else {
       // Table exists - ensure requested indexes exist
       const existingIndexes = await queryInterface.showIndex('return_outs');
@@ -51,7 +51,7 @@ module.exports = {
   if (!hasIndexOn('vendor_id')) await queryInterface.addIndex('return_outs', ['vendor_id']);
   if (!hasIndexOn('return_reason_id')) await queryInterface.addIndex('return_outs', ['return_reason_id']);
   if (!hasIndexOn('currency_id')) await queryInterface.addIndex('return_outs', ['currency_id']);
-  if (!hasIndexOn('company_id')) await queryInterface.addIndex('return_outs', ['company_id']);
+  // if (!hasIndexOn('company_id')) await queryInterface.addIndex('return_outs', ['companyId']);
     }
   },
 
