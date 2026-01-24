@@ -10,7 +10,7 @@ PurchaseOrder.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    poNumber: { type: DataTypes.STRING, allowNull: false, field: "po_number" },
+    poNumber: { type: DataTypes.STRING, allowNull: false, field: "po_number", unique: true },
     orderDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
