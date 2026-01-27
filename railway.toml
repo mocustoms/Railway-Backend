@@ -12,7 +12,7 @@ builder = "RAILPACK"
 
 [deploy]
 # Run migrations before starting the app (uses DB vars from linked Postgres service)
-preDeployCommand = ["npm", "run", "migrate"]
+preDeployCommand = ["npm run migrate"]
 
 # Start the API server (same as package.json "start")
 startCommand = "npm start"
