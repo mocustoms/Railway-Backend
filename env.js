@@ -167,8 +167,9 @@ const config = {
   // Security
   BCRYPT_ROUNDS: parseInt(process.env.BCRYPT_ROUNDS) || 10,
   SESSION_SECRET: process.env.SESSION_SECRET || "your_session_secret_here",
-  // CORS: Support multiple origins for production deployment
-  // Can be comma-separated list: "https://your-app.com,https://yourdomain.com"
+  // CORS: When frontend is on a different domain (e.g. Railway), set this to the frontend URL(s).
+  // Comma-separated: "https://your-frontend.up.railway.app,https://staging.up.railway.app"
+  // Use "*" only if you don't need cookies/credentials; with credentials, "*" is reflected as request origin.
   CORS_ORIGIN:
     process.env.CORS_ORIGIN ||
     (process.env.NODE_ENV === "production" ? "*" : "http://localhost:3002"),

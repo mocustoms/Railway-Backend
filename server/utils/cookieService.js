@@ -1,5 +1,18 @@
 const config = require('../../env');
 
+// In-memory cache of recently-issued CSRF tokens for cross-origin (e.g. Railway frontend).
+// When the browser doesn't send the csrf_token cookie (different origin), we accept
+// the token from X-CSRF-Token header if it was recently issued by us.
+const CSRF_ISSUED_TTL_MS = 60 * 60 * 1000; // 1 hour
+const csrfIssuedCache = new Map(); // token -> expiry timestamp
+
+function pruneExpiredCSRFTokens() {
+  const now = Date.now();
+  for (const [token, expiry] of csrfIssuedCache.entries()) {
+    if (expiry < now) csrfIssuedCache.delete(token);
+  }
+}
+
 class CookieService {
   /**
    * Set secure authentication cookies
@@ -34,8 +47,9 @@ class CookieService {
       expires: refreshTokenExpiry
     });
 
-    // CSRF token cookie
+    // CSRF token cookie (also register for header-only validation when cookie isn't sent cross-origin)
     const csrfToken = this.generateCSRFToken();
+    this.registerIssuedCSRFToken(csrfToken);
     res.cookie('csrf_token', csrfToken, {
       ...cookieOptions,
       expires: refreshTokenExpiry,
@@ -89,18 +103,36 @@ class CookieService {
   }
 
   /**
-   * Validate CSRF token
+   * Register a CSRF token as recently issued (for header-only validation when cookie isn't sent cross-origin).
+   * Used when frontend and backend are on different origins (e.g. Railway).
+   */
+  static registerIssuedCSRFToken(token) {
+    if (!token || typeof token !== 'string') return;
+    csrfIssuedCache.set(token, Date.now() + CSRF_ISSUED_TTL_MS);
+    if (csrfIssuedCache.size > 10000) pruneExpiredCSRFTokens();
+  }
+
+  /**
+   * Validate CSRF token (cookie vs header, or header-only if token was recently issued by us).
+   * Header-only fallback fixes "CSRF token validation failed" when frontend is on a different
+   * origin (e.g. Railway) and the browser does not send the csrf_token cookie.
    */
   static validateCSRFToken(req) {
     const cookieToken = this.getCSRFToken(req);
     const headerToken = req.headers['x-csrf-token'] || req.headers['csrf-token'];
-    
-    if (!cookieToken || !headerToken) {
-      return false;
+
+    if (cookieToken && headerToken && cookieToken === headerToken) {
+      return true;
     }
-    
-    const isValid = cookieToken === headerToken;
-    return isValid;
+    // Fallback: cookie missing (cross-origin) but token in header was recently issued by us
+    if (!cookieToken && headerToken && headerToken.length === 64 && /^[a-f0-9]+$/i.test(headerToken)) {
+      pruneExpiredCSRFTokens();
+      const expiry = csrfIssuedCache.get(headerToken);
+      if (expiry && expiry > Date.now()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

@@ -783,12 +783,13 @@ router.post('/reset-password', async (req, res) => {
 router.get('/csrf-token', (req, res) => {
     try {
         const csrfToken = CookieService.generateCSRFToken();
+        CookieService.registerIssuedCSRFToken(csrfToken); // for header-only validation when frontend is cross-origin (e.g. Railway)
         CookieService.setCookie(res, 'csrf_token', csrfToken, {
             httpOnly: false, // CSRF token needs to be accessible by JavaScript
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 1 day
         });
-        
-        res.json({ 
+
+        res.json({
             message: 'CSRF token generated successfully',
             csrfToken: csrfToken
         });

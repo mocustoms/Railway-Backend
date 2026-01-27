@@ -1,0 +1,26 @@
+# Railway config-as-code for Tenzen/EasyMauzo Backend
+# See: https://docs.railway.app/guides/config-as-code
+#
+# Usage: Deploy from Tenzen_Backend as the service root, or set the config file
+# path in Railway dashboard to: /Tenzen_Backend/railway.toml (if repo root is project root).
+
+[build]
+# Use default Railpack builder (Node.js); no custom build step for plain Node backend
+builder = "RAILPACK"
+# Optional: ensure production deps only (no dev install). Uncomment if you want:
+# buildCommand = "npm ci --omit=dev"
+
+[deploy]
+# Run migrations before starting the app (uses DB vars from linked Postgres service)
+preDeployCommand = ["npm run migrate"]
+
+# Start the API server (same as package.json "start")
+startCommand = "npm start"
+
+# Health check: backend exposes /api/health
+healthcheckPath = "/api/health"
+healthcheckTimeout = 120
+
+# Restart on failure
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
