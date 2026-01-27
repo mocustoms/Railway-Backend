@@ -579,8 +579,19 @@ if (isProduction) {
         }
       });
     } else {
+      // API-only deploy (e.g. frontend on separate Railway service): no build folder
+      const frontendUrl = process.env.FRONTEND_URL || process.env.PUBLIC_FRONTEND_URL || "";
       if (!res.headersSent) {
-        res.status(404).send("React app not built. Please run npm run build.");
+        res.status(200).set("Content-Type", "text/html").send(`
+          <!DOCTYPE html>
+          <html><head><meta charset="utf-8"><title>API</title></head>
+          <body style="font-family:sans-serif;max-width:520px;margin:60px auto;padding:20px;">
+            <h1>Tenzen API</h1>
+            <p>This is the API server. Use the frontend app to access the system.</p>
+            ${frontendUrl ? `<p><a href="${frontendUrl}">Open frontend →</a></p>` : "<p>Set <code>FRONTEND_URL</code> in this service to show a link.</p>"}
+            <p><a href="/api/health">Health check</a></p>
+          </body></html>
+        `);
       }
     }
   });
