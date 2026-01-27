@@ -70,6 +70,7 @@ backups/
 
 # Railway-specific sensitive files
 *railway*.md
+!docs/DEPLOYING_ON_RAILWAY.md
 !RAILWAY_VOLUME_SETUP.md
 !RAILWAY_IMAGE_UPLOAD_FIX.md
 
