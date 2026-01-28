@@ -256,11 +256,13 @@ router.post('/upload', csrfProtection, upload.single('file'), async (req, res) =
         rowErrors.push('Name is required');
       }
 
-      if (!rowData['Average Cost*'] || isNaN(parseFloat(rowData['Average Cost*']))) {
+      const avgCostNum = parseFloat(rowData['Average Cost*']);
+      if (rowData['Average Cost*'] == null || rowData['Average Cost*'] === '' || isNaN(avgCostNum)) {
         rowErrors.push('Valid Average Cost is required');
       }
 
-      if (!rowData['Selling Price*'] || isNaN(parseFloat(rowData['Selling Price*']))) {
+      const sellingPriceNum = parseFloat(rowData['Selling Price*']);
+      if (rowData['Selling Price*'] == null || rowData['Selling Price*'] === '' || isNaN(sellingPriceNum)) {
         rowErrors.push('Valid Selling Price is required');
       }
 

@@ -417,9 +417,6 @@ app.use("/api/trial-balance", require("./server/routes/trialBalance"));
 // Scheduler management routes
 app.use("/api/schedulers", require("./server/routes/scheduler"));
 
-// App version route (public, no auth required)
-app.use("/api/app-version", require("./server/routes/appVersion"));
-
 app.use("/api/vendor-groups", vendorGroupRouter);
 
 app.use("/api/vendors", require("./server/routes/vendor"));
