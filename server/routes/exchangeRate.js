@@ -287,7 +287,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/exchange-rates - Create new exchange rate
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const {
             from_currency_id,
@@ -323,7 +323,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // PUT /api/exchange-rates/:id - Update exchange rate
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const exchangeRate = await ExchangeRate.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -364,7 +364,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // DELETE /api/exchange-rates/:id - Delete exchange rate
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const exchangeRate = await ExchangeRate.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })

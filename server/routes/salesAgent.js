@@ -406,7 +406,7 @@ router.put('/:id', upload.single('photo'), csrfProtection, async (req, res) => {
 });
 
 // DELETE /api/sales-agents/:id - Delete sales agent
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     const salesAgent = await SalesAgent.findOne({
       where: buildCompanyWhere(req, { id: req.params.id })

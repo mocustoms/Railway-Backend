@@ -274,7 +274,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new stock adjustment (draft)
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     const transaction = await StockAdjustment.sequelize.transaction();
     
     try {
@@ -422,7 +422,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update stock adjustment
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     const transaction = await StockAdjustment.sequelize.transaction();
     
     try {
@@ -1250,7 +1250,7 @@ router.patch('/:id/reject', async (req, res) => {
 });
 
 // Delete stock adjustment (only drafts can be deleted)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     const transaction = await StockAdjustment.sequelize.transaction();
     
     try {

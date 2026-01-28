@@ -751,7 +751,7 @@ router.patch('/:id/accept-variance', async (req, res) => {
 });
 
 // Delete Physical Inventory
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await PhysicalInventoryService.deletePhysicalInventory(id);
@@ -830,7 +830,7 @@ router.get('/:id/items', async (req, res) => {
 });
 
 // Add item to Physical Inventory
-router.post('/:id/items', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/items', csrfProtection, async (req, res) => {
   try {
     const { id } = req.params;
     const itemData = req.body;
@@ -939,7 +939,7 @@ router.post('/:id/items', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update Physical Inventory Item
-router.put('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/items/:itemId', csrfProtection, async (req, res) => {
   try {
     const { id, itemId } = req.params;
     const itemData = req.body;
@@ -1057,7 +1057,7 @@ router.put('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res
 });
 
 // Delete Physical Inventory Item
-router.delete('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id/items/:itemId', csrfProtection, async (req, res) => {
   try {
     const { id, itemId } = req.params;
 

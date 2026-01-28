@@ -177,7 +177,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new financial year
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const { name, startDate, endDate, description } = req.body;
 
@@ -380,7 +380,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update financial year
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const { name, startDate, endDate, description } = req.body;
         const financialYear = await FinancialYear.findOne({
@@ -510,7 +510,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Set current financial year
-router.post('/:id/set-current', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/set-current', csrfProtection, async (req, res) => {
     try {
         const financialYear = await FinancialYear.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -555,7 +555,7 @@ router.post('/:id/set-current', csrfProtection, csrfProtection, async (req, res)
 });
 
 // Delete financial year (soft delete)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const financialYear = await FinancialYear.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -593,7 +593,7 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Force delete financial year (admin only)
-router.delete('/:id/force', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id/force', csrfProtection, async (req, res) => {
     try {
         // Check if user has admin privileges
         if (req.user.role !== 'admin') {
@@ -850,7 +850,7 @@ router.get('/check-overlap', async (req, res) => {
 });
 
 // Close financial year
-router.post('/:id/close', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/close', csrfProtection, async (req, res) => {
     try {
         const { notes } = req.body;
         const financialYear = await FinancialYear.findOne({
@@ -908,7 +908,7 @@ router.post('/:id/close', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Reopen financial year (admin only)
-router.post('/:id/reopen', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/reopen', csrfProtection, async (req, res) => {
     try {
         // Check if user has admin privileges
         if (req.user.role !== 'admin') {

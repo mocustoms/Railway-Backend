@@ -120,7 +120,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new tax code
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and tax code creation
     const transaction = await sequelize.transaction();
     
@@ -205,7 +205,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update a tax code
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const taxCode = await TaxCode.findByPk(req.params.id);
         if (!taxCode) {
@@ -285,7 +285,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete a tax code
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const taxCode = await TaxCode.findByPk(req.params.id);
         if (!taxCode) {

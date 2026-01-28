@@ -472,7 +472,7 @@ router.get('/:id/usage', async (req, res) => {
 });
 
 // Delete product manufacturer (only if not used)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const productManufacturer = await ProductManufacturer.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -511,7 +511,7 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Deactivate product manufacturer (for used manufacturers)
-router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/deactivate', csrfProtection, async (req, res) => {
     try {
         const productManufacturer = await ProductManufacturer.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })

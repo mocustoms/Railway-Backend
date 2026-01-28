@@ -2171,7 +2171,7 @@ router.put('/:id', upload.single('image'), csrfProtection, async (req, res) => {
 });
 
 // Delete product
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         // Find product with company filter to ensure multi-tenant isolation
         const productWhere = buildCompanyWhere(req, { id: req.params.id });
@@ -2322,7 +2322,7 @@ router.get('/reference/stores', async (req, res) => {
 });
 
 // Remove product from all stores
-router.delete('/:productId/stores', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:productId/stores', csrfProtection, async (req, res) => {
     try {
         const { productId } = req.params;
         

@@ -450,7 +450,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new opening balance
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const { 
             accountId, 
@@ -749,7 +749,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update opening balance
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const { 
             amount, 
@@ -865,7 +865,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete opening balance
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const openingBalance = await OpeningBalance.findOne({
             where: buildCompanyWhere(req, { id: req.params.id }),
@@ -900,7 +900,7 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Import opening balances from CSV
-router.post('/import', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/import', csrfProtection, async (req, res) => {
     try {
         const { records, currencyId, exchangeRateId, financialYearId } = req.body;
         
@@ -1269,7 +1269,7 @@ router.post('/import', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Save import as draft
-router.post('/draft', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/draft', csrfProtection, async (req, res) => {
     try {
         const { balances } = req.body;
 
