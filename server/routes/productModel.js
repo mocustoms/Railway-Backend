@@ -40,10 +40,12 @@ router.get('/active/list', async (req, res) => {
 router.use(auth);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Multer storage config for temporary uploads
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Multer storage config for temporary uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, '../../uploads/temp');
+    const uploadDir = getUploadDir('temp');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }

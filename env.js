@@ -194,7 +194,7 @@ const config = {
   SMTP_PASS: process.env.SMTP_PASS || "your_email_password_or_app_password",
   EMAIL_FROM: process.env.EMAIL_FROM || "noreply@easymauzo.com",
 
-  // File Upload
+  // File Upload (partition for photos: set UPLOAD_PATH to Railway Volume mount, e.g. /data)
   UPLOAD_PATH: process.env.UPLOAD_PATH || "uploads/",
   MAX_FILE_SIZE: parseInt(process.env.MAX_FILE_SIZE) || 5242880,
   ALLOWED_FILE_TYPES:

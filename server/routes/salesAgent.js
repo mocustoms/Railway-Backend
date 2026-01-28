@@ -10,16 +10,17 @@ const stripCompanyId = require('../middleware/stripCompanyId');
 const { csrfProtection } = require('../middleware/csrfProtection');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const ExportService = require('../utils/exportService');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for photo uploads
+// Configure multer for photo uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = 'uploads/sales-agent-photos/';
+    const uploadPath = getUploadDir('salesAgentPhotos');
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }

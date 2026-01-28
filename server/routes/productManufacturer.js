@@ -12,16 +12,17 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const { body, validationResult } = require('express-validator');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/product-manufacturer-logos');
+        const uploadDir = getUploadDir('productManufacturerLogos');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }

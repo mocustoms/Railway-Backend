@@ -11,6 +11,7 @@ const stripCompanyId = require('../middleware/stripCompanyId');
 const { csrfProtection } = require('../middleware/csrfProtection');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const sequelize = require('../../config/database');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
@@ -32,10 +33,10 @@ const {
   TransactionType
 } = require('../models');
 
-// Configure multer for file uploads
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, '../../uploads/temp');
+    const uploadDir = getUploadDir('temp');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }

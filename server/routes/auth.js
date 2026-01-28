@@ -17,10 +17,12 @@ const CookieService = require('../utils/cookieService');
 const { refreshCSRFToken } = require('../middleware/csrfProtection');
 const { csrfProtection } = require('../middleware/csrfProtection');
 
-// Configure multer for profile picture uploads - save directly to final location like other modules
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for profile picture uploads - save to UPLOAD_PATH (e.g. Railway Volume)
 const profilePictureStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/profile-pictures');
+        const uploadDir = getUploadDir('profilePictures');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
