@@ -27,104 +27,17 @@ function parseDatabaseUrl(customUrl = null) {
     password: process.env.PGPASSWORD || process.env.DB_PASSWORD || "postgres",
   };
 
-  // // Safety check: ensure database name is not the DATABASE_URL itself
-  // if (config.database === databaseUrl) {
-  //   console.error(
-  //     "❌ ERROR: Database name is set to DATABASE_URL! This should never happen."
-  //   );
-  //   console.error("   Using fallback database name: railway");
-  //   config.database = "railway"; // Railway's default database name
-  // }
-
-  console.log("📊 Using individual variables:", {
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    username: config.username,
-    password: config.password ? "***" : "not set",
-  });
+  if (process.env.NODE_ENV !== "production") {
+    console.log("📊 Using individual variables:", {
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      username: config.username,
+      password: config.password ? "***" : "not set",
+    });
+  }
 
   return config;
-  // // Allow custom URL to be passed (for scripts that need to connect to different databases)
-  // const databaseUrl = customUrl || process.env.DATABASE_URL;
-
-  // // If DATABASE_URL is provided, try to parse it
-  // if (databaseUrl) {
-  //   try {
-  //     // Normalize postgresql:// to postgres:// for URL parsing
-  //     // Handle both postgres:// and postgresql:// protocols
-  //     let normalizedUrl = databaseUrl.trim();
-  //     console.log('📊 Parsing DATABASE_URL:', normalizedUrl);
-
-  //     // Ensure it starts with a valid protocol
-  //     if (!normalizedUrl.startsWith('postgres://') && !normalizedUrl.startsWith('postgresql://')) {
-  //       throw new Error('DATABASE_URL must start with postgres:// or postgresql://');
-  //     }
-
-  //     normalizedUrl = normalizedUrl.replace(/^postgresql:\/\//, 'postgres://');
-  //     const url = new URL(normalizedUrl);
-
-  //     // Extract database name from pathname (remove leading '/')
-  //     const databaseName = url.pathname ? url.pathname.slice(1) : '';
-
-  //     // Validate that we got a database name
-  //     if (!databaseName) {
-  //       throw new Error('Database name not found in DATABASE_URL pathname');
-  //     }
-
-  //     const parsedConfig = {
-  //       host: url.hostname,
-  //       port: parseInt(url.port) || 5432,
-  //       database: databaseName,
-  //       username: url.username || 'postgres',
-  //       password: url.password || ''
-  //     };
-
-  //     console.log('📊 Using DATABASE_URL:', {
-  //       host: parsedConfig.host,
-  //       port: parsedConfig.port,
-  //       database: parsedConfig.database,
-  //       username: parsedConfig.username,
-  //       password: parsedConfig.password ? '***' : 'not set'
-  //     });
-
-  //     return parsedConfig;
-  //   } catch (error) {
-  //     console.warn('⚠️  Failed to parse DATABASE_URL, using individual variables');
-  //     console.warn('   Error:', error.message);
-  //     console.warn('   DATABASE_URL value (first 50 chars):', databaseUrl.substring(0, 50) + '...');
-  //     // Fall through to individual variables
-  //   }
-  // } else {
-  //   console.log('📊 DATABASE_URL not found, using individual variables');
-  // }
-
-  // // Fall back to individual environment variables (PGHOST, PGPORT, etc. or custom DB_* variables)
-  // // IMPORTANT: Never use DATABASE_URL as a database name - always use individual variables if parsing fails
-  // const config = {
-  //   host: process.env.PGHOST || process.env.DB_HOST || 'mauzo-db',
-  //   port: parseInt(process.env.PGPORT || process.env.DB_PORT || '5432'),
-  //   database: process.env.PGDATABASE || process.env.DB_NAME || 'easymauzo_pos',
-  //   username: process.env.PGUSER || process.env.DB_USER || 'postgres',
-  //   password: process.env.PGPASSWORD || process.env.DB_PASSWORD || 'postgres'
-  // };
-
-  // // Safety check: ensure database name is not the DATABASE_URL itself
-  // if (config.database === databaseUrl) {
-  //   console.error('❌ ERROR: Database name is set to DATABASE_URL! This should never happen.');
-  //   console.error('   Using fallback database name: railway');
-  //   config.database = 'railway'; // Railway's default database name
-  // }
-
-  // console.log('📊 Using individual variables:', {
-  //   host: config.host,
-  //   port: config.port,
-  //   database: config.database,
-  //   username: config.username,
-  //   password: config.password ? '***' : 'not set'
-  // });
-
-  // return config;
 }
 
 // Parse database configuration (can be overridden by passing custom URL)
@@ -146,7 +59,7 @@ const config = {
   DB_DIALECT: process.env.DB_DIALECT || "postgres",
   DB_LOGGING: process.env.DB_LOGGING === "true" ? console.log : false,
 
-  // JWT Configuration
+  // JWT Configuration (set JWT_SECRET and JWT_REFRESH_SECRET in production!)
   JWT_SECRET: process.env.JWT_SECRET || "your-very-secure-jwt-secret-key-2024",
   JWT_REFRESH_SECRET:
     process.env.JWT_REFRESH_SECRET ||
@@ -167,8 +80,9 @@ const config = {
   // Security
   BCRYPT_ROUNDS: parseInt(process.env.BCRYPT_ROUNDS) || 10,
   SESSION_SECRET: process.env.SESSION_SECRET || "your_session_secret_here",
-  // CORS: Support multiple origins for production deployment
-  // Can be comma-separated list: "https://your-app.com,https://yourdomain.com"
+  // CORS: When frontend is on a different domain (e.g. Railway), set this to the frontend URL(s).
+  // Comma-separated: "https://your-frontend.up.railway.app,https://staging.up.railway.app"
+  // Use "*" only if you don't need cookies/credentials; with credentials, "*" is reflected as request origin.
   CORS_ORIGIN:
     process.env.CORS_ORIGIN ||
     (process.env.NODE_ENV === "production" ? "*" : "http://localhost:3002"),
@@ -193,7 +107,7 @@ const config = {
   SMTP_PASS: process.env.SMTP_PASS || "your_email_password_or_app_password",
   EMAIL_FROM: process.env.EMAIL_FROM || "noreply@easymauzo.com",
 
-  // File Upload
+  // File Upload (partition for photos: set UPLOAD_PATH to Railway Volume mount, e.g. /data)
   UPLOAD_PATH: process.env.UPLOAD_PATH || "uploads/",
   MAX_FILE_SIZE: parseInt(process.env.MAX_FILE_SIZE) || 5242880,
   ALLOWED_FILE_TYPES:
@@ -204,8 +118,13 @@ const config = {
   LOG_FILE: process.env.LOG_FILE || "logs/app.log",
 };
 
-// Export parseDatabaseUrl function for use in scripts that need custom connections
-// This allows scripts to connect to different databases (e.g., local vs Railway)
-config.parseDatabaseUrl = parseDatabaseUrl;
+// Production: warn if default JWT secrets are used (set JWT_SECRET + JWT_REFRESH_SECRET in env)
+if (config.NODE_ENV === "production") {
+  const defaultJwt = "your-very-secure-jwt-secret-key-2024";
+  if (config.JWT_SECRET === defaultJwt || config.JWT_REFRESH_SECRET === defaultJwt) {
+    console.warn("⚠️  SECURITY: JWT_SECRET and/or JWT_REFRESH_SECRET are using defaults. Set them in production (e.g. Railway Variables).");
+  }
+}
 
+config.parseDatabaseUrl = parseDatabaseUrl;
 module.exports = config;

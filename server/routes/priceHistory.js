@@ -410,7 +410,7 @@ router.get('/statistics', async (req, res) => {
 });
 
 // Manual price change tracking (for testing or manual entries)
-router.post('/track', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/track', csrfProtection, async (req, res) => {
     try {
         const {
             entityType,

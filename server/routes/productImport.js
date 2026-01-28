@@ -13,6 +13,7 @@ const { sequelize } = require('../models');
 const { Op } = require('sequelize');
 const autoCodeService = require('../utils/autoCodeService');
 const PriceHistoryService = require('../utils/priceHistoryService');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
@@ -22,10 +23,10 @@ router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 // Import models
 const { Product, ProductCategory, ProductBrandName, ProductManufacturer, ProductModel, ProductColor, TaxCode, ProductStoreLocation, Packaging } = require('../models');
 
-// Configure multer for file uploads
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, '../../uploads/temp');
+    const uploadDir = getUploadDir('temp');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -255,11 +256,13 @@ router.post('/upload', csrfProtection, upload.single('file'), async (req, res) =
         rowErrors.push('Name is required');
       }
 
-      if (!rowData['Average Cost*'] || isNaN(parseFloat(rowData['Average Cost*']))) {
+      const avgCostNum = parseFloat(rowData['Average Cost*']);
+      if (rowData['Average Cost*'] == null || rowData['Average Cost*'] === '' || isNaN(avgCostNum)) {
         rowErrors.push('Valid Average Cost is required');
       }
 
-      if (!rowData['Selling Price*'] || isNaN(parseFloat(rowData['Selling Price*']))) {
+      const sellingPriceNum = parseFloat(rowData['Selling Price*']);
+      if (rowData['Selling Price*'] == null || rowData['Selling Price*'] === '' || isNaN(sellingPriceNum)) {
         rowErrors.push('Valid Selling Price is required');
       }
 

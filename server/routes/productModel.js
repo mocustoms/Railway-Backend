@@ -40,10 +40,12 @@ router.get('/active/list', async (req, res) => {
 router.use(auth);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Multer storage config for temporary uploads
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Multer storage config for temporary uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, '../../uploads/temp');
+    const uploadDir = getUploadDir('temp');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -207,7 +209,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new product model
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and model creation
     const transaction = await sequelize.transaction();
     
@@ -302,7 +304,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update product model
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const userId = req.user.id;
         const productModel = await ProductModel.findOne({
@@ -375,7 +377,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete product model
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const productModel = await ProductModel.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -783,7 +785,7 @@ router.get('/:id/usage', async (req, res) => {
 });
 
 // Deactivate product model (for used models)
-router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/deactivate', csrfProtection, async (req, res) => {
     try {
         const productModel = await ProductModel.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -807,7 +809,7 @@ router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) =
 });
 
 // Delete product model (only if not used)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const productModel = await ProductModel.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })

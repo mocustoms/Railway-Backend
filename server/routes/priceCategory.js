@@ -463,7 +463,7 @@ router.put('/:id', priceCategoryValidation, csrfProtection, async (req, res) => 
 });
 
 // Delete price category (soft delete)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     const priceCategory = await PriceCategory.findOne({
       where: buildCompanyWhere(req, { id: req.params.id })
@@ -505,7 +505,7 @@ router.patch('/:id/restore', async (req, res) => {
 });
 
 // Hard delete price category (permanent removal)
-router.delete('/:id/permanent', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id/permanent', csrfProtection, async (req, res) => {
   try {
     const priceCategory = await PriceCategory.findOne({
       where: buildCompanyWhere(req, { id: req.params.id })
@@ -558,7 +558,7 @@ router.get('/:id/usage', async (req, res) => {
 });
 
 // Deactivate price category (for used categories)
-router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/deactivate', csrfProtection, async (req, res) => {
   try {
     const priceCategory = await PriceCategory.findOne({
       where: buildCompanyWhere(req, { id: req.params.id })

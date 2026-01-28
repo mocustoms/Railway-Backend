@@ -154,7 +154,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new product color
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and color creation
     const transaction = await sequelize.transaction();
     
@@ -243,7 +243,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update product color
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const userId = req.user.id;
         const productColor = await ProductColor.findOne({
@@ -310,7 +310,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete product color
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const productColor = await ProductColor.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })

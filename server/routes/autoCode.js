@@ -128,7 +128,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new auto code configuration
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const {
             module_name,
@@ -184,7 +184,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update auto code configuration
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const autoCode = await AutoCode.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })
@@ -236,7 +236,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete auto code configuration
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const autoCode = await AutoCode.findOne({
             where: buildCompanyWhere(req, { id: req.params.id })

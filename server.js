@@ -95,6 +95,11 @@ const app = express();
 // Setting to 1 means: trust only the first proxy hop (more secure but may not work with Railway)
 app.set("trust proxy", config.NODE_ENV === "production" ? true : false);
 
+// Security: helmet + security headers (no CSP so cross-origin API works)
+const { securityMiddleware, additionalSecurityHeaders } = require("./server/middleware/security");
+app.use(securityMiddleware);
+app.use(additionalSecurityHeaders);
+
 // CORS configuration
 // Support multiple origins (comma-separated) or wildcard for production deployments
 const corsOrigin = config.CORS_ORIGIN;
@@ -142,9 +147,9 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
 // Serve static files from uploads directory BEFORE CSRF protection
-// Static files don't need CSRF tokens
-// __dirname is backend/, so uploads is in the same directory
-const uploadsPath = path.join(__dirname, "uploads");
+// Use UPLOAD_PATH env (e.g. /data on Railway Volume) so photos persist across deploys
+const { getUploadsRoot } = require("./server/utils/uploadsPath");
+const uploadsPath = getUploadsRoot();
 const fs = require("fs");
 
 // Log uploads path for debugging (especially on Railway)
@@ -411,9 +416,6 @@ app.use("/api/trial-balance", require("./server/routes/trialBalance"));
 
 // Scheduler management routes
 app.use("/api/schedulers", require("./server/routes/scheduler"));
-
-// App version route (public, no auth required)
-app.use("/api/app-version", require("./server/routes/appVersion"));
 
 app.use("/api/vendor-groups", vendorGroupRouter);
 

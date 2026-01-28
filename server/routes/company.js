@@ -16,10 +16,12 @@ router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for logo uploads
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for logo uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/company-logos');
+        const uploadDir = getUploadDir('companyLogos');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }

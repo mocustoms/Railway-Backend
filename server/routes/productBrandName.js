@@ -11,16 +11,17 @@ const { sequelize } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/product-brand-name-logos');
+        const uploadDir = getUploadDir('productBrandNameLogos');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }

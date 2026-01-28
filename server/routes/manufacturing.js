@@ -42,7 +42,7 @@ router.get('/info/:productId', async (req, res) => {
 });
 
 // Create or update manufacturing info
-router.post('/info', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/info', csrfProtection, async (req, res) => {
     try {
         const { product_id, manufacturing_process, production_time_hours } = req.body;
         const userId = req.user.id;
@@ -129,7 +129,7 @@ router.get('/raw-materials/:productId', async (req, res) => {
 });
 
 // Add raw material to manufactured product
-router.post('/raw-materials', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/raw-materials', csrfProtection, async (req, res) => {
     try {
         const { manufactured_product_id, raw_material_id, quantity_per_unit, unit } = req.body;
         const userId = req.user.id;
@@ -208,7 +208,7 @@ router.post('/raw-materials', csrfProtection, csrfProtection, async (req, res) =
 });
 
 // Update raw material quantity
-router.put('/raw-materials/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/raw-materials/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         const { quantity_per_unit, unit } = req.body;
@@ -256,7 +256,7 @@ router.put('/raw-materials/:id', csrfProtection, csrfProtection, async (req, res
 });
 
 // Remove raw material from manufactured product
-router.delete('/raw-materials/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/raw-materials/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -319,7 +319,7 @@ router.get('/available-raw-materials', async (req, res) => {
 });
 
 // Calculate raw materials needed for a given quantity
-router.post('/calculate-requirements', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/calculate-requirements', csrfProtection, async (req, res) => {
     try {
         const { manufactured_product_id, quantity } = req.body;
         

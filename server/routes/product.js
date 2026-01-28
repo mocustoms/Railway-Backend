@@ -18,11 +18,12 @@ router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads - save directly to final location like other modules
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // __dirname is server/server/routes, so we need to go up two levels to reach server/uploads
-        const uploadDir = path.join(__dirname, '../../uploads/products');
+        const uploadDir = getUploadDir('products');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -2170,7 +2171,7 @@ router.put('/:id', upload.single('image'), csrfProtection, async (req, res) => {
 });
 
 // Delete product
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         // Find product with company filter to ensure multi-tenant isolation
         const productWhere = buildCompanyWhere(req, { id: req.params.id });
@@ -2321,7 +2322,7 @@ router.get('/reference/stores', async (req, res) => {
 });
 
 // Remove product from all stores
-router.delete('/:productId/stores', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:productId/stores', csrfProtection, async (req, res) => {
     try {
         const { productId } = req.params;
         

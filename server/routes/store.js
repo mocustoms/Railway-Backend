@@ -794,7 +794,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new store
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     const {
         name,
         store_type,
@@ -954,7 +954,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update store
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     const {
         name,
         store_type,
@@ -1041,7 +1041,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete store
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const store = await Store.findByPk(req.params.id);
 
@@ -1066,7 +1066,7 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
     }
 });
 
-router.post('/import-final', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/import-final', csrfProtection, async (req, res) => {
     try {
         const { stores } = req.body; // Expecting an array of store objects
 
