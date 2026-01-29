@@ -319,7 +319,7 @@ class InitializationDataService {
       name: name.trim(),
       code: code.trim(),
       type: type || accountType.category,
-      account_type_id: mappedAccountTypeId,
+      accountTypeId: mappedAccountTypeId,
       parentId: mappedParentId || null,
       nature: finalNature,
       description: description || null,

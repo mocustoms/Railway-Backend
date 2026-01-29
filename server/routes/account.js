@@ -259,7 +259,7 @@ router.post('/', csrfProtection, async (req, res) => {
         
         const accountData = {
             ...req.body,
-            account_type_id: accountTypeId, // Explicitly map to the model field name
+            accountTypeId: accountTypeId, // Model attribute / DB column name
             type: accountType.category, // CRITICAL: Set type from account type's category to ensure correct tree placement
             code: code.trim(),
             nature: nature,
@@ -349,7 +349,7 @@ router.put('/:id', csrfProtection, async (req, res) => {
             name,
             parentId,
             type: accountType.category, // CRITICAL: Set type from account type's category to ensure correct tree placement
-            account_type_id: accountTypeId, // Explicitly map to the model field name
+            accountTypeId: accountTypeId, // Model attribute / DB column name
             // Code is auto-generated and read-only - do not update it
             nature: nature,
             updatedBy: req.user.id
