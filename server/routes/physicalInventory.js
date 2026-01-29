@@ -16,15 +16,30 @@ const { csrfProtection } = require('../middleware/csrfProtection');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const PhysicalInventoryService = require('../services/physicalInventoryService');
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads
-const upload = multer({ 
-  dest: 'uploads/temp/',
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume)
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      const uploadDir = getUploadDir('temp');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, 'physical-inventory-' + uniqueSuffix + path.extname(file.originalname));
+    }
+  }),
   limits: {
     fileSize: 5 * 1024 * 1024 // 5MB limit
   },
