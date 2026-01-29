@@ -912,9 +912,9 @@ router.put('/:id', upload.single('document'), csrfProtection, async (req, res) =
     // Handle document upload
     let documentPath = existingDeposit.documentPath; // Keep existing document if no new one uploaded
     if (req.file) {
-      // Delete old document if exists
+      // Delete old document if exists (use UPLOAD_PATH for Railway)
       if (existingDeposit.documentPath) {
-        const oldDocumentPath = path.join('uploads/customer-deposits/', existingDeposit.documentPath);
+        const oldDocumentPath = path.join(getUploadDir('customerDeposits'), existingDeposit.documentPath);
         if (fs.existsSync(oldDocumentPath)) {
           fs.unlinkSync(oldDocumentPath);
         }
@@ -1138,9 +1138,9 @@ router.delete('/:id', csrfProtection, async (req, res) => {
       transaction
     });
 
-    // Delete the document file if it exists
+    // Delete the document file if it exists (use UPLOAD_PATH for Railway)
     if (existingDeposit.documentPath) {
-      const documentPath = path.join('uploads/customer-deposits/', existingDeposit.documentPath);
+      const documentPath = path.join(getUploadDir('customerDeposits'), existingDeposit.documentPath);
       if (fs.existsSync(documentPath)) {
         fs.unlinkSync(documentPath);
       }

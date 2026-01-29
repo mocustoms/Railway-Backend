@@ -345,9 +345,9 @@ router.put('/:id', upload.single('photo'), csrfProtection, async (req, res) => {
     // Handle photo upload
     let photoPath = salesAgent.photo; // Keep existing photo if no new one uploaded
     if (req.file) {
-      // Delete old photo if exists
+      // Delete old photo if exists (use UPLOAD_PATH for Railway)
       if (salesAgent.photo) {
-        const oldPhotoPath = path.join('uploads/sales-agent-photos/', salesAgent.photo);
+        const oldPhotoPath = path.join(getUploadDir('salesAgentPhotos'), salesAgent.photo);
         if (fs.existsSync(oldPhotoPath)) {
           fs.unlinkSync(oldPhotoPath);
         }
@@ -416,9 +416,9 @@ router.delete('/:id', csrfProtection, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Sales agent not found' });
     }
 
-    // Delete photo file if exists
+    // Delete photo file if exists (use UPLOAD_PATH for Railway)
     if (salesAgent.photo) {
-      const photoPath = path.join('uploads/sales-agent-photos/', salesAgent.photo);
+      const photoPath = path.join(getUploadDir('salesAgentPhotos'), salesAgent.photo);
       if (fs.existsSync(photoPath)) {
         fs.unlinkSync(photoPath);
       }

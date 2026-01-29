@@ -402,7 +402,7 @@ router.post('/upload-logo', upload.single('logo'), csrfProtection, async (req, r
     }
 
     const inputPath = req.file.path;
-    const outputDir = path.join(__dirname, '../../uploads/product-model-logos');
+    const outputDir = getUploadDir('productModelLogos');
     
     // Ensure output directory exists
     if (!fs.existsSync(outputDir)) {

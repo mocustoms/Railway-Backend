@@ -1375,12 +1375,10 @@ router.put('/:id', upload.single('image'), csrfProtection, async (req, res) => {
             // Store relative path in database
             productData.image = `uploads/products/${fileName}`;
             
-            // Delete old image if it exists (only when actually uploading a new image)
+            // Delete old image if it exists (use UPLOAD_PATH for Railway)
             if (product.image && product.image.trim() !== '') {
-                // Construct the correct path to the old image file
-                // product.image is stored as 'uploads/products/filename.jpg'
-                // We need to resolve it relative to the server root (where uploads folder is)
-                const oldImagePath = path.join(__dirname, '../../', product.image);
+                const fileName = path.basename(product.image);
+                const oldImagePath = path.join(getUploadDir('products'), fileName);
                 if (fs.existsSync(oldImagePath)) {
                     try {
                         fs.unlinkSync(oldImagePath);
