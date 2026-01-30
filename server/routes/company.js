@@ -16,10 +16,12 @@ router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for logo uploads
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for logo uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/company-logos');
+        const uploadDir = getUploadDir('companyLogos');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -184,12 +186,18 @@ router.post('/', upload.single('logoFile'), csrfProtection, async (req, res) => 
         if (company) {
             // Update existing company (preserve existing code, only update if explicitly provided)
             const updateData = {
-                name, address, phone, fax, email, website, logo: logoPath,
+                name, address, phone, fax, email, website,
                 country, region, description, businessType, industry,
                 businessRegistrationNumber, timezone, tin, vrn,
                 defaultCurrencyId, costingMethod, efdSettings
             };
-            
+            // Only set logo when we have a new file or explicit value — otherwise preserve existing logo
+            if (req.file) {
+                updateData.logo = `/uploads/company-logos/${req.file.filename}`;
+            } else if (logo !== undefined && logo !== null && logo !== '') {
+                updateData.logo = logo;
+            }
+            // else: do not set updateData.logo so Sequelize leaves the column unchanged
             // Only update code if explicitly provided in request
             if (code && code.trim()) {
                 updateData.code = code.trim();

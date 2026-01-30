@@ -18,11 +18,12 @@ router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads - save directly to final location like other modules
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // __dirname is server/server/routes, so we need to go up two levels to reach server/uploads
-        const uploadDir = path.join(__dirname, '../../uploads/products');
+        const uploadDir = getUploadDir('products');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -1374,12 +1375,10 @@ router.put('/:id', upload.single('image'), csrfProtection, async (req, res) => {
             // Store relative path in database
             productData.image = `uploads/products/${fileName}`;
             
-            // Delete old image if it exists (only when actually uploading a new image)
+            // Delete old image if it exists (use UPLOAD_PATH for Railway)
             if (product.image && product.image.trim() !== '') {
-                // Construct the correct path to the old image file
-                // product.image is stored as 'uploads/products/filename.jpg'
-                // We need to resolve it relative to the server root (where uploads folder is)
-                const oldImagePath = path.join(__dirname, '../../', product.image);
+                const fileName = path.basename(product.image);
+                const oldImagePath = path.join(getUploadDir('products'), fileName);
                 if (fs.existsSync(oldImagePath)) {
                     try {
                         fs.unlinkSync(oldImagePath);
@@ -2170,7 +2169,7 @@ router.put('/:id', upload.single('image'), csrfProtection, async (req, res) => {
 });
 
 // Delete product
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         // Find product with company filter to ensure multi-tenant isolation
         const productWhere = buildCompanyWhere(req, { id: req.params.id });
@@ -2321,7 +2320,7 @@ router.get('/reference/stores', async (req, res) => {
 });
 
 // Remove product from all stores
-router.delete('/:productId/stores', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:productId/stores', csrfProtection, async (req, res) => {
     try {
         const { productId } = req.params;
         

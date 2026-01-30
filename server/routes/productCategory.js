@@ -695,7 +695,7 @@ router.get('/:id/usage', async (req, res) => {
 });
 
 // Deactivate product category instead of deleting
-router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/deactivate', csrfProtection, async (req, res) => {
     try {
         const productCategory = await ProductCategory.findByPk(req.params.id);
         if (!productCategory) {
@@ -714,7 +714,7 @@ router.put('/:id/deactivate', csrfProtection, csrfProtection, async (req, res) =
 });
 
 // Delete product category (with usage check)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const productCategory = await ProductCategory.findByPk(req.params.id);
         if (!productCategory) {

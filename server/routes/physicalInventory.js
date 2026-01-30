@@ -16,15 +16,30 @@ const { csrfProtection } = require('../middleware/csrfProtection');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const PhysicalInventoryService = require('../services/physicalInventoryService');
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for file uploads
-const upload = multer({ 
-  dest: 'uploads/temp/',
+// Configure multer for file uploads (uses UPLOAD_PATH for Railway Volume)
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      const uploadDir = getUploadDir('temp');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, 'physical-inventory-' + uniqueSuffix + path.extname(file.originalname));
+    }
+  }),
   limits: {
     fileSize: 5 * 1024 * 1024 // 5MB limit
   },
@@ -751,7 +766,7 @@ router.patch('/:id/accept-variance', async (req, res) => {
 });
 
 // Delete Physical Inventory
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await PhysicalInventoryService.deletePhysicalInventory(id);
@@ -830,7 +845,7 @@ router.get('/:id/items', async (req, res) => {
 });
 
 // Add item to Physical Inventory
-router.post('/:id/items', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/items', csrfProtection, async (req, res) => {
   try {
     const { id } = req.params;
     const itemData = req.body;
@@ -939,7 +954,7 @@ router.post('/:id/items', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update Physical Inventory Item
-router.put('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id/items/:itemId', csrfProtection, async (req, res) => {
   try {
     const { id, itemId } = req.params;
     const itemData = req.body;
@@ -1057,7 +1072,7 @@ router.put('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res
 });
 
 // Delete Physical Inventory Item
-router.delete('/:id/items/:itemId', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id/items/:itemId', csrfProtection, async (req, res) => {
   try {
     const { id, itemId } = req.params;
 

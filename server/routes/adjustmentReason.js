@@ -215,7 +215,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new adjustment reason
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and reason creation
     const transaction = await sequelize.transaction();
     
@@ -358,7 +358,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update adjustment reason
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const adjustmentReason = await AdjustmentReason.findByPk(req.params.id);
         if (!adjustmentReason) {
@@ -470,7 +470,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete adjustment reason (hard delete)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const adjustmentReason = await AdjustmentReason.findByPk(req.params.id);
         if (!adjustmentReason) {

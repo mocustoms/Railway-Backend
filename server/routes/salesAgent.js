@@ -10,16 +10,17 @@ const stripCompanyId = require('../middleware/stripCompanyId');
 const { csrfProtection } = require('../middleware/csrfProtection');
 const { companyFilter, buildCompanyWhere } = require('../middleware/companyFilter');
 const ExportService = require('../utils/exportService');
+const { getUploadDir } = require('../utils/uploadsPath');
 
 // Apply authentication and company filtering to all routes
 router.use(auth);
 router.use(companyFilter);
 router.use(stripCompanyId); // CRITICAL: Prevent companyId override attacks
 
-// Configure multer for photo uploads
+// Configure multer for photo uploads (uses UPLOAD_PATH for Railway Volume / partition)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = 'uploads/sales-agent-photos/';
+    const uploadPath = getUploadDir('salesAgentPhotos');
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
@@ -344,9 +345,9 @@ router.put('/:id', upload.single('photo'), csrfProtection, async (req, res) => {
     // Handle photo upload
     let photoPath = salesAgent.photo; // Keep existing photo if no new one uploaded
     if (req.file) {
-      // Delete old photo if exists
+      // Delete old photo if exists (use UPLOAD_PATH for Railway)
       if (salesAgent.photo) {
-        const oldPhotoPath = path.join('uploads/sales-agent-photos/', salesAgent.photo);
+        const oldPhotoPath = path.join(getUploadDir('salesAgentPhotos'), salesAgent.photo);
         if (fs.existsSync(oldPhotoPath)) {
           fs.unlinkSync(oldPhotoPath);
         }
@@ -405,7 +406,7 @@ router.put('/:id', upload.single('photo'), csrfProtection, async (req, res) => {
 });
 
 // DELETE /api/sales-agents/:id - Delete sales agent
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     const salesAgent = await SalesAgent.findOne({
       where: buildCompanyWhere(req, { id: req.params.id })
@@ -415,9 +416,9 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Sales agent not found' });
     }
 
-    // Delete photo file if exists
+    // Delete photo file if exists (use UPLOAD_PATH for Railway)
     if (salesAgent.photo) {
-      const photoPath = path.join('uploads/sales-agent-photos/', salesAgent.photo);
+      const photoPath = path.join(getUploadDir('salesAgentPhotos'), salesAgent.photo);
       if (fs.existsSync(photoPath)) {
         fs.unlinkSync(photoPath);
       }

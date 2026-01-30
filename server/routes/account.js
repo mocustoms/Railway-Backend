@@ -184,7 +184,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/accounts - Create account
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and account creation
     const transaction = await sequelize.transaction();
     
@@ -259,7 +259,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
         
         const accountData = {
             ...req.body,
-            account_type_id: accountTypeId, // Explicitly map to the model field name
+            accountTypeId: accountTypeId, // Model attribute / DB column name
             type: accountType.category, // CRITICAL: Set type from account type's category to ensure correct tree placement
             code: code.trim(),
             nature: nature,
@@ -300,7 +300,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // PUT /api/accounts/:id - Update account
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const { name, parentId, type, accountTypeId } = req.body;
         
@@ -349,7 +349,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
             name,
             parentId,
             type: accountType.category, // CRITICAL: Set type from account type's category to ensure correct tree placement
-            account_type_id: accountTypeId, // Explicitly map to the model field name
+            accountTypeId: accountTypeId, // Model attribute / DB column name
             // Code is auto-generated and read-only - do not update it
             nature: nature,
             updatedBy: req.user.id
@@ -380,7 +380,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // DELETE /api/accounts/:id - Delete account
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const account = await Account.findOne({ 
             where: buildCompanyWhere(req, { id: req.params.id })

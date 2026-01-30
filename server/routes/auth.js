@@ -17,10 +17,12 @@ const CookieService = require('../utils/cookieService');
 const { refreshCSRFToken } = require('../middleware/csrfProtection');
 const { csrfProtection } = require('../middleware/csrfProtection');
 
-// Configure multer for profile picture uploads - save directly to final location like other modules
+const { getUploadDir } = require('../utils/uploadsPath');
+
+// Configure multer for profile picture uploads - save to UPLOAD_PATH (e.g. Railway Volume)
 const profilePictureStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../../uploads/profile-pictures');
+        const uploadDir = getUploadDir('profilePictures');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -783,12 +785,13 @@ router.post('/reset-password', async (req, res) => {
 router.get('/csrf-token', (req, res) => {
     try {
         const csrfToken = CookieService.generateCSRFToken();
+        CookieService.registerIssuedCSRFToken(csrfToken); // for header-only validation when frontend is cross-origin (e.g. Railway)
         CookieService.setCookie(res, 'csrf_token', csrfToken, {
             httpOnly: false, // CSRF token needs to be accessible by JavaScript
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 1 day
         });
-        
-        res.json({ 
+
+        res.json({
             message: 'CSRF token generated successfully',
             csrfToken: csrfToken
         });

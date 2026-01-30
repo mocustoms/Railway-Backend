@@ -14,6 +14,7 @@ PurchaseInvoice.init(
       type: DataTypes.STRING,
       allowNull: true,
       field: "invoice_number",
+      unique: true,
     },
     invoiceDate: {
       type: DataTypes.DATEONLY,

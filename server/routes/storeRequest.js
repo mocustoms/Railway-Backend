@@ -1129,7 +1129,7 @@ router.get('/pdf/test-simple', async (req, res) => {
 });
 
 // POST /api/store-requests/export-current-stock-balance-pdf - Export current stock balance as PDF
-router.post('/export-current-stock-balance-pdf', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/export-current-stock-balance-pdf', csrfProtection, async (req, res) => {
   let browser;
   try {
     // Starting PDF export for current stock balance...
@@ -1432,7 +1432,7 @@ router.post('/export-current-stock-balance-pdf', csrfProtection, csrfProtection,
 });
 
 // POST /api/store-requests/export-stock-balance-as-of-date-pdf - Export historical stock balance as PDF
-router.post('/export-stock-balance-as-of-date-pdf', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/export-stock-balance-as-of-date-pdf', csrfProtection, async (req, res) => {
   let browser;
   try {
     const filters = req.body.filters || {};
@@ -1880,7 +1880,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/store-requests - Create new store request
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
   try {
     const {
       requesting_store_id,
@@ -2003,7 +2003,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // PUT /api/store-requests/:id - Update store request
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
   try {
     // Use findOne with company filter instead of findByPk
     const storeRequestWhere = buildCompanyWhere(req, { id: req.params.id });
@@ -2105,7 +2105,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // DELETE /api/store-requests/:id - Delete store request
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
   try {
     // Use findOne with company filter instead of findByPk
     const storeRequestWhere = buildCompanyWhere(req, { id: req.params.id });

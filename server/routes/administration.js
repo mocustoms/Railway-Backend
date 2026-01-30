@@ -137,7 +137,7 @@ router.get('/account-types/:id', async (req, res) => {
     }
 });
 
-router.post('/account-types', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/account-types', csrfProtection, async (req, res) => {
     // Start transaction for atomic code generation and account type creation
     const transaction = await sequelize.transaction();
     
@@ -220,7 +220,7 @@ router.post('/account-types', csrfProtection, csrfProtection, async (req, res) =
     }
 });
 
-router.put('/account-types/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/account-types/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, category, nature, isActive } = req.body;
@@ -301,7 +301,7 @@ router.put('/account-types/:id', csrfProtection, csrfProtection, async (req, res
     }
 });
 
-router.delete('/account-types/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/account-types/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         

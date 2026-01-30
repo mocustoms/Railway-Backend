@@ -65,13 +65,15 @@ function parseDatabaseUrl(customUrl = null) {
     username: process.env.PGUSER || process.env.DB_USER || "postgres",
     password: process.env.PGPASSWORD || process.env.DB_PASSWORD || "postgres",
   };
-  console.log("📊 Using individual variables:", {
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    username: config.username,
-    password: config.password ? "***" : "not set",
-  });
+  if (process.env.NODE_ENV !== "production") {
+    console.log("📊 Using individual variables:", {
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      username: config.username,
+      password: config.password ? "***" : "not set",
+    });
+  }
   return config;
 }
 
@@ -94,7 +96,7 @@ const config = {
   DB_DIALECT: process.env.DB_DIALECT || "postgres",
   DB_LOGGING: process.env.DB_LOGGING === "true" ? console.log : false,
 
-  // JWT Configuration
+  // JWT Configuration (set JWT_SECRET and JWT_REFRESH_SECRET in production!)
   JWT_SECRET: process.env.JWT_SECRET || "your-very-secure-jwt-secret-key-2024",
   JWT_REFRESH_SECRET:
     process.env.JWT_REFRESH_SECRET ||
@@ -115,8 +117,10 @@ const config = {
   // Security
   BCRYPT_ROUNDS: parseInt(process.env.BCRYPT_ROUNDS) || 10,
   SESSION_SECRET: process.env.SESSION_SECRET || "your_session_secret_here",
-  // CORS: Support multiple origins for production deployment
-  // Can be comma-separated list: "https://your-app.com,https://yourdomain.com"
+  // CORS: When frontend is on a different domain (e.g. Railway), set this to the frontend URL(s).
+  // Comma-separated: "http://localhost:3002,https://your-frontend.up.railway.app"
+  // For local dev against Railway backend: set CORS_ORIGIN=http://localhost:3002 in Railway Variables.
+  // Use "*" only if you don't need cookies/credentials; with credentials, "*" is reflected as request origin.
   CORS_ORIGIN:
     process.env.CORS_ORIGIN ||
     (process.env.NODE_ENV === "production" ? "*" : "http://localhost:3002"),
@@ -141,7 +145,7 @@ const config = {
   SMTP_PASS: process.env.SMTP_PASS || "your_email_password_or_app_password",
   EMAIL_FROM: process.env.EMAIL_FROM || "noreply@easymauzo.com",
 
-  // File Upload
+  // File Upload (partition for photos: set UPLOAD_PATH to Railway Volume mount, e.g. /data)
   UPLOAD_PATH: process.env.UPLOAD_PATH || "uploads/",
   MAX_FILE_SIZE: parseInt(process.env.MAX_FILE_SIZE) || 5242880,
   ALLOWED_FILE_TYPES:
@@ -152,8 +156,13 @@ const config = {
   LOG_FILE: process.env.LOG_FILE || "logs/app.log",
 };
 
-// Export parseDatabaseUrl function for use in scripts that need custom connections
-// This allows scripts to connect to different databases (e.g., local vs Railway)
-config.parseDatabaseUrl = parseDatabaseUrl;
+// Production: warn if default JWT secrets are used (set JWT_SECRET + JWT_REFRESH_SECRET in env)
+if (config.NODE_ENV === "production") {
+  const defaultJwt = "your-very-secure-jwt-secret-key-2024";
+  if (config.JWT_SECRET === defaultJwt || config.JWT_REFRESH_SECRET === defaultJwt) {
+    console.warn("⚠️  SECURITY: JWT_SECRET and/or JWT_REFRESH_SECRET are using defaults. Set them in production (e.g. Railway Variables).");
+  }
+}
 
+config.parseDatabaseUrl = parseDatabaseUrl;
 module.exports = config;

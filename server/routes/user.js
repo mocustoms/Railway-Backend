@@ -148,7 +148,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new user
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const {
             first_name,
@@ -318,7 +318,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update a user
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const {
             first_name,
@@ -678,7 +678,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete a user
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         // Build where clause with company filter
         const whereClause = buildCompanyWhere(req, { id: req.params.id });
@@ -799,7 +799,7 @@ router.get('/:id/stores/pos', async (req, res) => {
 });
 
 // Assign stores to user
-router.post('/:id/stores', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/:id/stores', csrfProtection, async (req, res) => {
     try {
         const { store_assignments } = req.body; // Array of { store_id, role } objects
 
@@ -860,7 +860,7 @@ router.post('/:id/stores', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Remove store assignment from user
-router.delete('/:id/stores/:storeId', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id/stores/:storeId', csrfProtection, async (req, res) => {
     try {
         const { id: userId, storeId } = req.params;
 

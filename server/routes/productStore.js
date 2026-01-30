@@ -98,7 +98,7 @@ router.get('/store/:storeId', async (req, res) => {
 });
 
 // Create product-store relationship
-router.post('/', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/', csrfProtection, async (req, res) => {
     try {
         const { product_id, store_id } = req.body;
         
@@ -158,7 +158,7 @@ router.post('/', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Update product-store relationship
-router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.put('/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         const { is_active } = req.body;
@@ -193,7 +193,7 @@ router.put('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Delete product-store relationship (soft delete)
-router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
+router.delete('/:id', csrfProtection, async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -226,7 +226,7 @@ router.delete('/:id', csrfProtection, csrfProtection, async (req, res) => {
 });
 
 // Bulk create/update product-store relationships
-router.post('/bulk', csrfProtection, csrfProtection, async (req, res) => {
+router.post('/bulk', csrfProtection, async (req, res) => {
     try {
         const { product_id, store_ids } = req.body;
         

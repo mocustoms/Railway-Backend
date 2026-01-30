@@ -142,9 +142,9 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
 // Serve static files from uploads directory BEFORE CSRF protection
-// Static files don't need CSRF tokens
-// __dirname is backend/, so uploads is in the same directory
-const uploadsPath = path.join(__dirname, "uploads");
+// Use UPLOAD_PATH env (e.g. /data on Railway Volume) so photos persist across deploys
+const { getUploadsRoot } = require("./server/utils/uploadsPath");
+const uploadsPath = getUploadsRoot();
 const fs = require("fs");
 
 // Log uploads path for debugging (especially on Railway)
