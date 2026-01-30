@@ -19,9 +19,6 @@ const { csrfProtection } = require('../middleware/csrfProtection');
 
 const { getUploadDir } = require('../utils/uploadsPath');
 
-// Access token expiry in seconds (for response body; matches JWT_EXPIRES_IN "15m")
-const ACCESS_TOKEN_EXPIRES_SECONDS = 15 * 60;
-
 // Configure multer for profile picture uploads - save to UPLOAD_PATH (e.g. Railway Volume)
 const profilePictureStorage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -167,7 +164,6 @@ router.post('/register', authRateLimiter, async (req, res) => {
         const csrfToken = CookieService.setAuthCookies(res, accessToken, refreshToken, false);
 
         // Return user data - frontend will redirect to company registration
-        // Include accessToken in body for Authorization header (Option B: works cross-origin when cookies are blocked)
         res.status(201).json({
             message: 'Account created successfully. Please register your company to continue.',
             user: {
@@ -180,9 +176,7 @@ router.post('/register', authRateLimiter, async (req, res) => {
                 companyId: null // No company yet
             },
             requiresCompanyRegistration: true,
-            csrfToken,
-            accessToken,
-            expiresIn: ACCESS_TOKEN_EXPIRES_SECONDS
+            csrfToken // Send CSRF token to frontend
         });
     } catch (error) {
         // Don't expose internal errors to client
@@ -304,7 +298,6 @@ router.post('/register-company', authRateLimiter, auth, async (req, res) => {
         }
 
         // Return success - remaining initialization will be handled manually via frontend
-        // Include accessToken in body for Authorization header (Option B: works cross-origin when cookies are blocked)
         res.status(201).json({
             message: 'Company registered successfully',
             user: {
@@ -321,8 +314,6 @@ router.post('/register-company', authRateLimiter, auth, async (req, res) => {
                 name: company.name
             },
             csrfToken,
-            accessToken,
-            expiresIn: ACCESS_TOKEN_EXPIRES_SECONDS,
             requiresInitialization: true,
             autoInitialized: {
                 account_types: autoInitResult?.success ? true : false,
@@ -448,7 +439,6 @@ router.post('/login', authRateLimiter, async (req, res) => {
         const csrfToken = CookieService.setAuthCookies(res, accessToken, refreshToken, req.body.remember || false);
 
         // Return user data with companyId
-        // Include accessToken in body for Authorization header (Option B: works cross-origin when cookies are blocked)
         res.json({
             user: {
                 id: user.id,
@@ -461,9 +451,7 @@ router.post('/login', authRateLimiter, async (req, res) => {
                 isSystemAdmin: user.isSystemAdmin
             },
             stores: assignedStores,
-            csrfToken,
-            accessToken,
-            expiresIn: ACCESS_TOKEN_EXPIRES_SECONDS
+            csrfToken // Send CSRF token to frontend
         });
 
     } catch (error) {
@@ -510,9 +498,7 @@ router.post('/refresh', async (req, res) => {
 
         res.json({
             message: 'Token refreshed successfully',
-            csrfToken,
-            accessToken,
-            expiresIn: ACCESS_TOKEN_EXPIRES_SECONDS
+            csrfToken
         });
     } catch (error) {
         res.status(401).json({ message: 'Invalid refresh token' });

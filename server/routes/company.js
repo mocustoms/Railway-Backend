@@ -186,12 +186,18 @@ router.post('/', upload.single('logoFile'), csrfProtection, async (req, res) => 
         if (company) {
             // Update existing company (preserve existing code, only update if explicitly provided)
             const updateData = {
-                name, address, phone, fax, email, website, logo: logoPath,
+                name, address, phone, fax, email, website,
                 country, region, description, businessType, industry,
                 businessRegistrationNumber, timezone, tin, vrn,
                 defaultCurrencyId, costingMethod, efdSettings
             };
-            
+            // Only set logo when we have a new file or explicit value — otherwise preserve existing logo
+            if (req.file) {
+                updateData.logo = `/uploads/company-logos/${req.file.filename}`;
+            } else if (logo !== undefined && logo !== null && logo !== '') {
+                updateData.logo = logo;
+            }
+            // else: do not set updateData.logo so Sequelize leaves the column unchanged
             // Only update code if explicitly provided in request
             if (code && code.trim()) {
                 updateData.code = code.trim();
