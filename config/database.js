@@ -47,17 +47,16 @@ const dbConfig = {
   },
   dialectOptions: {
     connectTimeout: 10000, // 10 seconds
-    // Railway requires SSL for database connections
-    // Enable SSL if connecting to Railway (detected by hostname containing 'railway' or not localhost)
-    ssl:false,
-      // config.DB_HOST &&
-      // config.DB_HOST !== "localhost" &&
-      // !config.DB_HOST.includes("127.0.0.1")
-      //   ? {
-      //       require: true,
-      //       rejectUnauthorized: false, // Railway uses self-signed certificates
-      //     }
-      //   : false,
+    // Railway and other PaaS require SSL for Postgres; disable only for localhost
+    ssl:
+      config.DB_HOST &&
+      config.DB_HOST !== "localhost" &&
+      !config.DB_HOST.includes("127.0.0.1")
+        ? {
+            require: true,
+            rejectUnauthorized: false, // Railway uses self-signed certs
+          }
+        : false,
   },
 };
 

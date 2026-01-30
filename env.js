@@ -19,23 +19,52 @@ require("dotenv").config({ path: envPath });
  */
 
 function parseDatabaseUrl(customUrl = null) {
+  const databaseUrl = customUrl || process.env.DATABASE_URL;
+
+  // If DATABASE_URL is provided (Railway, Heroku, etc.), parse it first
+  if (databaseUrl && typeof databaseUrl === "string" && databaseUrl.trim()) {
+    try {
+      let normalizedUrl = databaseUrl.trim();
+      if (
+        !normalizedUrl.startsWith("postgres://") &&
+        !normalizedUrl.startsWith("postgresql://")
+      ) {
+        throw new Error("DATABASE_URL must start with postgres:// or postgresql://");
+      }
+      normalizedUrl = normalizedUrl.replace(/^postgresql:\/\//, "postgres://");
+      const url = new URL(normalizedUrl);
+      const databaseName = url.pathname ? url.pathname.slice(1).split("?")[0] : "";
+      if (!databaseName) {
+        throw new Error("Database name not found in DATABASE_URL pathname");
+      }
+      const parsedConfig = {
+        host: url.hostname,
+        port: parseInt(url.port, 10) || 5432,
+        database: databaseName,
+        username: url.username || "postgres",
+        password: url.password || "",
+      };
+      console.log("📊 Using DATABASE_URL:", {
+        host: parsedConfig.host,
+        port: parsedConfig.port,
+        database: parsedConfig.database,
+        username: parsedConfig.username,
+        password: parsedConfig.password ? "***" : "not set",
+      });
+      return parsedConfig;
+    } catch (error) {
+      console.warn("⚠️  Failed to parse DATABASE_URL, using individual variables:", error.message);
+    }
+  }
+
+  // Fall back to individual variables (PGHOST, PGPORT, etc.) or Docker default
   const config = {
     host: process.env.PGHOST || process.env.DB_HOST || "mauzo-db",
-    port: parseInt(process.env.PGPORT || process.env.DB_PORT || "5432"),
+    port: parseInt(process.env.PGPORT || process.env.DB_PORT || "5432", 10),
     database: process.env.PGDATABASE || process.env.DB_NAME || "easymauzo_pos",
     username: process.env.PGUSER || process.env.DB_USER || "postgres",
     password: process.env.PGPASSWORD || process.env.DB_PASSWORD || "postgres",
   };
-
-  // // Safety check: ensure database name is not the DATABASE_URL itself
-  // if (config.database === databaseUrl) {
-  //   console.error(
-  //     "❌ ERROR: Database name is set to DATABASE_URL! This should never happen."
-  //   );
-  //   console.error("   Using fallback database name: railway");
-  //   config.database = "railway"; // Railway's default database name
-  // }
-
   console.log("📊 Using individual variables:", {
     host: config.host,
     port: config.port,
@@ -43,88 +72,7 @@ function parseDatabaseUrl(customUrl = null) {
     username: config.username,
     password: config.password ? "***" : "not set",
   });
-
   return config;
-  // // Allow custom URL to be passed (for scripts that need to connect to different databases)
-  // const databaseUrl = customUrl || process.env.DATABASE_URL;
-
-  // // If DATABASE_URL is provided, try to parse it
-  // if (databaseUrl) {
-  //   try {
-  //     // Normalize postgresql:// to postgres:// for URL parsing
-  //     // Handle both postgres:// and postgresql:// protocols
-  //     let normalizedUrl = databaseUrl.trim();
-  //     console.log('📊 Parsing DATABASE_URL:', normalizedUrl);
-
-  //     // Ensure it starts with a valid protocol
-  //     if (!normalizedUrl.startsWith('postgres://') && !normalizedUrl.startsWith('postgresql://')) {
-  //       throw new Error('DATABASE_URL must start with postgres:// or postgresql://');
-  //     }
-
-  //     normalizedUrl = normalizedUrl.replace(/^postgresql:\/\//, 'postgres://');
-  //     const url = new URL(normalizedUrl);
-
-  //     // Extract database name from pathname (remove leading '/')
-  //     const databaseName = url.pathname ? url.pathname.slice(1) : '';
-
-  //     // Validate that we got a database name
-  //     if (!databaseName) {
-  //       throw new Error('Database name not found in DATABASE_URL pathname');
-  //     }
-
-  //     const parsedConfig = {
-  //       host: url.hostname,
-  //       port: parseInt(url.port) || 5432,
-  //       database: databaseName,
-  //       username: url.username || 'postgres',
-  //       password: url.password || ''
-  //     };
-
-  //     console.log('📊 Using DATABASE_URL:', {
-  //       host: parsedConfig.host,
-  //       port: parsedConfig.port,
-  //       database: parsedConfig.database,
-  //       username: parsedConfig.username,
-  //       password: parsedConfig.password ? '***' : 'not set'
-  //     });
-
-  //     return parsedConfig;
-  //   } catch (error) {
-  //     console.warn('⚠️  Failed to parse DATABASE_URL, using individual variables');
-  //     console.warn('   Error:', error.message);
-  //     console.warn('   DATABASE_URL value (first 50 chars):', databaseUrl.substring(0, 50) + '...');
-  //     // Fall through to individual variables
-  //   }
-  // } else {
-  //   console.log('📊 DATABASE_URL not found, using individual variables');
-  // }
-
-  // // Fall back to individual environment variables (PGHOST, PGPORT, etc. or custom DB_* variables)
-  // // IMPORTANT: Never use DATABASE_URL as a database name - always use individual variables if parsing fails
-  // const config = {
-  //   host: process.env.PGHOST || process.env.DB_HOST || 'mauzo-db',
-  //   port: parseInt(process.env.PGPORT || process.env.DB_PORT || '5432'),
-  //   database: process.env.PGDATABASE || process.env.DB_NAME || 'easymauzo_pos',
-  //   username: process.env.PGUSER || process.env.DB_USER || 'postgres',
-  //   password: process.env.PGPASSWORD || process.env.DB_PASSWORD || 'postgres'
-  // };
-
-  // // Safety check: ensure database name is not the DATABASE_URL itself
-  // if (config.database === databaseUrl) {
-  //   console.error('❌ ERROR: Database name is set to DATABASE_URL! This should never happen.');
-  //   console.error('   Using fallback database name: railway');
-  //   config.database = 'railway'; // Railway's default database name
-  // }
-
-  // console.log('📊 Using individual variables:', {
-  //   host: config.host,
-  //   port: config.port,
-  //   database: config.database,
-  //   username: config.username,
-  //   password: config.password ? '***' : 'not set'
-  // });
-
-  // return config;
 }
 
 // Parse database configuration (can be overridden by passing custom URL)
