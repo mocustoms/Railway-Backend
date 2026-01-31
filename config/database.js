@@ -47,16 +47,19 @@ const dbConfig = {
   },
   dialectOptions: {
     connectTimeout: 10000, // 10 seconds
-    // Railway and other PaaS require SSL for Postgres; disable only for localhost
-    ssl:
-      config.DB_HOST &&
-      config.DB_HOST !== "localhost" &&
-      !config.DB_HOST.includes("127.0.0.1")
-        ? {
-            require: true,
-            rejectUnauthorized: false, // Railway uses self-signed certs
-          }
-        : false,
+    // Railway and other PaaS require SSL for Postgres. Disable for local/Docker (localhost, mauzo-db, etc.)
+    // Set DB_SSL=false in .env to force no SSL; DB_SSL=true to force SSL.
+    ssl: (() => {
+      if (process.env.DB_SSL === "false" || process.env.DB_SSL === "0") return false;
+      if (process.env.DB_SSL === "true" || process.env.DB_SSL === "1") {
+        return { require: true, rejectUnauthorized: false };
+      }
+      const localHosts = ["localhost", "127.0.0.1", "mauzo-db", "db", "postgres"];
+      const isLocal = !config.DB_HOST || localHosts.includes(config.DB_HOST);
+      return isLocal
+        ? false
+        : { require: true, rejectUnauthorized: false };
+    })(),
   },
 };
 
@@ -115,16 +118,11 @@ function createDatabaseConnection(databaseUrl) {
     },
     dialectOptions: {
       connectTimeout: 10000,
-      // Enable SSL if not localhost
-      ssl:
-        customConfig.host &&
-        customConfig.host !== "localhost" &&
-        !customConfig.host.includes("127.0.0.1")
-          ? {
-              require: true,
-              rejectUnauthorized: false,
-            }
-          : false,
+      ssl: (() => {
+        const localHosts = ["localhost", "127.0.0.1", "mauzo-db", "db", "postgres"];
+        const isLocal = !customConfig.host || localHosts.includes(customConfig.host);
+        return isLocal ? false : { require: true, rejectUnauthorized: false };
+      })(),
     },
   };
 
