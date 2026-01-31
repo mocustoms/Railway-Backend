@@ -676,33 +676,43 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-const startServer = async (port) => {
-  try {
-    // Test database connection before starting server
+const startServer = (port) => {
+  // Listen on port FIRST so Railway (and health checks) can reach the process immediately.
+  // DB connection, migrations, and schedulers run after bind to avoid "connection refused" (502).
+  const server = app.listen(port, "0.0.0.0", () => {
+    console.log(`🚀 Server running on port ${port}`);
+    console.log(`📊 Health check: http://localhost:${port}/api/health`);
+    console.log(`🔗 API base URL: http://localhost:${port}/api`);
+  });
+
+  server.on("error", (error) => {
+    if (error.code === "EADDRINUSE") {
+      console.error(`❌ Port ${port} is already in use`);
+      process.exit(1);
+    } else {
+      console.error("❌ Server error:", error.message);
+      process.exit(1);
+    }
+  });
+
+  // Run DB init and schedulers in background (non-blocking)
+  const initBackground = async () => {
     try {
       await sequelize.authenticate();
       console.log("✅ Database connection verified");
       const qi = sequelize.getQueryInterface();
-
       const tables = await qi.sequelize.query(
-         `
-             SELECT tablename
-                FROM pg_tables
-                WHERE schemaname = 'public';
-         `,
+        `SELECT tablename FROM pg_tables WHERE schemaname = 'public';`,
         { type: sequelize.QueryTypes.SELECT }
       );
       if (tables.length < 2) {
-        await sequelize.sync({ alter: false, force: false }); // Ensure models are synced
+        await sequelize.sync({ alter: false, force: false });
         console.log("✅ Database synchronized");
       } else {
         console.log("ℹ️ Database already initialized, skipping sync");
       }
-      // Verify database schema if enabled (set VERIFY_SCHEMA_ON_STARTUP=true)
       if (process.env.VERIFY_SCHEMA_ON_STARTUP === "true") {
-        console.log("🔍 Verifying database schema on startup...");
         try {
-          console.log("\n🔍 Verifying database schema...");
           const {
             verifyDatabaseSchema,
           } = require("./server/utils/databaseSchemaVerifier");
@@ -711,33 +721,18 @@ const startServer = async (port) => {
             failOnError: false,
             skipExtraColumns: true,
           });
-
           if (!schemaResults.verified) {
             console.warn(
-              '⚠️  Schema verification found issues. Run "npm run verify-schema" for details.'
+              "⚠️  Schema verification found issues. Run \"npm run verify-schema\" for details."
             );
-            if (schemaResults.errors.length > 0) {
-              console.warn(
-                `   Found ${schemaResults.errors.length} errors that need attention.`
-              );
-            }
           } else {
             console.log("✅ Database schema verified successfully");
           }
         } catch (schemaError) {
           console.warn("⚠️  Schema verification failed:", schemaError.message);
-          console.warn(
-            "   Server will continue, but you should verify the schema manually."
-          );
         }
       }
-        // Run pending migrations
-        await runMigrations();
-
-      // System initialization disabled - data creation scripts removed for Railway deployment
-      // To create admin user manually, run: node scripts/seedAdminUser.js
-      // const systemInitializer = require('./server/utils/systemInitializer');
-      // const initResult = await systemInitializer.initializeSystem();
+      await runMigrations();
     } catch (dbError) {
       console.error("❌ Database connection failed:", dbError.message);
       console.error(
@@ -749,60 +744,34 @@ const startServer = async (port) => {
         database: config.DB_NAME,
         username: config.DB_USER,
       });
-      // Continue starting server - routes will handle connection errors gracefully
       console.warn(
-        "⚠️  Starting server anyway - database connection will be retried on first request"
+        "⚠️  Server is up; database will be retried on first request. /api/health will return 503 until DB is connected."
       );
     }
 
-    // Initialize scheduled tasks
     try {
       const {
         startBirthdayBonusScheduler,
       } = require("./server/services/birthdayBonusScheduler");
       startBirthdayBonusScheduler();
       console.log("✅ Birthday bonus scheduler initialized");
-    } catch (schedulerError) {
-      console.error(
-        "⚠️  Failed to initialize birthday bonus scheduler:",
-        schedulerError.message
-      );
-      // Don't fail server startup if scheduler fails
+    } catch (e) {
+      console.error("⚠️  Birthday bonus scheduler failed:", e.message);
     }
-
     try {
       const {
         startScheduledInvoiceGenerator,
       } = require("./server/services/scheduledInvoiceGenerator");
       startScheduledInvoiceGenerator();
       console.log("✅ Scheduled invoice generator initialized");
-    } catch (schedulerError) {
-      console.error(
-        "⚠️  Failed to initialize scheduled invoice generator:",
-        schedulerError.message
-      );
-      // Don't fail server startup if scheduler fails
+    } catch (e) {
+      console.error("⚠️  Scheduled invoice generator failed:", e.message);
     }
+  };
 
-    const server = app.listen(port, "0.0.0.0", () => {
-      console.log(`🚀 Server running on port ${port}`);
-      console.log(`📊 Health check: http://localhost:${port}/health`);
-      console.log(`🔗 API base URL: http://localhost:${port}/api`);
-    });
-
-    server.on("error", (error) => {
-      if (error.code === "EADDRINUSE") {
-        console.error(`❌ Port ${port} is already in use`);
-        process.exit(1);
-      } else {
-        console.error("❌ Server error:", error.message);
-        process.exit(1);
-      }
-    });
-  } catch (error) {
-    console.error("❌ Failed to start server:", error.message);
-    process.exit(1);
-  }
+  initBackground().catch((err) => {
+    console.error("❌ Background init error:", err.message);
+  });
 };
 
 // Start server
@@ -835,7 +804,4 @@ process.on("uncaughtException", (error) => {
   }
 });
 
-startServer(PORT).catch((error) => {
-  console.error("❌ Failed to start server:", error);
-  process.exit(1);
-});
+startServer(PORT);

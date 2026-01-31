@@ -93,12 +93,18 @@ With the config in place, each deploy will:
 | `DB_LOGGING` | unset; set `true` to log SQL (noisy, use only for debugging) |
 | `COOKIE_DOMAIN` | unset in dev; set in production if you need a specific cookie domain |
 
+## Server startup (502 fix)
+
+The server is designed to **listen on the port immediately** when `node server.js` runs. Database connection, migrations, and schedulers run in the background after the HTTP server is bound. This avoids Railway (or any reverse proxy) getting **502 Bad Gateway** or **connection refused** while DB/migrations are still running. Until the DB is connected, `/api/health` may return 503 with `"database":"Disconnected"`; API routes that need the DB will also return 503 until the connection is ready.
+
 ## Troubleshooting
 
 - **Migrations fail in pre-deploy**  
   Ensure the Backend service has DB variables (or `DATABASE_URL`) from the Postgres service and that Postgres is running.
 - **Health check fails**  
   Confirm the service is listening on `PORT` and that `/api/health` returns 200. Increase `healthcheckTimeout` in `railway.toml` / `railway.json` if startup is slow.
+- **502 Bad Gateway / connection refused**  
+  The server now listens on the port before running DB init. If you still see 502, check deploy logs for crashes or port binding errors; ensure `PORT` is set by Railway and the process is not exiting before the proxy can connect.
 - **CORS errors from frontend**  
   Set `CORS_ORIGIN` to your frontend origin(s), e.g. `https://your-app.railway.app`.
 
